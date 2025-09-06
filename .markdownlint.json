@@ -1,0 +1,8 @@
+{
+  "ignores": [
+    "node_modules",
+    "site",
+    ".venv",
+    "000-template.md"
+  ]
+}

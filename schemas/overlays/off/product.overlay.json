@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/schemas/overlays/off/product.overlay.json",
+  "$id": "https://circl.dev/schemas/overlays/off/product.overlay.json",
   "title": "OFF Product Overlay",
   "type": "object",
   "additionalProperties": true,

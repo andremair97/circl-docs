@@ -44,9 +44,6 @@ paths:
             application/json:
               schema:
                 $ref: ../schemas/universal/product.json
-              examples:
-                default:
-                  externalValue: ../examples/products/get-by-id.json
         '404':
           description: Product not found
           content:
@@ -59,7 +56,4 @@ paths:
                     type: string
                   message:
                     type: string
-              examples:
-                notFound:
-                  externalValue: ../examples/errors/not-found.json
 

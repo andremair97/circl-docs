@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint:oas": "spectral lint -r @stoplight/spectral:oas 'openapi/**/*.yaml'",
-    "validate:examples": "node .github/validate-examples.mjs",
+    "lint:oas": "spectral lint 'openapi/**/*.yaml'",
+    "map:off": "node scripts/off-map.mjs",
+    "schema:validate": "ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/universal/product.json -d examples/products/get-by-id.json && ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/overlays/off/product.overlay.json -d examples/off/product.sample.json",
+    "generate:examples": "npm run map:off && npm run schema:validate",
     "docs:build": "mkdocs build --strict"
   },
   "devDependencies": {
+    "@stoplight/spectral-cli": "^6.15.0",
     "ajv": "^8.17.1",
+    "ajv-cli": "^5.0.0",
     "ajv-formats": "^3.0.1",
     "glob": "^11.0.0",
-    "@stoplight/spectral-cli": "^6.15.0",
     "markdownlint-cli": "^0.41.0"
   }
 }
