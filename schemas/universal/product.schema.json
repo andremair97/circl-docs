@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://circl.dev/schemas/universal/product.json",
+  "$id": "https://circl.dev/schemas/universal/product.schema.json",
   "title": "Universal Product",
   "type": "object",
   "additionalProperties": false,
