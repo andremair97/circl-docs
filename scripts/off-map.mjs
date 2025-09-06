@@ -26,7 +26,6 @@ const packagingMaterials = raw.packaging
 const brandName = raw.brands ? raw.brands.split(',')[0].trim() : '';
 
 const product = {
-  $schema: '/schemas/universal/product.json',
   id: raw.code,
   title: raw.product_name,
   brand: { name: brandName },

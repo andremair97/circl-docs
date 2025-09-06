@@ -1,12 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/schemas/universal/product.json",
+  "$id": "https://circl.dev/schemas/universal/product.json",
   "title": "Universal Product",
   "type": "object",
   "additionalProperties": false,
   "required": ["id", "title", "brand", "identifiers", "classification", "packaging", "provenance"],
   "properties": {
-    "$schema": { "const": "/schemas/universal/product.json" },
     "id": {
       "type": "string",
       "description": "Primary product identifier (e.g., barcode or internal ID)"

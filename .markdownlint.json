@@ -2,6 +2,7 @@
   "ignores": [
     "node_modules",
     "site",
-    ".venv"
+    ".venv",
+    "000-template.md"
   ]
 }
