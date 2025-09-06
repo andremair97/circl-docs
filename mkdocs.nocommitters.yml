@@ -42,9 +42,6 @@ plugins:
       enable_creation_date: true
       fallback_to_build_date: true
       type: timeago
-  - git-committers:
-      repository: andremair97/circl-docs
-      branch: main
   - macros
   - rss:
       abstract_chars_count: 240

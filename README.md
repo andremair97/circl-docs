@@ -14,3 +14,8 @@ Docs-as-code for the Circl project:
 source .venv/bin/activate
 mkdocs serve
 ```
+
+### Docs build with/without committers
+
+- With token (recommended): `export MKDOCS_GIT_COMMITTERS_APIKEY=<gh PAT or GITHUB_TOKEN>` then `mkdocs build`
+- Without token (forks/offline): `mkdocs build -f mkdocs.nocommitters.yml`

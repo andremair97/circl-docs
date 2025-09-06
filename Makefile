@@ -4,4 +4,4 @@ changelog:
 	. .venv/bin/activate && cz changelog --unreleased
 
 docs:
-	mkdocs build --strict
+	./scripts/mkdocs_build_ci.sh

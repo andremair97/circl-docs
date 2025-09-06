@@ -15,11 +15,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install node deps
+        run: npm ci
       - name: Install deps
         run: |
           python -m pip install -U pip
           pip install -r requirements.txt
-          pip install mkdocs-git-committers-plugin-2
       - name: Generate changelog (unreleased)
         run: |
           python - <<'PY'
@@ -27,10 +31,12 @@ jobs:
           subprocess.run(". .venv/bin/activate 2>/dev/null || true", shell=True)
           subprocess.run("cz changelog --unreleased || true", shell=True, check=False)
           PY
-      - name: Build docs
+      - name: Build docs (auto-detect token)
         env:
           MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
-        run: mkdocs build --strict
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./scripts/mkdocs_build_ci.sh
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
