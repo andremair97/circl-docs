@@ -1,9 +1,17 @@
 {
+  "name": "circl-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint:oas": "spectral lint -r @stoplight/spectral:oas 'openapi/**/*.yaml'",
+    "validate:examples": "node .github/validate-examples.mjs",
+    "docs:build": "mkdocs build --strict"
+  },
   "devDependencies": {
-    "@stoplight/spectral-cli": "^6.15.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "glob": "^11.0.3",
-    "markdownlint-cli": "^0.45.0"
+    "glob": "^11.0.0",
+    "@stoplight/spectral-cli": "^6.15.0",
+    "markdownlint-cli": "^0.41.0"
   }
 }
