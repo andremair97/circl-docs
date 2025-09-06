@@ -3,13 +3,13 @@
 Welcome. This is the **one-page orientation** for AI agents and developers.
 
 ## Key Docs
-- [Vision](/docs/vision/100-vision.md)
-- [Product Requirements (PRD)](/docs/ops/200-prd.md)
-- [Data Standard](/docs/ops/500-data-standard.md)
-- [Provenance](/docs/ops/520-provenance.md)
-- [Scoring](/docs/ops/530-scoring.md)
-- [API Overview](/docs/apis/400-api-overview.md)
-- [Schemas](/schemas/)
+- [Vision](../vision/010-product-vision.md)
+- [Product Requirements (PRD)](../product/100-mvp-prd.md)
+- [Data Standard](../data/300-data-standard.md)
+- [Provenance](../data/310-provenance-standard.md)
+- [Scoring](../data/330-scoring-spec.md)
+- [API Overview](../apis/400-api-overview.md)
+- Schemas — browse the `schemas/` folder in the repo
 
 ## Glossary
 - **Circl Score** → unified measure of sustainability quality.
