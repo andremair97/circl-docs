@@ -19,6 +19,7 @@ jobs:
         run: |
           python -m pip install -U pip
           pip install -r requirements.txt
+          pip install mkdocs-git-committers-plugin-2
       - name: Generate changelog (unreleased)
         run: |
           python - <<'PY'
@@ -27,6 +28,8 @@ jobs:
           subprocess.run("cz changelog --unreleased || true", shell=True, check=False)
           PY
       - name: Build docs
+        env:
+          MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
         run: mkdocs build --strict
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
