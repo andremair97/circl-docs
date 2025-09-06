@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": ["id", "title", "brand", "identifiers", "classification", "packaging", "provenance"],
   "properties": {
+    "$schema": { "const": "/schemas/universal/product.json" },
     "id": {
       "type": "string",
       "description": "Primary product identifier (e.g., barcode or internal ID)"
