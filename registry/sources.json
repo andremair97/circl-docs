@@ -1,0 +1,15 @@
+{
+  "sources": [
+    {
+      "id": "example:source",
+      "name": "Replace me",
+      "url": "https://example.com",
+      "license": "open",
+      "scope": "taxonomy|repair|food|ethics|certification",
+      "fields_contributed": [],
+      "update_policy": "check quarterly",
+      "notes": ""
+    }
+  ]
+}
+

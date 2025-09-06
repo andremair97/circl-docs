@@ -1,0 +1,41 @@
+openapi: 3.1.0
+info:
+  title: Circl Public API
+  version: 0.1.0
+servers:
+  - url: https://api.circl.dev
+
+paths:
+  /search:
+    get:
+      summary: Search for products and places
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+        - in: query
+          name: lat
+          schema:
+            type: number
+        - in: query
+          name: lng
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+
+  /products/{id}:
+    get:
+      summary: Get a product by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+

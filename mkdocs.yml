@@ -1,0 +1,67 @@
+site_name: Circl Planning & Specs
+site_description: Sustainability data platform – plans, standards, and APIs
+repo_url: https://github.com/your-org/circl-docs
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.indexes
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.emoji
+
+plugins:
+  - search
+  - mermaid2
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+nav:
+  - Overview:
+      - index.md
+      - vision/010-product-vision.md
+      - vision/020-principles.md
+  - Product:
+      - product/100-mvp-prd.md
+      - product/110-roadmap.md
+      - product/120-user-stories.md
+      - product/130-ux-wireframes.md
+  - Architecture:
+      - architecture/200-c4-context.md
+      - architecture/210-c4-container.md
+      - architecture/220-c4-component.md
+      - architecture/230-threat-model.md
+  - Data:
+      - data/300-data-standard.md
+      - data/310-provenance-standard.md
+      - data/320-taxonomy-mapping.md
+      - data/330-scoring-spec.md
+      - data/340-source-registry.md
+  - APIs:
+      - apis/400-api-overview.md
+      - apis/410-search-api.md
+      - apis/420-products-api.md
+      - apis/430-scores-api.md
+      - apis/440-taxonomy-api.md
+  - Ops:
+      - ops/500-ingestion-playbooks.md
+      - ops/510-data-quality.md
+      - ops/520-observability.md
+      - ops/530-security-privacy.md
+      - ops/540-licensing-compliance.md
+  - Process:
+      - process/600-adrs/index.md
+      - process/610-contributing.md
+      - process/620-versioning-release.md
+
