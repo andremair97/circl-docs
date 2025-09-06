@@ -1,6 +1,6 @@
 site_name: Circl Planning & Specs
 site_description: Sustainability data platform – plans, standards, and APIs
-repo_url: https://github.com/your-org/circl-docs
+repo_url: https://github.com/andremair97/circl-docs
 docs_dir: docs
 
 theme:
@@ -55,13 +55,20 @@ nav:
       - apis/430-scores-api.md
       - apis/440-taxonomy-api.md
   - Ops:
+      - ops/CONTEXT-PACK.md
+      - ops/AGENT-BRIEF.md
+      - ops/PROMPT-LIBRARY.md
       - ops/500-ingestion-playbooks.md
       - ops/510-data-quality.md
       - ops/520-observability.md
       - ops/530-security-privacy.md
       - ops/540-licensing-compliance.md
+      - Playbooks:
+          - ops/playbooks/off.md
+          - ops/playbooks/_etl-checklist.md
   - Process:
       - process/600-adrs/index.md
+      - process/605-ai-collaboration.md
       - process/610-contributing.md
       - process/620-versioning-release.md
 

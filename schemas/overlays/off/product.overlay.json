@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/overlays/off/product.overlay.json",
+  "title": "OFF Product Overlay",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["code", "product_name", "last_modified_t"],
+  "properties": {
+    "code": { "type": "string", "description": "Barcode (EAN/UPC) from OFF" },
+    "product_name": { "type": "string" },
+    "brands": { "type": "string", "description": "Comma-separated brand names" },
+    "categories": { "type": "string", "description": "OFF category hierarchy string" },
+    "quantity": { "type": "string", "description": "Declared net quantity, e.g. '500 g'" },
+    "packaging": { "type": "string" },
+    "ecoscore_grade": {
+      "type": "string",
+      "description": "OFF Eco-Score grade if present",
+      "enum": ["a", "b", "c", "d", "e", "unknown"]
+    },
+    "nutriscore_grade": {
+      "type": "string",
+      "enum": ["a", "b", "c", "d", "e", "unknown"]
+    },
+    "countries": { "type": "string" },
+    "last_modified_t": { "type": "integer", "minimum": 0, "description": "UNIX epoch seconds" },
+    "_provenance": {
+      "type": "object",
+      "required": ["source", "fetched_at", "file_sha256", "transform_version"],
+      "properties": {
+        "source": { "const": "OpenFoodFacts" },
+        "fetched_at": { "type": "string", "format": "date-time" },
+        "file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "transform_version": { "type": "string" },
+        "record_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+

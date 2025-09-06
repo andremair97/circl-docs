@@ -1,0 +1,163 @@
+name: CI (Docs, Specs, Schemas)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Python deps (MkDocs + YAML lint)
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material yamllint
+
+      - name: Install Node CLI deps (Spectral, markdownlint) + ajv libs
+        run: |
+          npm i -g @stoplight/spectral-cli markdownlint-cli
+          # local (no package.json needed) — used by validator script
+          npm i --no-save ajv@^8 ajv-formats@^3 glob@^11
+
+      # ---------- Docs build ----------
+      - name: Build MkDocs (strict)
+        run: |
+          mkdocs build --strict
+
+      # ---------- Linters ----------
+      - name: Lint Markdown
+        run: |
+          npx markdownlint "**/*.md" --ignore "node_modules" --ignore "site" --ignore ".venv" || (echo "Run: npx markdownlint --fix to auto-fix some issues" && exit 1)
+
+      - name: Lint YAML
+        run: |
+          yamllint -s .
+
+      # ---------- OpenAPI validation ----------
+      - name: Spectral lint (OpenAPI 3.1)
+        run: |
+          if compgen -G "apis/**/*.{yaml,yml,json}" > /dev/null; then
+            spectral lint "apis/**/*.{yaml,yml,json}"
+          else
+            echo "No OpenAPI files found under /apis — skipping."
+          fi
+
+      # ---------- JSON example validation (JSON Schema 2020-12 via ajv) ----------
+      - name: Validate examples against schemas (ajv)
+        run: |
+          cat > .github/validate-examples.mjs <<'EOF'
+          import { createRequire } from 'module';
+          import { readFileSync, existsSync } from 'fs';
+          import { glob } from 'glob';
+          import path from 'path';
+          const require = createRequire(import.meta.url);
+          const Ajv = require('ajv');
+          const addFormats = require('ajv-formats');
+
+          const repoRoot = process.cwd();
+          const examplesGlob = 'examples/**/*.json';
+          const schemasRoot = path.join(repoRoot, 'schemas');
+
+          const ajv = new Ajv({
+            strict: true,
+            allErrors: true
+          });
+          addFormats(ajv);
+
+          const failures = [];
+
+          const loadJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
+
+          const resolveSchemaPath = (examplePath, data) => {
+            // 1) Prefer explicit $schema (repo-relative like "/schemas/universal/product.json")
+            if (data && typeof data.$schema === 'string') {
+              const s = data.$schema.trim();
+              if (s.startsWith('http://') || s.startsWith('https://')) {
+                throw new Error(`Example ${examplePath} uses remote $schema URL (${s}). Use a repo-relative path instead.`);
+              }
+              const rel = s.startsWith('/') ? s.slice(1) : s;
+              const abs = path.join(repoRoot, rel);
+              if (!existsSync(abs)) throw new Error(`$schema path not found for ${examplePath}: ${abs}`);
+              return abs;
+            }
+            // 2) Fallback: map examples/**/foo.json -> schemas/**/foo.json (same relative path)
+            const relFromExamples = path.relative(path.join(repoRoot, 'examples'), examplePath);
+            const candidate = path.join(schemasRoot, relFromExamples);
+            if (existsSync(candidate)) return candidate;
+
+            // 3) Not resolvable
+            throw new Error(`Cannot resolve schema for example ${examplePath}. Add "$schema": "/schemas/<...>.json" to the example.`);
+          };
+
+          const main = async () => {
+            const files = await glob(examplesGlob, { nodir: true });
+            if (files.length === 0) {
+              console.log('No examples found under /examples — skipping.');
+              return;
+            }
+            for (const ex of files) {
+              try {
+                const data = loadJson(ex);
+                const schemaPath = resolveSchemaPath(path.join(repoRoot, ex), data);
+                const schema = loadJson(schemaPath);
+
+                // Add schema to AJV with key as its absolute path for caching
+                const key = schema.$id || schemaPath;
+                if (!ajv.getSchema(key)) {
+                  ajv.addSchema(schema, key);
+                }
+                const validate = ajv.getSchema(key) || ajv.compile(schema);
+                const valid = validate(data);
+                if (!valid) {
+                  failures.push({ example: ex, schema: path.relative(repoRoot, schemaPath), errors: validate.errors });
+                } else {
+                  console.log(`OK  ${ex}  ->  ${path.relative(repoRoot, schemaPath)}`);
+                }
+              } catch (err) {
+                failures.push({ example: ex, schema: '(unresolved)', errors: [{ message: err.message }] });
+              }
+            }
+
+            if (failures.length) {
+              console.error('\nExample validation failures:');
+              for (const f of failures) {
+                console.error(`\n- Example: ${f.example}`);
+                console.error(`  Schema : ${f.schema}`);
+                for (const e of f.errors || []) {
+                  console.error(`  • ${e.instancePath || ''} ${e.message}`);
+                }
+              }
+              process.exit(1);
+            } else {
+              console.log('\nAll examples validate against their schemas ✅');
+            }
+          };
+
+          main().catch((e) => {
+            console.error(e);
+            process.exit(1);
+          });
+          EOF
+
+          node .github/validate-examples.mjs
+

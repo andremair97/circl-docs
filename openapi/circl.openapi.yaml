@@ -29,13 +29,37 @@ paths:
   /products/{id}:
     get:
       summary: Get a product by id
+      description: Returns a universal product resource for the given ID (e.g., barcode).
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
+          description: Product identifier (e.g., barcode)
       responses:
         '200':
-          description: OK
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/universal/product.json
+              examples:
+                default:
+                  externalValue: ../examples/products/get-by-id.json
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [error, message]
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                notFound:
+                  externalValue: ../examples/errors/not-found.json
 

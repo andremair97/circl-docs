@@ -1,0 +1,21 @@
+{
+  "$schema": "/schemas/overlays/off/product.overlay.json",
+  "code": "3017620429484",
+  "product_name": "Chocolate Hazelnut Spread",
+  "brands": "BrandCo",
+  "categories": "Spreads, Chocolate spreads",
+  "quantity": "400 g",
+  "packaging": "Glass jar, Metal lid",
+  "ecoscore_grade": "b",
+  "nutriscore_grade": "d",
+  "countries": "United Kingdom, Ireland",
+  "last_modified_t": 1725555555,
+  "_provenance": {
+    "source": "OpenFoodFacts",
+    "fetched_at": "2025-09-05T20:10:00Z",
+    "file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "transform_version": "off-ingest-v0.1",
+    "record_id": "3017620429484"
+  }
+}
+
