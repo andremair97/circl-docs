@@ -52,7 +52,8 @@ jobs:
 
       - name: Lint YAML
         run: |
-          yamllint -s .
+          FILES="$(git ls-files '*.yml' '*.yaml' | grep -v '^node_modules/' | grep -v '^site/' || true)"
+          [ -z "$FILES" ] || yamllint -s -c .yamllint.yaml $FILES
 
       # ---------- OpenAPI validation ----------
       - name: Spectral lint (OpenAPI 3.1)
