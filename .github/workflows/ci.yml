@@ -50,7 +50,12 @@ jobs:
       - name: Lint Markdown
         run: |
           # docs/ contains legacy files; ignore until formatted
-          npx markdownlint "**/*.md" --ignore "node_modules" --ignore "site" --ignore ".venv" --ignore "docs" || (echo "Run: npx markdownlint --fix to auto-fix some issues" && exit 1)
+          npx markdownlint "**/*.md" \
+            --ignore "node_modules" \
+            --ignore "site" \
+            --ignore ".venv" \
+            --ignore "docs" \
+            || (echo "Run: npx markdownlint --fix to auto-fix some issues" && exit 1)
 
       - name: Lint YAML
         run: |
@@ -97,7 +102,10 @@ jobs:
             if (data && typeof data.$schema === 'string') {
               const s = data.$schema.trim();
               if (s.startsWith('http://') || s.startsWith('https://')) {
-                throw new Error(`Example ${examplePath} uses remote $schema URL (${s}). Use a repo-relative path instead.`);
+                throw new Error(
+                  `Example ${examplePath} uses remote $schema URL (${s}).` +
+                    ' Use a repo-relative path instead.'
+                );
               }
               const rel = s.startsWith('/') ? s.slice(1) : s;
               const abs = path.join(repoRoot, rel);
@@ -110,7 +118,10 @@ jobs:
             if (existsSync(candidate)) return candidate;
 
             // 3) Not resolvable
-            throw new Error(`Cannot resolve schema for example ${examplePath}. Add "$schema": "/schemas/<...>.json" to the example.`);
+            throw new Error(
+              `Cannot resolve schema for example ${examplePath}.` +
+                ' Add "$schema": "/schemas/<...>.json" to the example.'
+            );
           };
 
           const main = async () => {
