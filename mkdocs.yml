@@ -1,76 +1,102 @@
-site_name: Circl Planning & Specs
-site_description: Sustainability data platform – plans, standards, and APIs
+site_name: CIRCL Docs
+site_description: Universal mapping, overlays, and data adapters
+site_url: https://andremair97.github.io/circl-docs/
+repo_name: andremair97/circl-docs
 repo_url: https://github.com/andremair97/circl-docs
+edit_uri: edit/main/docs/
 docs_dir: docs
 
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.instant
-    - navigation.indexes
-    - content.code.copy
+    - navigation.tabs
+    - navigation.top
     - content.action.edit
+    - content.code.copy
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
 
 markdown_extensions:
   - admonition
   - toc:
       permalink: true
-  - tables
+  - footnotes
+  - attr_list
+  - def_list
+  - md_in_html
   - pymdownx.details
-  - pymdownx.highlight
   - pymdownx.superfences
-  - pymdownx.emoji
+  - pymdownx.snippets
+  - pymdownx.critic
 
 plugins:
   - search
-  - mermaid2:
-      javascript: ../node_modules/mermaid/dist/mermaid.esm.min.mjs
+  - mermaid2
   - git-revision-date-localized:
       enable_creation_date: true
+      fallback_to_build_date: true
+      type: timeago
+  - git-committers:
+      repository: andremair97/circl-docs
+      branch: main
+  - macros
+  - rss:
+      abstract_chars_count: 240
+      categories:
+        - Changelog
+      match_path: "(docs/|)changelog/.*"
 
 nav:
-  - Overview:
-      - index.md
-      - vision/010-product-vision.md
-      - vision/020-principles.md
-  - Product:
-      - product/100-mvp-prd.md
-      - product/110-roadmap.md
-      - product/120-user-stories.md
-      - product/130-ux-wireframes.md
+  - Home: index.md
+  - Guides:
+      - Overview:
+          - vision/010-product-vision.md
+          - vision/020-principles.md
+      - Product:
+          - product/100-mvp-prd.md
+          - product/110-roadmap.md
+          - product/120-user-stories.md
+          - product/130-ux-wireframes.md
+      - Architecture:
+          - architecture/200-c4-context.md
+          - architecture/210-c4-container.md
+          - architecture/220-c4-component.md
+          - architecture/230-threat-model.md
+      - Data:
+          - data/300-data-standard.md
+          - data/310-provenance-standard.md
+          - data/320-taxonomy-mapping.md
+          - data/330-scoring-spec.md
+          - data/340-source-registry.md
+      - APIs:
+          - apis/400-api-overview.md
+          - apis/410-search-api.md
+          - apis/420-products-api.md
+          - apis/430-scores-api.md
+          - apis/440-taxonomy-api.md
+      - Ops:
+          - ops/CONTEXT-PACK.md
+          - ops/AGENT-BRIEF.md
+          - ops/PROMPT-LIBRARY.md
+          - ops/500-ingestion-playbooks.md
+          - ops/510-data-quality.md
+          - ops/520-observability.md
+          - ops/530-security-privacy.md
+          - ops/540-licensing-compliance.md
+          - Playbooks:
+              - ops/playbooks/off.md
+              - ops/playbooks/_etl-checklist.md
+      - Process:
+          - process/605-ai-collaboration.md
+          - process/610-contributing.md
+          - process/620-versioning-release.md
+  - Changelog: changelog/index.md
   - Architecture:
-      - architecture/200-c4-context.md
-      - architecture/210-c4-container.md
-      - architecture/220-c4-component.md
-      - architecture/230-threat-model.md
-  - Data:
-      - data/300-data-standard.md
-      - data/310-provenance-standard.md
-      - data/320-taxonomy-mapping.md
-      - data/330-scoring-spec.md
-      - data/340-source-registry.md
-  - APIs:
-      - apis/400-api-overview.md
-      - apis/410-search-api.md
-      - apis/420-products-api.md
-      - apis/430-scores-api.md
-      - apis/440-taxonomy-api.md
-  - Ops:
-      - ops/CONTEXT-PACK.md
-      - ops/AGENT-BRIEF.md
-      - ops/PROMPT-LIBRARY.md
-      - ops/500-ingestion-playbooks.md
-      - ops/510-data-quality.md
-      - ops/520-observability.md
-      - ops/530-security-privacy.md
-      - ops/540-licensing-compliance.md
-      - Playbooks:
-          - ops/playbooks/off.md
-          - ops/playbooks/_etl-checklist.md
-  - Process:
-      - process/600-adrs/index.md
-      - process/600-adrs/0001-use-adrs.md
-      - process/605-ai-collaboration.md
-      - process/610-contributing.md
-      - process/620-versioning-release.md
+      - ADRs: adr/index.md
+  - Releases: releases.md
 

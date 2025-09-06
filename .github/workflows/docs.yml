@@ -1,0 +1,36 @@
+name: Docs
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git date/committers plugins
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Generate changelog (unreleased)
+        run: |
+          python - <<'PY'
+          import subprocess,sys
+          subprocess.run(". .venv/bin/activate 2>/dev/null || true", shell=True)
+          subprocess.run("cz changelog --unreleased || true", shell=True, check=False)
+          PY
+      - name: Build docs
+        run: mkdocs build --strict
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
