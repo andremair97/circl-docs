@@ -1,4 +1,4 @@
-.PHONY: changelog docs setup validate test smoke
+.PHONY: changelog docs setup validate test smoke test-web
 
 changelog:
 	. .venv/bin/activate && cz changelog --unreleased
@@ -17,3 +17,6 @@ test:
 
 smoke:
 	./tools/ingest_and_map.py --source off --barcode 737628064502 --out /tmp/off-mapped.json && head -n 30 /tmp/off-mapped.json
+
+test-web:
+	pnpm -C ui test
