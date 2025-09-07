@@ -1,0 +1,25 @@
+{
+  "name": "mobile",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "build": "expo build",
+    "test": "echo \"no tests\""
+  },
+  "dependencies": {
+    "expo": "^50.0.0",
+    "expo-router": "^3.5.0",
+    "react": "^18.2.0",
+    "react-native": "0.73.0",
+    "@circl/ui": "workspace:*",
+    "@circl/schemas": "workspace:*",
+    "@circl/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-native": "^0.73.0",
+    "vitest": "^1.5.0"
+  }
+}

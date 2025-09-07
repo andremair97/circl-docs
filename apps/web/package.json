@@ -1,0 +1,25 @@
+{
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest --passWithNoTests"
+  },
+  "dependencies": {
+    "next": "^14.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-native-web": "^0.19.10",
+    "@circl/ui": "workspace:*",
+    "@circl/schemas": "workspace:*",
+    "@circl/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "vitest": "^1.5.0"
+  }
+}

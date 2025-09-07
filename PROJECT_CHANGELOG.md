@@ -8,6 +8,7 @@
 
 - Start here for your current branch. On merge, move bullets under today’s
   date.
+- infra: scaffold pnpm monorepo with Next.js web, Expo mobile, shared packages, and CI; follow-up: flesh out features
 
 ## 2025-09-07
 

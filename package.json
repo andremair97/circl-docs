@@ -2,8 +2,13 @@
   "name": "circl-docs",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.15.0",
   "type": "module",
   "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test && pytest -q",
     "lint:oas": "spectral lint 'openapi/**/*.yaml'",
     "map:off": "node scripts/off-map.mjs",
     "schema:validate": "for s in schemas/universal/product.json; do for d in examples/universal/*.json; do ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s \"$s\" -d \"$d\"; done; done",
@@ -22,6 +27,12 @@
     "ajv-formats": "^3.0.1",
     "dotenv": "^16.4.5",
     "glob": "^11.0.0",
-    "markdownlint-cli": "^0.41.0"
+    "markdownlint-cli": "^0.41.0",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "prettier": "^3.2.5"
   }
 }
