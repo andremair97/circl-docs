@@ -1,12 +1,13 @@
 {
-  "name": "web",
+  "name": "@circl/web",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest run --exclude tests/e2e/**",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "^14.2.3",
@@ -15,11 +16,18 @@
     "react-native-web": "^0.19.10",
     "@circl/ui": "workspace:*",
     "@circl/schemas": "workspace:*",
-    "@circl/utils": "workspace:*"
+    "@circl/utils": "workspace:*",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-tabs": "^1.0.4",
+    "clsx": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "vitest": "^1.5.0"
+    "vitest": "^1.5.0",
+    "@playwright/test": "^1.44.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

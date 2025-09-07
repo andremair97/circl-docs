@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ifixit-1",
+    "title": "iPhone Battery Replacement",
+    "summary": "Guide to replace iPhone battery",
+    "image": "https://via.placeholder.com/150",
+    "url": "https://example.com/ifixit",
+    "fetched_at": "2024-06-01T00:00:00Z"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ebay-1",
+    "title": "Used Laptop",
+    "summary": "Refurbished laptop with 8GB RAM",
+    "image": "https://via.placeholder.com/150",
+    "url": "https://example.com/ebay",
+    "fetched_at": "2024-06-01T00:00:00Z"
+  }
+]
