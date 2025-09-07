@@ -89,5 +89,6 @@ nav:
       - ADRs: adr/index.md
   - Releases: releases.md
   - Contributing:
+      # Guide on changelog fragments for PRs
       - Changelog fragments: contributing/changelog.md
 

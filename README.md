@@ -24,4 +24,9 @@ mkdocs serve
   `mkdocs build -f mkdocs.nocommitters.yml`
 
 ### Changelog
-Do not edit `CHANGELOG.md` directly. Add a short fragment in `changelog.d/`. The release workflow compiles fragments into the main changelog.
+Each PR must either:
+
+1. Add `/changelog.d/<short-title>.md` with a one-line summary, or
+2. Apply the `no-changelog` label for docs/CI-only changes.
+
+The release workflow compiles fragments into `CHANGELOG.md` and clears the directory.
