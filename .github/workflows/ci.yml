@@ -78,3 +78,51 @@ jobs:
       - name: Run tests
         run: pytest -q
 
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      connectors: ${{ steps.matrix.outputs.connectors }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: paths
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            off:
+              - 'src/adapters/off.py'
+              - 'examples/off/**'
+              - 'tests/connectors/off/**'
+              - 'tools/ingest_and_map.py'
+              - 'overlays/off.*'
+      - id: matrix
+        run: |
+          connectors=()
+          if [[ "${{ steps.paths.outputs.off }}" == 'true' ]]; then connectors+=("off"); fi
+          printf 'connectors=[%s]\n' "$(IFS=,; echo "${connectors[*]}")" >> "$GITHUB_OUTPUT"
+
+  connectors:
+    needs: changes
+    if: needs.changes.outputs.connectors != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        connector: ${{ fromJSON(needs.changes.outputs.connectors) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps (Python)
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Run connector smoke tests
+        run: make test-connectors CONNECTOR=${{ matrix.connector }}
+
