@@ -7,7 +7,12 @@
     "map:off": "node scripts/off-map.mjs",
     "schema:validate": "for s in schemas/**/*.json; do for d in examples/**/*.json; do ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s \"$s\" -d \"$d\"; done; done",
     "generate:examples": "npm run map:off && npm run schema:validate",
-    "docs:build": "mkdocs build --strict"
+    "docs:build": "mkdocs build --strict",
+    "test:connectors": "node tests/run_all.mjs",
+    "test:off": "node tests/test_off.mjs",
+    "test:ifixit": "node tests/test_ifixit.mjs",
+    "test:ebay": "node tests/test_ebay.mjs",
+    "test:lot": "node tests/test_lot.mjs"
   },
   "devDependencies": {
     "@stoplight/spectral-cli": "^6.15.0",
