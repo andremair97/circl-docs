@@ -26,6 +26,6 @@ mkdocs serve
 ## Changelog
 
 - Do not edit `CHANGELOG.md` directly.
-- For each PR, add a short fragment under `changelog.d/` (e.g., `changelog.d/add-off-connector.md`).
+- For each PR, add a fragment under `changelog.d/` summarising the change in one or two lines using Conventional Commit style (e.g., `changelog.d/add-off-connector.md`).
 - If no entry is needed, label the PR `no-changelog`.
 - During release, fragments are compiled into `CHANGELOG.md` and then cleared.
