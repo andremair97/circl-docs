@@ -39,20 +39,15 @@ plugins:
   - mermaid2:
       javascript: ../node_modules/mermaid/dist/mermaid.esm.min.mjs
   - git-revision-date-localized:
-
       enable_creation_date: true
       fallback_to_build_date: true
       type: timeago
-  - git-committers:
-      repository: andremair97/circl-docs
-      branch: main
   - macros
   - rss:
       abstract_chars_count: 240
       categories:
         - Changelog
       match_path: "(docs/|)changelog/.*"
-
 
 nav:
   - Home: index.md
