@@ -1,0 +1,10 @@
+{
+  "id": "example:1",
+  "title": "Example Product",
+  "brand": "ExampleBrand",
+  "provenance": {
+    "source": "Example",
+    "url": "https://example.com/product/1",
+    "fetched_at": "2024-01-01T00:00:00Z"
+  }
+}
