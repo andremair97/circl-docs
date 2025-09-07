@@ -5,15 +5,15 @@ import shlex
 import tempfile
 import subprocess
 from pathlib import Path
-from typing import Any, Dict, Tuple, Optional
+from typing import Any, Dict, Tuple, Optional, List
 
 import streamlit as st
 import requests
 from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "schemas" / "universal" / "product.json"
-OVERLAY_PATH = ROOT / "schemas" / "overlays" / "off" / "product.overlay.json"
+SCHEMA_PATH = ROOT / "schemas" / "universal" / "product.schema.json"
+OVERLAY_PATH = ROOT / "overlays" / "off.product.overlay.json"
 MAP_TOOL = ROOT / "scripts" / "off-map.mjs"
 SAMPLE_RAW = ROOT / "examples" / "off" / "product.sample.json"
 
@@ -68,7 +68,6 @@ def _run_mapper_with_args(args: list[str]) -> Tuple[Optional[Dict[str, Any]], Di
         "--out", str(out_path),
         *args,
     ]
-    # Run
     proc = subprocess.run(cmd, capture_output=True, text=True)
     stdout = (proc.stdout or "").strip()
     stderr = (proc.stderr or "").strip()
@@ -77,33 +76,19 @@ def _run_mapper_with_args(args: list[str]) -> Tuple[Optional[Dict[str, Any]], Di
     diag = {
         "cmd": " ".join(shlex.quote(x) for x in cmd),
         "rc": str(proc.returncode),
-        "stdout": stdout[:2000],  # cap to keep UI light
+        "stdout": stdout[:2000],
         "stderr": stderr[:4000],
         "outfile": str(out_path),
     }
 
-    try:
-        # Prefer the outfile, it should always exist when success
-        if out_path.exists() and out_path.stat().st_size > 0:
+    if out_path.exists() and out_path.stat().st_size > 0:
+        try:
             with out_path.open("r", encoding="utf-8") as f:
                 mapped = json.load(f)
-        else:
-            # As a fallback, try parsing stdout if mapper prints JSON there
-            if stdout.startswith("{") or stdout.startswith("["):
-                mapped = json.loads(stdout)
-    except Exception as ex:
-        diag["error"] = f"Failed to parse mapper output: {ex}"
-
-    # If proc failed and we didn't get JSON, surface error
+        except Exception as ex:
+            diag["error"] = f"Failed to parse outfile: {ex}"
     if proc.returncode != 0 and mapped is None:
         diag.setdefault("error", "Mapper exited with non-zero return code.")
-
-    # Clean temp file if we parsed it successfully
-    try:
-        if mapped is not None:
-            os.unlink(out_path)
-    except OSError:
-        pass
 
     return mapped, diag
 
@@ -131,18 +116,51 @@ def off_live_probe(barcode: str, timeout: int = 8) -> Tuple[bool, str]:
     except Exception as e:
         return False, f"Probe error: {e}"
 
+def off_name_search(query: str, timeout: int = 8) -> List[Dict[str, Any]]:
+    url = "https://world.openfoodfacts.org/api/v2/search"
+    params = {
+        "page_size": 20,
+        "fields": "product_name,brands,code,image_url",
+        "sort_by": "unique_scans_n",
+        "lc": "en",
+        "search_terms": query,
+    }
+    try:
+        r = requests.get(url, params=params, timeout=timeout)
+        if r.status_code != 200:
+            return []
+        data = r.json()
+        return data.get("products", [])
+    except Exception:
+        return []
+
 # --- UI shell (keep your existing header)
 st.set_page_config(page_title="Universal Mapping – Local Playground", layout="wide")
 st.title("\U0001F9EA Universal Mapping – Local Playground")
 st.caption("Isolated UI: fetch/upload → map → validate (no CI, no docs, no conflicts)")
 
 schema = load_json(SCHEMA_PATH)
-overlay = load_json(OVERLAY_PATH)
 
 with st.sidebar:
     st.header("Open Food Facts")
     barcode = st.text_input("Barcode", value="5449000000996")
     run_fetch = st.button("Fetch + Map + Validate (barcode)", type="primary")
+
+    st.subheader("Search by product name")
+    if "search_results" not in st.session_state:
+        st.session_state["search_results"] = []
+    query = st.text_input("Name query", value="")
+    if st.button("Search") and query:
+        st.session_state["search_results"] = off_name_search(query)
+    results = st.session_state.get("search_results", [])
+    selected_code = None
+    if results:
+        labels = [f"{p.get('product_name','?')} — {p.get('brands','?')} — {p.get('code','?')}" for p in results]
+        choice = st.selectbox("product_name — brands — code", labels)
+        idx = labels.index(choice)
+        selected_code = results[idx].get("code")
+    run_search = st.button("Map + Validate (search result)")
+
     st.divider()
     st.subheader("Or upload raw OFF JSON")
     uploaded = st.file_uploader("Upload .json", type=["json"])
@@ -165,10 +183,11 @@ def show_diag(diag: Dict[str, str]):
         if diag.get("outfile"):
             st.text(f"outfile: {diag['outfile']}")
 
-if run_fetch:
+if run_fetch or (run_search and selected_code):
+    code = barcode if run_fetch else selected_code
     with st.spinner("Fetching from OFF → mapping → validating…"):
-        mapped, diag = run_map_off_with_barcode(barcode)
-        ok_probe, probe_msg = off_live_probe(barcode)
+        mapped, diag = run_map_off_with_barcode(code)
+        ok_probe, probe_msg = off_live_probe(code)
 
     with col_status:
         st.subheader("Live probe")
@@ -182,7 +201,7 @@ if run_fetch:
             st.download_button(
                 "⬇️ Download mapped.json",
                 data=json.dumps(mapped, indent=2).encode("utf-8"),
-                file_name=f"{barcode}-mapped.json",
+                file_name=f"{code}-mapped.json",
                 mime="application/json",
             )
         with col_status:
@@ -192,25 +211,35 @@ if run_fetch:
     else:
         st.error("Failed to map via Node mapper.")
         show_diag(diag)
-        st.info("Trying fallback: local sample mapped inline with overlay…")
+        st.info("Trying fallback: local sample mapped inline…")
         try:
             raw = load_json(SAMPLE_RAW)
-            # Simple inline mapping fallback
-            def get_path(obj, dotted):
-                cur = obj
-                for p in dotted.split("."):
-                    if isinstance(cur, dict):
-                        cur = cur.get(p)
-                    else:
-                        return None
-                return cur
-            mapped2 = {k: get_path(raw, v) if isinstance(v, str) else None for k, v in overlay.items()}
+            mapped2 = {
+                "title": raw.get("product_name") or raw.get("title", ""),
+                "brand": (raw.get("brands") or raw.get("brand", "")).split(",")[0].strip(),
+                "barcode": raw.get("code") or raw.get("barcode", ""),
+            }
+            if raw.get("quantity"):
+                mapped2["quantity"] = raw.get("quantity")
+            if raw.get("categories"):
+                mapped2["categories"] = raw.get("categories")
+            if raw.get("image_url"):
+                mapped2["image_url"] = raw.get("image_url")
+            if raw.get("ingredients_text"):
+                mapped2["ingredients_text"] = raw.get("ingredients_text")
+            if raw.get("nutriscore_grade"):
+                mapped2["nutriscore_grade"] = raw.get("nutriscore_grade")
+            if raw.get("ecoscore_grade"):
+                mapped2["ecoscore_grade"] = raw.get("ecoscore_grade")
+            if raw.get("url"):
+                mapped2["provenance_source"] = raw.get("url")
+
             ok2, msg2 = validate_all(schema, mapped2)
             with col_raw:
                 st.subheader("Raw (Fallback sample)")
                 st.json(raw)
             with col_mapped:
-                st.subheader("Mapped (Fallback inline)")
+                st.subheader("Mapped (Fallback)")
                 st.json(mapped2)
             with col_status:
                 st.subheader("Validation (Fallback)")
