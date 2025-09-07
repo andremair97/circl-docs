@@ -1,4 +1,4 @@
-.PHONY: changelog docs setup validate lint test test-web smoke test-connectors test-contracts
+.PHONY: changelog docs setup validate lint test smoke test-connectors test-contracts test-web
 
 changelog:
 	. .venv/bin/activate && cz changelog --unreleased
@@ -15,11 +15,9 @@ validate:
 lint:
 	pnpm lint
 
+
 test:
 	pytest -q
-
-test-web:
-	pnpm -C ui test
 
 smoke:
 	./tools/ingest_and_map.py --source off --barcode 737628064502 --out /tmp/off-mapped.json && head -n 30 /tmp/off-mapped.json
@@ -29,3 +27,6 @@ test-connectors:
 
 test-contracts:
 	$(MAKE) validate
+
+test-web:
+	pnpm -C ui test
