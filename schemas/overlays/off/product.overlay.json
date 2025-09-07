@@ -1,0 +1,12 @@
+{
+  "mapping": {
+    "id": { "const": "off:${code}" },
+    "title": { "path": "product_name" },
+    "brand": { "pipe": ["brands", "firstCsv"] },
+    "identifiers": { "object": { "gtin": { "path": "code" } } },
+    "classification": { "object": { "categories": { "pipe": ["categories", "csvToArray"] } } },
+    "packaging": { "object": { "summary": { "path": "packaging" } } },
+    "images": { "array": [ { "object": { "url": { "path": "image_url" }, "kind": { "const": "front" } } } ] },
+    "provenance": { "object": { "source": { "const": "OpenFoodFacts" }, "url": { "path": "url" }, "fetched_at": { "now": true } } }
+  }
+}

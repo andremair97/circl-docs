@@ -1,0 +1,10 @@
+{
+  "itemId": "1234567890",
+  "title": "Refurbished Laptop",
+  "brand": "BrandY",
+  "gtin": "00012345678905",
+  "price": 199.99,
+  "currency": "USD",
+  "image": "https://example.com/image.jpg",
+  "url": "https://www.ebay.com/itm/1234567890"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "tool-1",
+  "name": "Power Drill",
+  "brand": "DrillCo",
+  "location": "Borough Library",
+  "availability": "available",
+  "image": "https://example.com/drill.jpg",
+  "url": "https://libraryofthings.example/items/tool-1"
+}

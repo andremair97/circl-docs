@@ -1,0 +1,15 @@
+{
+  "mapping": {
+    "id": { "const": "ifixit:${id}" },
+    "title": { "path": "title" },
+    "brand": { "path": "device" },
+    "identifiers": { "object": { "model": { "path": "device" } } },
+    "repairs": { "array": [ { "object": {
+      "title": { "path": "title" },
+      "difficulty": { "path": "difficulty" },
+      "time": { "path": "time_required" },
+      "url": { "path": "url" }
+    }}]},
+    "provenance": { "object": { "source": { "const": "iFixit" }, "url": { "path": "url" }, "fetched_at": { "now": true } } }
+  }
+}
