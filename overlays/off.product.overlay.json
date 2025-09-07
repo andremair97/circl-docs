@@ -1,0 +1,12 @@
+{
+  "title": "product_name",
+  "brand": "brands",
+  "barcode": "code",
+  "quantity": "quantity",
+  "categories": "categories",
+  "image_url": "image_url",
+  "ingredients_text": "ingredients_text",
+  "nutriscore_grade": "nutriscore_grade",
+  "ecoscore_grade": "ecoscore_grade",
+  "provenance_source": "url"
+}

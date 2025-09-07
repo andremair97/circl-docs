@@ -1,7 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://circl.dev/schemas/_meta/dialect.json",
-  "title": "Draft 2020-12 Dialect Anchor",
-  "type": "object",
-  "additionalProperties": true
-}

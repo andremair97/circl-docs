@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circl.dev/schemas/universal/product.schema.json",
+  "title": "Universal Product",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "brand",
+    "barcode"
+  ],
+  "properties": {
+    "title": { "type": "string" },
+    "brand": { "type": "string" },
+    "barcode": { "type": "string" },
+    "quantity": { "type": "string" },
+    "categories": { "type": "string" },
+    "image_url": { "type": "string", "format": "uri" },
+    "ingredients_text": { "type": "string" },
+    "nutriscore_grade": { "type": "string" },
+    "ecoscore_grade": { "type": "string" },
+    "provenance_source": { "type": "string", "format": "uri" }
+  }
+}
