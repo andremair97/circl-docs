@@ -1,17 +1,9 @@
 import SearchBar from '../components/SearchBar';
 
-// Landing page with centered SearchBar and green background.
+// Landing page with centered SearchBar and themed background.
 export default function Search() {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#e6f4ea',
-      }}
-    >
+    <div className="flex flex-col items-center justify-center py-24">
       <SearchBar />
     </div>
   );
