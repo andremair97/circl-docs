@@ -1,0 +1,7 @@
+[
+  { "id": "c1", "title": "Patagonia", "type": "company" },
+  { "id": "c2", "title": "IKEA", "type": "company" },
+  { "id": "p1", "title": "Refurbished Laptop", "type": "product" },
+  { "id": "p2", "title": "Recycled Notebook", "type": "product" },
+  { "id": "p3", "title": "Organic Cotton T-Shirt", "type": "product" }
+]

@@ -1,10 +1,12 @@
 import SearchBar from '../components/SearchBar';
+import LocalSeedProvider from '../suggest/LocalSeedProvider';
 
 // Landing page with centered SearchBar and themed background.
 export default function Search() {
+  const provider = new LocalSeedProvider();
   return (
     <div className="flex flex-col items-center justify-center py-24">
-      <SearchBar />
+      <SearchBar provider={provider} />
     </div>
   );
 }
