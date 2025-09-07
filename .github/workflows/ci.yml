@@ -33,13 +33,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin mkdocs-git-revision-date-localized-plugin yamllint
+          pip install -r requirements.txt
           npm ci
 
       # ---------- Docs build ----------
       - name: Build MkDocs (strict)
-        run: |
-          mkdocs build --strict
+        run: ./scripts/mkdocs_build_ci.sh
+        env:
+          MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # ---------- Linters ----------
       - name: Lint Markdown
