@@ -1,0 +1,10 @@
+[
+  {
+    "id": "lot-1",
+    "title": "Power Drill Rental",
+    "summary": "Borrow a drill from the local library",
+    "image": "https://via.placeholder.com/150",
+    "url": "https://example.com/lot",
+    "fetched_at": "2024-06-01T00:00:00Z"
+  }
+]

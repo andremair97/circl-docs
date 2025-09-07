@@ -1,16 +1,12 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import { Button, View, Text } from '@circl/ui';
+import SearchBar from '@/src/components/SearchBar';
 
-// Home screen shows navigation to Results.
+// Landing page nudges users to start with a sustainability-focused search.
 export default function HomePage() {
   return (
-    <View>
-      <Text>Home</Text>
-      <Link href="/results">
-        <Button>Go to Results</Button>
-      </Link>
-    </View>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-4 text-center">
+      <h1 className="text-4xl font-bold">Circl</h1>
+      <p className="text-lg text-gray-600">Sustainable shopping made simple</p>
+      <SearchBar />
+    </main>
   );
 }

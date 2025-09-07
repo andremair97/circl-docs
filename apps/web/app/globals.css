@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles applied across pages. Keeping it minimal so Tailwind can handle
+   most of the layout and theming. */

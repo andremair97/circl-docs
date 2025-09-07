@@ -1,12 +1,12 @@
-'use client';
-import React from 'react';
-import { View, Text } from '@circl/ui';
+import { Suspense } from 'react';
+import ResultsClient from './results-client';
 
-// Placeholder results screen.
+// Wraps the client results component in Suspense to satisfy Next.js requirements
+// around search params.
 export default function ResultsPage() {
   return (
-    <View>
-      <Text>Results coming soon…</Text>
-    </View>
+    <Suspense fallback={<p>Loading…</p>}>
+      <ResultsClient />
+    </Suspense>
   );
 }

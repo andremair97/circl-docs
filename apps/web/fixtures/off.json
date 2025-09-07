@@ -1,0 +1,10 @@
+[
+  {
+    "id": "off-1",
+    "product_name": "Stainless Steel Bottle",
+    "ingredients_text": "Durable reusable bottle",
+    "image_url": "https://via.placeholder.com/150",
+    "url": "https://example.com/bottle",
+    "fetched_at": "2024-06-01T00:00:00Z"
+  }
+]

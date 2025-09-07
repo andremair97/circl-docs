@@ -18,10 +18,15 @@
     ],
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "app",
+    "src",
     ".next/types/**/*.ts"
   ],
   "exclude": [
