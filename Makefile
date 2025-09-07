@@ -1,4 +1,4 @@
-.PHONY: changelog docs setup validate test smoke
+.PHONY: changelog docs setup validate test test-connectors smoke
 
 changelog:
 	. .venv/bin/activate && cz changelog --unreleased
@@ -14,6 +14,13 @@ validate:
 
 test:
 	pytest -q
+
+test-connectors:
+	@if [ -n "$(CONNECTOR)" ]; then \
+		pytest -q tests/connectors/$(CONNECTOR); \
+	else \
+		pytest -q tests/connectors; \
+	fi
 
 smoke:
 	./tools/ingest_and_map.py --source off --barcode 737628064502 --out /tmp/off-mapped.json && head -n 30 /tmp/off-mapped.json
