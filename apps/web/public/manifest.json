@@ -1,0 +1,9 @@
+{
+  "name": "Circl Web",
+  "short_name": "Circl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Sustainability Discovery",
+  "icons": []
+}

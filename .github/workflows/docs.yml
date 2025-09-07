@@ -15,11 +15,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
       - name: Install node deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Install deps
         run: |
           python -m pip install -U pip

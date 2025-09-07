@@ -8,6 +8,11 @@
 
 - Start here for your current branch. On merge, move bullets under today’s
   date.
+- infra: scaffold pnpm monorepo with Next.js web, Expo mobile, shared packages, and CI; follow-up: flesh out features
+- ci: switch workflows to pnpm to leverage lockfile caching and prevent setup-node failures; files: .github/workflows/ci.yml, .github/workflows/docs.yml; follow-up: tighten cache paths
+- ui: rename Tamagui provider entry to .tsx so TypeScript compiles JSX; files: packages/ui/index.tsx, packages/ui/package.json, packages/ui/tsconfig.json; follow-up: add component tests
+- web: alias react-native to react-native-web and simplify shared UI to React Native primitives; files: apps/web/next.config.mjs, apps/web/tsconfig.json, packages/ui/\*; follow-up: audit Next ESLint plugin
+- ci: ignore pnpm lockfile and fix require-changelog workflow so YAML lint passes; files: .yamllint.yaml, .github/workflows/require-changelog.yml; follow-up: monitor YAML lint
 
 ## 2025-09-07
 
@@ -28,3 +33,4 @@
 
 - docs: add PRD “Deliberate Friction”; add Borrow and Repair buckets to UI
   spec; follow-up: screenshots
+```
