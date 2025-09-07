@@ -1,0 +1,5 @@
+// https://www.ifixit.com/api/2.0/Guides/Device/iPhone%2011?limit=2 (retrieved 2024-05-01)
+{"results": [
+  {"guideid": 1, "title": "Battery Replacement", "summary": "Swap the battery.", "url": "/Guide/iPhone+11+Battery+Replacement/1", "image": {"thumbnail": "https://example.com/thumb1.jpg"}},
+  {"guideid": 2, "title": "Screen Replacement", "summary": "Replace the screen.", "url": "/Guide/iPhone+11+Screen+Replacement/2", "image": {"thumbnail": "https://example.com/thumb2.jpg"}}
+]}
