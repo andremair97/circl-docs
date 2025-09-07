@@ -124,5 +124,5 @@ jobs:
           python -m pip install -U pip
           pip install -r requirements.txt
       - name: Run connector smoke tests
-        run: make test-connectors CONNECTOR=${{ matrix.connector }}
+        run: pytest -q tests/connectors/${{ matrix.connector }}
 
