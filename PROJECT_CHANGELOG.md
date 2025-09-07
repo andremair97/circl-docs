@@ -13,7 +13,9 @@
 - ui: rename Tamagui provider entry to .tsx so TypeScript compiles JSX; files: packages/ui/index.tsx, packages/ui/package.json, packages/ui/tsconfig.json; follow-up: add component tests
 - web: alias react-native to react-native-web and simplify shared UI to React Native primitives; files: apps/web/next.config.mjs, apps/web/tsconfig.json, packages/ui/\*; follow-up: audit Next ESLint plugin
 - ci: ignore pnpm lockfile and fix require-changelog workflow so YAML lint passes; files: .yamllint.yaml, .github/workflows/require-changelog.yml; follow-up: monitor YAML lint
-- ui: add mock-driven search UI with feature flag, mock data, and tests; files: ui/*, Makefile; follow-up: connect to real search backend
+- connectors/off: add feature-flagged OFF adapter emitting universal v1; adds CLI and schema validation tests; follow-up: integrate into unified search
+- feat(contracts): freeze universal v1 + seed UI-readable mocks; files: schemas/universal/search-result.v1.json, openapi/circl.openapi.yaml, mocks/search.sample.json; follow-up: add validation tests
+- docs: document changelog fragment workflow in contributor guides and templates; files: AGENT.md, .github/PULL_REQUEST_TEMPLATE.md, docs/contributing/changelog.md, README.md, mkdocs.yml; follow-up: monitor CI guard
 
 ## 2025-09-07
 
