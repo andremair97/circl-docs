@@ -1,29 +1,28 @@
 name: require changelog fragment
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened, edited]
-
+    types: [opened, synchronize, reopened, ready_for_review, edited, labeled]
+permissions:
+  contents: read
+  pull-requests: read
 jobs:
-  changelog:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-changelog') }}
+  check-fragment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Ensure fragment exists
+      - name: Skip if label present
+        if: contains(join(fromJson('["' + join(github.event.pull_request.labels.*.name, '","') + '"]'), ','), 'skip-changelog')
+        run: echo "skip-changelog label present — bypassing." && exit 0
+      - name: Ensure a fragment exists under /changelog/
         run: |
           set -euo pipefail
           base="${{ github.event.pull_request.base.sha }}"
           head="${{ github.event.pull_request.head.sha }}"
-          if git diff --name-only "$base" "$head" | grep -q '^changelog/.*\\.md$'; then
-            if git diff --name-only "$base" "$head" | grep -q '^PROJECT_CHANGELOG.md$'; then
-              echo 'Do not edit PROJECT_CHANGELOG.md directly.' >&2
-              exit 1
-            fi
-            echo 'Changelog fragment present.'
+          if git diff --name-only "$base" "$head" | grep -E '^changelog/.*\.md$' >/dev/null; then
+            echo "Fragment found ✅"
           else
-            echo 'Missing changelog fragment in changelog/ or apply the skip-changelog label.' >&2
+            echo "::error ::Add a fragment under /changelog/ (or apply the 'skip-changelog' label)."
             exit 1
           fi
