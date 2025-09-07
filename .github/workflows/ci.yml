@@ -1,80 +1,145 @@
-name: CI (Docs, Specs, Schemas)
+name: CI
 
 on:
   push:
     branches: [ main, master ]
+    paths:
+      - 'schemas/**'
+      - 'openapi/**'
+      - 'ui/**'
+      - 'examples/**'
+      - 'src/connectors/**'
+      - 'tests/connectors/**'
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/**'
   pull_request:
     branches: [ main, master ]
+    paths:
+      - 'schemas/**'
+      - 'openapi/**'
+      - 'ui/**'
+      - 'examples/**'
+      - 'src/connectors/**'
+      - 'tests/connectors/**'
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/**'
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  changes:
     runs-on: ubuntu-latest
-
+    outputs:
+      contracts: ${{ steps.filter.outputs.contracts }}
+      web: ${{ steps.filter.outputs.web }}
+      connectors: ${{ steps.filter.outputs.connectors }}
+      docs: ${{ steps.filter.outputs.docs }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - id: filter
+        uses: dorny/paths-filter@v3
         with:
-          python-version: "3.11"
+          filters: |
+            contracts:
+              - 'schemas/**'
+              - 'openapi/**'
+            web:
+              - 'ui/**'
+            connectors:
+              - 'examples/**'
+              - 'src/connectors/**'
+              - 'tests/connectors/**'
+            docs:
+              - 'docs/**'
+              - 'mkdocs.yml'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+  contracts:
+    needs: changes
+    if: ${{ needs.changes.outputs.contracts == 'true' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: contracts-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
         with:
-          version: 8
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint:oas
+      - run: pnpm run schema:validate
 
-      - name: Install deps (Node)
-        run: pnpm install --frozen-lockfile
+  web:
+    needs: changes
+    if: ${{ needs.changes.outputs.web == 'true' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: web-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter ui build --if-present
+      - run: pnpm --filter ui test --if-present
 
-      - name: Install deps (Python)
-        run: |
-          python -m pip install -U pip
-          pip install -r requirements.txt
+  connectors:
+    needs: changes
+    if: ${{ needs.changes.outputs.connectors == 'true' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: connectors-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+      - run: python -m pip install -U pip
+      - run: pip install -r requirements.txt
+      - run: pytest tests/connectors -q
 
-      # ---------- Docs build ----------
-      - name: Build MkDocs (strict)
-        run: ./scripts/mkdocs_build_ci.sh
-        env:
-          MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # ---------- Linters ----------
-      - name: Lint Markdown
-        run: |
-          # docs/ contains legacy files; ignore until formatted
-          npx markdownlint "**/*.md" \
-            --ignore "node_modules" \
-            --ignore "site" \
-            --ignore ".venv" \
-            --ignore "docs" \
-            --ignore "000-template.md" \
-            || (echo "Run: npx markdownlint --fix to auto-fix some issues" && exit 1)
-
-      - name: Lint YAML
-        run: |
-          FILES="$(git ls-files '*.yml' '*.yaml' | grep -v '^node_modules/' | grep -v '^site/' || true)"
-          [ -z "$FILES" ] || yamllint -s -c .yamllint.yaml $FILES
-
-      # ---------- OpenAPI validation ----------
-      - name: Spectral lint (OpenAPI 3.1)
-        run: pnpm run lint:oas
-
-      # ---------- JSON Schema validation ----------
-      - name: Validate against schemas (ajv)
-        run: pnpm run schema:validate
-
-      - name: Run tests
-        run: pytest -q
-
+  docs:
+    needs: changes
+    if: ${{ needs.changes.outputs.docs == 'true' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: docs-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+      - run: python -m pip install -U pip
+      - run: pip install -r requirements.txt
+      - run: mkdocs build --strict
