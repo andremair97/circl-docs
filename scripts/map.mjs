@@ -207,6 +207,46 @@ if (!source || (!barcode && !id && !query && !inFile)) {
     }
   }
 
+  // --- begin: fill minimal required defaults if overlay didn't provide them ---
+  // id: prefer overlay; else ctx.id; else barcode/code from raw; else raw.id
+  if (!mapped.id) {
+    mapped.id =
+      ctx.id ??
+      ctx.code ??
+      raw?.id ??
+      raw?.code ??
+      raw?.uuid ??
+      raw?.Item?.id ??
+      raw?.product?.id ??
+      null;
+  }
+
+  // title: try common title/name fields across sources
+  if (!mapped.title) {
+    const titleCandidates = [
+      mapped.name,
+      raw?.title,
+      raw?.product_name,
+      raw?.name,
+      raw?.Item?.title,
+      raw?.product?.product_name,
+      raw?.listing?.title,
+      raw?.Title
+    ];
+    mapped.title = titleCandidates.find(Boolean) ?? null;
+  }
+
+  // provenance: object with minimal fields the schema expects
+  if (!mapped.provenance) {
+    mapped.provenance = {
+      source: source,
+      method: inFile ? 'fixture' : 'adapter',
+      fetched_at: new Date().toISOString()
+    };
+  }
+  // --- end: defaults ---
+
+
   const ajv = new Ajv({ strict: false, allErrors: true });
   addFormats(ajv);
   const validate = ajv.compile(schemaJson);
