@@ -11,7 +11,6 @@
 
 - connectors: enforce schema-safe mapping defaults (string ids, minimal provenance); fix samples & tests; scripts/map.mjs, tests/**, examples/*; follow-up: expand connector coverage
 - docs: add connectors section to nav and bundle local mermaid assets; mkdocs.yml, docs/assets/mermaid.esm.min.mjs; follow-up: publish diagrams
-- ci: fix require-changelog workflow YAML; .github/workflows/require-changelog.yml; follow-up: none
 
 ## 2025-09-07
 
@@ -31,4 +30,3 @@
 
 - docs: add PRD “Deliberate Friction”; add Borrow and Repair buckets to UI
   spec; follow-up: screenshots
-```
