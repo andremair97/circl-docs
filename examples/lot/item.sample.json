@@ -1,0 +1,9 @@
+{
+  "id": "tool-1",
+  "name": "Hammer Drill",
+  "brand": "Bosch",
+  "location": "London",
+  "availability": "available",
+  "image": "https://example.com/hammer.jpg",
+  "url": "https://libraryofthings.co.uk/items/tool-1"
+}

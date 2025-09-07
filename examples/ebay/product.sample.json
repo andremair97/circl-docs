@@ -1,0 +1,10 @@
+{
+  "itemId": "123456",
+  "title": "Sample Gadget",
+  "brand": "Acme",
+  "gtin": "00012345600012",
+  "price": 19.99,
+  "currency": "USD",
+  "image": "https://example.com/image.jpg",
+  "url": "https://www.ebay.com/itm/123456"
+}
