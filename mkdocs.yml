@@ -26,9 +26,7 @@ plugins:
   - mermaid2:
       javascript: ../node_modules/mermaid/dist/mermaid.esm.min.mjs
   - git-revision-date-localized:
-      fallback_to_build_date: true
-  - git-committers:
-      enabled: false
+      enable_creation_date: true
 
 nav:
   - Overview:
@@ -71,7 +69,6 @@ nav:
           - ops/playbooks/_etl-checklist.md
   - Process:
       - process/600-adrs/index.md
-      - process/600-adrs/0001-use-adrs.md
       - process/605-ai-collaboration.md
       - process/610-contributing.md
       - process/620-versioning-release.md
