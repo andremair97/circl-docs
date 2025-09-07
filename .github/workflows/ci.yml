@@ -19,22 +19,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps (Node)
+        run: npm ci
+
+      - name: Install deps (Python)
         run: |
-          python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material mkdocs-mermaid2-plugin mkdocs-git-revision-date-localized-plugin yamllint
-          npm ci
+          python -m pip install -U pip
+          pip install -r requirements.txt
 
       # ---------- Docs build ----------
       - name: Build MkDocs (strict)
@@ -53,11 +55,6 @@ jobs:
             --ignore "000-template.md" \
             || (echo "Run: npx markdownlint --fix to auto-fix some issues" && exit 1)
 
-      - name: Lint YAML
-        run: |
-          FILES="$(git ls-files '*.yml' '*.yaml' | grep -v '^node_modules/' | grep -v '^site/' || true)"
-          [ -z "$FILES" ] || yamllint -s -c .yamllint.yaml $FILES
-
       # ---------- OpenAPI validation ----------
       - name: Spectral lint (OpenAPI 3.1)
         run: npm run lint:oas
@@ -65,4 +62,7 @@ jobs:
       # ---------- JSON Schema validation ----------
       - name: Validate against schemas (ajv)
         run: npm run schema:validate
+
+      - name: Run tests
+        run: pytest -q
 

@@ -1,0 +1,13 @@
+{
+  "id": "code",
+  "title": "product_name",
+  "brand.name": "brands",
+  "identifiers.barcode": "code",
+  "classification.categories": "categories",
+  "packaging.net_quantity": "quantity",
+  "packaging.materials": "packaging",
+  "scores.ecoscore.grade": "ecoscore_grade",
+  "provenance.source": "url",
+  "provenance.record_id": "code",
+  "provenance.fetched_at": "last_modified_t"
+}
