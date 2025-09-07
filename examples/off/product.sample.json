@@ -1,12 +1,12 @@
 {
-  "title": "M&M's Peanut",
-  "brand": "Mars",
-  "barcode": "737628064502",
-  "quantity": "49 g",
+  "code": "737628064502",
+  "product_name": "M&M's Peanut",
+  "brands": "Mars",
   "categories": "Snacks, Sweet snacks, Chocolate snacks",
+  "packaging": "Plastic",
   "image_url": "https://static.openfoodfacts.org/images/products/737/628/064/502/front_en.3.400.jpg",
+  "url": "https://world.openfoodfacts.org/product/737628064502",
   "ingredients_text": "Peanuts, sugar, chocolate, skim milk, cocoa butter",
   "nutriscore_grade": "d",
-  "ecoscore_grade": "e",
-  "provenance_source": "https://world.openfoodfacts.org/product/737628064502"
+  "ecoscore_grade": "e"
 }

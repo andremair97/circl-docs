@@ -1,0 +1,10 @@
+{
+  "mapping": {
+    "id": { "const": "lot:${id}" },
+    "title": { "path": "name" },
+    "brand": { "path": "brand" },
+    "borrow": { "object": { "location": { "path": "location" }, "availability": { "path": "availability" } } },
+    "images": { "array": [ { "object": { "url": { "path": "image" }, "kind": { "const": "catalog" } } } ] },
+    "provenance": { "object": { "source": { "const": "LibraryOfThings" }, "url": { "path": "url" }, "fetched_at": { "now": true } } }
+  }
+}

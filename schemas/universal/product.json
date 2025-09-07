@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal Product",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "provenance"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "brand": { "type": "string" },
+    "identifiers": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "gtin": { "type": "string" },
+        "model": { "type": "string" }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "packaging": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "summary": { "type": "string" }
+      }
+    },
+    "repairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "additionalProperties": true,
+        "properties": {
+          "title": { "type": "string" },
+          "difficulty": { "type": "string" },
+          "time": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "borrow": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "location": { "type": "string" },
+        "availability": { "type": "string" }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "amount": { "type": ["number", "string"] },
+        "currency": { "type": "string" }
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url"],
+        "additionalProperties": true,
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "kind": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "fetched_at"],
+      "additionalProperties": true,
+      "properties": {
+        "source": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "fetched_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

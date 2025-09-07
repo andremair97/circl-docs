@@ -1,0 +1,10 @@
+{
+  "itemId": "12345",
+  "title": "Used Widget",
+  "brand": "WidgetCo",
+  "gtin": "00012345600012",
+  "price": 9.99,
+  "currency": "USD",
+  "image": "https://example.com/widget.jpg",
+  "url": "https://www.ebay.com/itm/12345"
+}

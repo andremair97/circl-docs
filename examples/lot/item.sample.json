@@ -1,0 +1,9 @@
+{
+  "id": "lot-1",
+  "name": "Power Drill",
+  "brand": "ToolCorp",
+  "location": "London",
+  "availability": "available",
+  "image": "https://example.com/drill.jpg",
+  "url": "https://libraryofthings.co.uk/items/1"
+}

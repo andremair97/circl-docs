@@ -1,0 +1,11 @@
+{
+  "mapping": {
+    "id": { "const": "ebay:${itemId}" },
+    "title": { "path": "title" },
+    "brand": { "path": "brand" },
+    "identifiers": { "object": { "gtin": { "path": "gtin" } } },
+    "pricing": { "object": { "amount": { "path": "price" }, "currency": { "path": "currency" } } },
+    "images": { "array": [ { "object": { "url": { "path": "image" }, "kind": { "const": "listing" } } } ] },
+    "provenance": { "object": { "source": { "const": "eBay" }, "url": { "path": "url" }, "fetched_at": { "now": true } } }
+  }
+}
