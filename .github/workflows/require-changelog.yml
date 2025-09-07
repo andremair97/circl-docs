@@ -1,0 +1,33 @@
+
+# .github/workflows/require-changelog.yml (add this file)
+
+```yaml
+name: Require CHANGELOG update
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  check-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure PROJECT_CHANGELOG.md modified in this PR
+        run: |
+          set -euo pipefail
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          if git diff --name-only "$base" "$head" | grep -q '^PROJECT_CHANGELOG.md$'; then
+            echo "Changelog updated. ✅"
+          else
+            echo "ERROR: PROJECT_CHANGELOG.md must be updated in this PR." >&2
+            exit 1
+          fi
+```
+
+> Tip: if you prefer a softer approach, change `exit 1` to a warning and gate merges via branch protection.
+
+---

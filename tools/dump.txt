@@ -1,0 +1,157 @@
+==> Latest commit
+commit 42181659352065c907e89732866ef98e0bba16a3
+Author:     Andre Mair <andremair@hotmail.co.uk>
+AuthorDate: Sun Sep 7 00:45:27 2025 +0100
+Commit:     Andre Mair <andremair@hotmail.co.uk>
+CommitDate: Sun Sep 7 00:45:27 2025 +0100
+
+    add scipt for AI to keep on track of what changes have occured by codex
+
+==> Repo structure (top 3 levels, ignoring junk)
+.
+├── 000-template.md
+├── AGENT.md
+├── CONTEXT-PACK.md
+├── docs
+│   ├── adr
+│   ├── apis
+│   │   ├── 400-api-overview.md
+│   │   ├── 410-search-api.md
+│   │   ├── 420-products-api.md
+│   │   ├── 430-scores-api.md
+│   │   └── 440-taxonomy-api.md
+│   ├── architecture
+│   │   ├── 200-c4-context.md
+│   │   ├── 210-c4-container.md
+│   │   ├── 220-c4-component.md
+│   │   └── 230-threat-model.md
+│   ├── data
+│   │   ├── 300-data-standard.md
+│   │   ├── 310-provenance-standard.md
+│   │   ├── 320-taxonomy-mapping.md
+│   │   ├── 330-scoring-spec.md
+│   │   └── 340-source-registry.md
+│   ├── index.md
+│   ├── ops
+│   │   ├── 500-ingestion-playbooks.md
+│   │   ├── 510-data-quality.md
+│   │   ├── 520-observability.md
+│   │   ├── 530-security-privacy.md
+│   │   ├── 540-licensing-compliance.md
+│   │   ├── AGENT-BRIEF.md
+│   │   ├── AGENT.md
+│   │   ├── CONTEXT-PACK.md
+│   │   ├── playbooks
+│   │   └── PROMPT-LIBRARY.md
+│   ├── process
+│   │   ├── 600-adrs
+│   │   ├── 605-ai-collaboration.md
+│   │   ├── 610-contributing.md
+│   │   └── 620-versioning-release.md
+│   ├── product
+│   │   ├── 100-mvp-prd.md
+│   │   ├── 110-roadmap.md
+│   │   ├── 120-user-stories.md
+│   │   └── 130-ux-wireframes.md
+│   └── vision
+│       ├── 010-product-vision.md
+│       └── 020-principles.md
+├── examples
+│   ├── off
+│   │   └── product.sample.json
+│   └── products
+│       └── get-by-id.json
+├── mkdocs.yml
+├── openapi
+│   └── circl.openapi.yaml
+├── package-lock.json
+├── package.json
+├── README.md
+├── registry
+│   └── sources.json
+├── requirements.txt
+├── schemas
+│   ├── _meta
+│   │   └── dialect.json
+│   ├── meta-source.schema.json
+│   ├── overlays
+│   │   └── off
+│   ├── product.schema.json
+│   └── universal
+│       └── product.json
+├── scripts
+│   └── off-map.mjs
+└── tools
+    ├── dump_context.sh
+    └── dump.txt
+
+24 directories, 52 files
+
+==> MkDocs config (first 40 lines)
+site_name: Circl Planning & Specs
+site_description: Sustainability data platform – plans, standards, and APIs
+repo_url: https://github.com/andremair97/circl-docs
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.indexes
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.emoji
+
+plugins:
+  - search
+  - mermaid2:
+      javascript: ../node_modules/mermaid/dist/mermaid.esm.min.mjs
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+nav:
+  - Overview:
+      - index.md
+      - vision/010-product-vision.md
+      - vision/020-principles.md
+  - Product:
+      - product/100-mvp-prd.md
+      - product/110-roadmap.md
+      - product/120-user-stories.md
+      - product/130-ux-wireframes.md
+
+==> Recent diffs (last 5 commits)
+ .github/validate-examples.mjs             |   99 ---
+ .github/workflows/ci.yml                  |  133 +---
+ .gitignore                                |    2 +-
+ .markdownlint.json                        |    8 +
+ .spectral.yaml                            |    2 +
+ .yamllint.yaml                            |   14 +
+ docs/000-template.md => 000-template.md   |    0
+ AGENT.md                                  |    4 +
+ CONTEXT-PACK.md                           |    5 +-
+ README.md                                 |    4 +-
+ docs/ops/AGENT.md                         |   25 +
+ docs/ops/CONTEXT-PACK.md                  |   14 +-
+ examples/off/product.sample.json          |    1 -
+ examples/products/get-by-id.json          |   33 +
+ mkdocs.yml                                |    4 +-
+ openapi/circl.openapi.yaml                |    6 -
+ package-lock.json                         | 1078 ++++++++---------------------
+ package.json                              |    9 +-
+ requirements.txt                          |   19 +
+ schemas/_meta/dialect.json                |    7 +
+ schemas/overlays/off/product.overlay.json |    2 +-
+ schemas/universal/product.json            |    2 +-
+ scripts/off-map.mjs                       |   50 ++
+ tools/dump_context.sh                     |   20 +
+ 24 files changed, 507 insertions(+), 1034 deletions(-)
