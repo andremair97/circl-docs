@@ -29,15 +29,12 @@ const __maybeInput  = __get(['--input', '--in'], null);
 const __maybeOverlay = __get(['--overlay', '--map'], null);
 const __maybeSchema  = __get(['--schema'], null);
 
-// If old style provided but overlay/schema missing, synthesize them.
 if (__maybeSource && __maybeInput) {
   if (!__maybeOverlay) {
-    // e.g., overlays/off.product.overlay.json for --source off
     const guessedOverlay = `overlays/${__maybeSource}.product.overlay.json`;
     __argv.push('--overlay', guessedOverlay);
   }
   if (!__maybeSchema) {
-    // Prefer new filename if present; fallback to older tests filename.
     const preferred = 'schemas/universal/product.json';
     const fallback  = 'schemas/universal/product.schema.json';
     try {
@@ -46,21 +43,16 @@ if (__maybeSource && __maybeInput) {
       } else if (existsSync(fallback)) {
         __argv.push('--schema', fallback);
       }
-    } catch (_) {
-      // If fs check fails for any reason, still try preferred first:
+    } catch {
       __argv.push('--schema', preferred);
     }
   }
-  // Normalize to new flag name expected by script:
   if (!__argv.includes('--input') && __maybeInput) {
-    __argv.push('--input', __maybeInput);
+    __argv.push('--input', __maybeInput); // harmless if not used later
   }
 }
-// Reassign process.argv so the rest of the script sees normalized flags.
 process.argv = [process.argv[0], process.argv[1], ...__argv];
 // --- end compatibility shim ---
-
-
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -149,10 +141,10 @@ async function main() {
     quiet
   } = args;
 
-if (!source || (!barcode && !id && !query && !inFile)) {
+  if (!source || (!barcode && !id && !query && !inFile)) {
     console.error('usage: --source <src> [--barcode|--id|--query|--in <file>] [--out <file>]');
     process.exit(2);
-}
+  }
 
   const schemaPath = schema || path.join(ROOT, 'schemas', 'universal', 'product.json');
   const overlayPath = overlay || path.join(ROOT, 'schemas', 'overlays', source, 'product.overlay.json');
@@ -207,11 +199,7 @@ if (!source || (!barcode && !id && !query && !inFile)) {
     }
   }
 
-  // --- begin: fill minimal required defaults if overlay didn't provide them ---
-  // id: prefer overlay; else ctx.id; else barcode/code from raw; else raw.id
-
-  // --- begin: fill minimal required defaults if overlay didn't provide them ---
-  // id: prefer overlay; else ctx.id; else barcode/code from raw; else raw.id
+  // --- begin: minimal defaults for required fields if overlay omitted them ---
   if (!mapped.id) {
     mapped.id =
       ctx.id ??
@@ -224,7 +212,6 @@ if (!source || (!barcode && !id && !query && !inFile)) {
       null;
   }
 
-  // title: try common title/name fields across sources
   if (!mapped.title) {
     const titleCandidates = [
       mapped.name,
@@ -239,40 +226,54 @@ if (!source || (!barcode && !id && !query && !inFile)) {
     mapped.title = titleCandidates.find(Boolean) ?? null;
   }
 
-  // provenance: schema requires ONLY { url }, no additional properties
-  if (!mapped.provenance) {
-    // Try to derive a reasonable URL by source
-    let provUrl = null;
+  // provenance must be exactly { url, source, fetched_at }
+  const PROV_KEYS = new Set(['url', 'source', 'fetched_at']);
 
+  function deriveProvenanceUrl(source, raw, ctx) {
     if (source === 'off') {
-      // OFF: if code known, link to product page; else OFF homepage
-      if (ctx.code) provUrl = `https://world.openfoodfacts.org/product/${encodeURIComponent(ctx.code)}`;
-      else provUrl = 'https://world.openfoodfacts.org/';
-    } else if (source === 'ifixit') {
-      // iFixit: use raw.url if present; else try guide id; else site
-      provUrl =
-        raw?.url ??
-        (raw?.guideid ? `https://www.ifixit.com/Guide/${encodeURIComponent(raw.guideid)}` : 'https://www.ifixit.com/');
-    } else if (source === 'ebay') {
-      // eBay typical fields
-      provUrl =
-        raw?.viewItemURL ??
-        raw?.ViewItemURL ??
-        raw?.Item?.ViewItemURL ??
-        'https://www.ebay.co.uk/';
-    } else if (source === 'lot') {
-      // Library of Things (generic fallback)
-      provUrl = raw?.url ?? 'https://libraryofthings.co.uk/';
+      return ctx.code
+        ? `https://world.openfoodfacts.org/product/${encodeURIComponent(ctx.code)}`
+        : 'https://world.openfoodfacts.org/';
     }
-
-    // Final fallback: valid URI placeholder
-    if (!provUrl) provUrl = `https://example.com/source/${encodeURIComponent(source)}`;
-
-    mapped.provenance = { url: provUrl };
+    if (source === 'ifixit') {
+      return raw?.url
+        || (raw?.guideid ? `https://www.ifixit.com/Guide/${encodeURIComponent(raw.guideid)}` : 'https://www.ifixit.com/');
+    }
+    if (source === 'ebay') {
+      return raw?.viewItemURL || raw?.ViewItemURL || raw?.Item?.ViewItemURL || 'https://www.ebay.co.uk/';
+    }
+    if (source === 'lot') {
+      return raw?.url || 'https://libraryofthings.co.uk/';
+    }
+    return `https://example.com/source/${encodeURIComponent(source)}`;
   }
-  // --- end: defaults ---
 
+  function sanitizeProvenance(p, source, raw, ctx) {
+    const base = p && typeof p === 'object' ? p : {};
+    const cleaned = {
+      url:
+        typeof base.url === 'string' && base.url
+          ? base.url
+          : deriveProvenanceUrl(source, raw, ctx),
+      source:
+        typeof base.source === 'string' && base.source
+          ? base.source
+          : String(source),
+      fetched_at:
+        typeof base.fetched_at === 'string' && base.fetched_at
+          ? base.fetched_at
+          : new Date().toISOString()
+    };
+    // No extras allowed: keep only the required keys
+    return {
+      url: cleaned.url,
+      source: cleaned.source,
+      fetched_at: cleaned.fetched_at
+    };
+  }
 
+  mapped.provenance = sanitizeProvenance(mapped.provenance, source, raw, ctx);
+  // --- end: minimal defaults ---
 
   const ajv = new Ajv({ strict: false, allErrors: true });
   addFormats(ajv);
@@ -287,9 +288,9 @@ if (!source || (!barcode && !id && !query && !inFile)) {
       console.error(`failed to write ${out}: ${e.message}`);
     }
   } else {
-    // default for tests: print to stdout
     console.log(outputJson);
   }
+
   if (!quiet && !valid) {
     console.error('Validation errors:');
     for (const err of validate.errors) {
