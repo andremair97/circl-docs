@@ -1,1 +1,2 @@
-- docs: document changelog fragment workflow
+<!-- markdownlint-disable-file -->
+docs: document changelog fragment workflow
