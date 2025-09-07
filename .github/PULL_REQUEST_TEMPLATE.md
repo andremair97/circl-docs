@@ -6,3 +6,5 @@
 
 - [ ] Add `/changelog.d/<short-title>.md`
 - [ ] Or label this PR as `no-changelog`
+
+<!-- See docs/contributing/changelog.md for fragment style -->
