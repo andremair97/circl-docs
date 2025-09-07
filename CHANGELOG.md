@@ -1,3 +1,5 @@
+# Changelog
+
 ## Unreleased (2025-09-06)
 
 ### Feat
