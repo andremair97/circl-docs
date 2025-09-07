@@ -2,12 +2,12 @@
 
 ```bash
 #!/usr/bin/env bash
-# Prevent commits to main without updating the changelog in the same branch (local enforcement)
+# Warn if commit lacks a changelog fragment
 set -euo pipefail
 
 changed=$(git diff --cached --name-only)
-if ! grep -q "^PROJECT_CHANGELOG.md$" <<< "$changed"; then
-  echo "WARNING: You haven't staged PROJECT_CHANGELOG.md. Please update it before committing." >&2
+if ! grep -q '^changelog/.*\.md$' <<< "$changed"; then
+  echo "WARNING: You haven't staged a changelog fragment in changelog/." >&2
 fi
 ```
 
