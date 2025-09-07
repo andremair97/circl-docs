@@ -9,11 +9,19 @@
     "schema:validate": "for s in schemas/universal/product.json; do for d in examples/universal/*.json; do ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s \"$s\" -d \"$d\"; done; done",
     "generate:examples": "npm run map:off && npm run schema:validate",
     "docs:build": "mkdocs build --strict",
+<<<<<<< HEAD
     "map:off:live": "node scripts/map.mjs --source off --barcode 5449000000996 --schema schemas/universal/product.json --overlay schemas/overlays/off/product.overlay.json --out /tmp/off.json --debug",
     "map:off:local": "node scripts/map.mjs --source off --in examples/off/product.sample.json --schema schemas/universal/product.json --overlay schemas/overlays/off/product.overlay.json --out /tmp/off.local.json --debug",
     "map:ifixit:local": "node scripts/map.mjs --source ifixit --in examples/ifixit/guide.sample.json --schema schemas/universal/product.json --overlay schemas/overlays/ifixit/product.overlay.json --out /tmp/ifixit.json --debug",
     "map:ebay:local": "node scripts/map.mjs --source ebay --in examples/ebay/product.sample.json --schema schemas/universal/product.json --overlay schemas/overlays/ebay/product.overlay.json --out /tmp/ebay.json --debug",
     "map:lot:local": "node scripts/map.mjs --source lot --in examples/lot/item.sample.json --schema schemas/universal/product.json --overlay schemas/overlays/lot/product.overlay.json --out /tmp/lot.json --debug"
+=======
+    "test:connectors": "node tests/run_all.mjs",
+    "test:off": "node tests/test_off.mjs",
+    "test:ifixit": "node tests/test_ifixit.mjs",
+    "test:ebay": "node tests/test_ebay.mjs",
+    "test:lot": "node tests/test_lot.mjs"
+>>>>>>> 1d1b96e (docs: note connector pathway)
   },
   "devDependencies": {
     "@stoplight/spectral-cli": "^6.15.0",

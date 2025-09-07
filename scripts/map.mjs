@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+<<<<<<< HEAD
 import 'dotenv/config';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -16,23 +17,33 @@ const SAMPLE = {
   ebay: 'product.sample.json',
   lot: 'item.sample.json'
 };
+=======
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+>>>>>>> 1d1b96e (docs: note connector pathway)
 
 function parseArgs(argv) {
   const out = {};
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg.startsWith('--')) {
+<<<<<<< HEAD
       const key = arg.slice(2);
       if (['debug', 'quiet'].includes(key)) {
         out[key] = true;
       } else {
         out[key] = argv[++i];
       }
+=======
+      out[arg.slice(2)] = argv[++i];
+>>>>>>> 1d1b96e (docs: note connector pathway)
     }
   }
   return out;
 }
 
+<<<<<<< HEAD
 function safeGet(obj, dotted) {
   return dotted.split('.').reduce((o, k) => (o ? o[k] : undefined), obj);
 }
@@ -180,3 +191,46 @@ async function main() {
 }
 
 main();
+=======
+function get(obj, dotted) {
+  return dotted.split('.').reduce((o, k) => (o ? o[k] : undefined), obj);
+}
+
+function set(obj, dotted, value) {
+  const parts = dotted.split('.');
+  let cur = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    cur = cur[parts[i]] || (cur[parts[i]] = {});
+  }
+  cur[parts[parts.length - 1]] = value;
+}
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.join(__dirname, '..');
+
+const args = parseArgs(process.argv.slice(2));
+const { source, in: inFile } = args;
+
+if (!source || !inFile) {
+  console.error('usage: --source <source> --in <file>');
+  process.exit(2);
+}
+
+try {
+  const overlayPath = path.join(ROOT, 'overlays', `${source}.product.overlay.json`);
+  const overlay = JSON.parse(fs.readFileSync(overlayPath, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(inFile, 'utf8'));
+  const mapped = {};
+  for (const [target, srcPath] of Object.entries(overlay)) {
+    const val = get(raw, srcPath);
+    if (val !== undefined && val !== null && val !== '') {
+      set(mapped, target, val);
+    }
+  }
+  process.stdout.write(JSON.stringify(mapped, null, 2));
+  process.exit(0);
+} catch (e) {
+  console.error(e.message);
+  process.exit(1);
+}
+>>>>>>> 1d1b96e (docs: note connector pathway)
