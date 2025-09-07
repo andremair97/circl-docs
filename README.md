@@ -22,3 +22,10 @@ mkdocs serve
   then `mkdocs build`
 - Without token (forks/offline):
   `mkdocs build -f mkdocs.nocommitters.yml`
+
+## Changelog
+
+- Do not edit `CHANGELOG.md` directly.
+- For each PR, add a short fragment under `changelog.d/` (e.g., `changelog.d/add-off-connector.md`).
+- If no entry is needed, label the PR `no-changelog`.
+- During release, fragments are compiled into `CHANGELOG.md` and then cleared.

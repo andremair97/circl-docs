@@ -84,6 +84,7 @@ nav:
           - process/605-ai-collaboration.md
           - process/610-contributing.md
           - process/620-versioning-release.md
+          - contributing/changelog.md
   - Changelog: changelog/index.md
   - Architecture:
       - ADRs: adr/index.md

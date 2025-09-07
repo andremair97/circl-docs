@@ -15,3 +15,4 @@ Conventions:
 
 - Code in TypeScript/Node/Next.js, JSON Schema 2020-12, OpenAPI 3.1
 - Always update docs + ADRs when changing behavior or decisions
+- Use changelog fragments: add `/changelog.d/<short-title>.md` per PR; CI blocks direct edits to `CHANGELOG.md`
