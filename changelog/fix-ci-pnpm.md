@@ -1,0 +1,1 @@
+- fix: install pnpm in CI workflow
