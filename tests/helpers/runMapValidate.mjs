@@ -5,7 +5,18 @@ import addFormats from 'ajv-formats';
 
 export default async function runMapValidate(source, fixture) {
   return new Promise((resolve, reject) => {
-    const proc = spawn('node', ['scripts/map.mjs', '--source', source, '--in', fixture], {
+    // Use modern flag names while shim keeps backward compatibility
+    const overlay = `schemas/overlays/${source}/product.overlay.json`;
+    const schemaPath = fs.existsSync('schemas/universal/product.json')
+      ? 'schemas/universal/product.json'
+      : 'schemas/universal/product.schema.json';
+    const proc = spawn('node', [
+      'scripts/map.mjs',
+      '--source', source,
+      '--input', fixture,
+      '--overlay', overlay,
+      '--schema', schemaPath
+    ], {
       stdio: ['ignore', 'pipe', 'inherit']
     });
     let stdout = '';
@@ -17,9 +28,8 @@ export default async function runMapValidate(source, fixture) {
       }
       try {
         const mapped = JSON.parse(stdout);
-        const schema = JSON.parse(
-          fs.readFileSync('schemas/universal/product.schema.json', 'utf8')
-        );
+        // Validate mapped output against the same schema used by the mapper
+        const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
         const ajv = new Ajv({ allErrors: true, strict: false });
         addFormats(ajv);
         const valid = ajv.validate(schema, mapped);
