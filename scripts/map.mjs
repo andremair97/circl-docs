@@ -212,6 +212,10 @@ async function main() {
       null;
   }
 
+if (mapped.id !== undefined && mapped.id !== null) {
+  mapped.id = String(mapped.id);
+}
+
   if (!mapped.title) {
     const titleCandidates = [
       mapped.name,
