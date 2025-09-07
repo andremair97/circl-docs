@@ -14,6 +14,7 @@
 - web: alias react-native to react-native-web and simplify shared UI to React Native primitives; files: apps/web/next.config.mjs, apps/web/tsconfig.json, packages/ui/\*; follow-up: audit Next ESLint plugin
 - ci: ignore pnpm lockfile and fix require-changelog workflow so YAML lint passes; files: .yamllint.yaml, .github/workflows/require-changelog.yml; follow-up: monitor YAML lint
 - connectors/off: add feature-flagged OFF adapter emitting universal v1; adds CLI and schema validation tests; follow-up: integrate into unified search
+- feat(contracts): freeze universal v1 + seed UI-readable mocks; files: schemas/universal/search-result.v1.json, openapi/circl.openapi.yaml, mocks/search.sample.json; follow-up: add validation tests
 
 ## 2025-09-07
 

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "result-1",
+    "title": "Refurbished Laptop",
+    "summary": "Upgraded and tested, 1-year warranty.",
+    "score": 0.87,
+    "dataSource": ["ebay"],
+    "badges": ["used", "warranty"],
+    "url": "https://example.com/laptop",
+    "product": { "sku": "A1" },
+    "company": { "name": "Example Store" }
+  }
+]
