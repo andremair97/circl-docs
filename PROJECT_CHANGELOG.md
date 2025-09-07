@@ -18,7 +18,6 @@
   CI guard that requires changelog updates on PRs.
 
 ### Changelog Entry Template
-
 ```text
 - area: short description of change; why it matters; primary files touched;
   follow-ups
