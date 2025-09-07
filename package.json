@@ -5,7 +5,7 @@
   "scripts": {
     "lint:oas": "spectral lint 'openapi/**/*.yaml'",
     "map:off": "node scripts/off-map.mjs",
-    "schema:validate": "ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/universal/product.json -d examples/products/get-by-id.json && ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/overlays/off/product.overlay.json -d examples/off/product.sample.json",
+    "schema:validate": "for s in schemas/**/*.json; do for d in examples/**/*.json; do ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s \"$s\" -d \"$d\"; done; done",
     "generate:examples": "npm run map:off && npm run schema:validate",
     "docs:build": "mkdocs build --strict"
   },

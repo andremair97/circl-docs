@@ -1,24 +1,17 @@
-# Core JSON/schema tools
+# Core
 jsonschema>=4.22.0
 requests>=2.32.0
-
-# CLI / parsing
 click>=8.1.7
 
 # Testing
 pytest>=8.3.2
 
-# Dev / lint (optional but recommended)
+# Dev
 black>=24.4.2
 ruff>=0.5.7
 
-# Documentation (only if you're using MkDocs for docs site)
+# Docs (MkDocs stack)
 mkdocs>=1.6.1
 mkdocs-material>=9.5.17
 mkdocs-mermaid2-plugin>=1.2.2
 mkdocs-git-revision-date-localized-plugin>=1.2.0
-mkdocs-git-committers-plugin-2>=2.3.0
-mkdocs-macros-plugin>=1.0.5
-mkdocs-rss-plugin>=1.12.0
-
-commitizen>=3.30.0
