@@ -1,0 +1,9 @@
+name: PR – Vercel Preview Note
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  note:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Vercel will comment a private Preview URL once the first build finishes (protected by Vercel Authentication)."
