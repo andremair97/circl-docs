@@ -1,4 +1,5 @@
-import React from 'react';
+// React namespace import keeps typings compatible with both web and native builds
+import * as React from 'react';
 import { TamaguiProvider as Provider, Button, View, Text } from 'tamagui';
 import { config } from './tamagui.config';
 

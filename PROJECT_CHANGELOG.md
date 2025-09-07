@@ -9,6 +9,8 @@
 - Start here for your current branch. On merge, move bullets under today’s
   date.
 - infra: scaffold pnpm monorepo with Next.js web, Expo mobile, shared packages, and CI; follow-up: flesh out features
+- ci: switch workflows to pnpm to leverage lockfile caching and prevent setup-node failures; files: .github/workflows/ci.yml, .github/workflows/docs.yml; follow-up: tighten cache paths
+- ui: rename Tamagui provider entry to .tsx so TypeScript compiles JSX; files: packages/ui/index.tsx, packages/ui/package.json, packages/ui/tsconfig.json; follow-up: add component tests
 
 ## 2025-09-07
 
