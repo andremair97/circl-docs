@@ -209,6 +209,9 @@ if (!source || (!barcode && !id && !query && !inFile)) {
 
   // --- begin: fill minimal required defaults if overlay didn't provide them ---
   // id: prefer overlay; else ctx.id; else barcode/code from raw; else raw.id
+
+  // --- begin: fill minimal required defaults if overlay didn't provide them ---
+  // id: prefer overlay; else ctx.id; else barcode/code from raw; else raw.id
   if (!mapped.id) {
     mapped.id =
       ctx.id ??
@@ -236,15 +239,39 @@ if (!source || (!barcode && !id && !query && !inFile)) {
     mapped.title = titleCandidates.find(Boolean) ?? null;
   }
 
-  // provenance: object with minimal fields the schema expects
+  // provenance: schema requires ONLY { url }, no additional properties
   if (!mapped.provenance) {
-    mapped.provenance = {
-      source: source,
-      method: inFile ? 'fixture' : 'adapter',
-      fetched_at: new Date().toISOString()
-    };
+    // Try to derive a reasonable URL by source
+    let provUrl = null;
+
+    if (source === 'off') {
+      // OFF: if code known, link to product page; else OFF homepage
+      if (ctx.code) provUrl = `https://world.openfoodfacts.org/product/${encodeURIComponent(ctx.code)}`;
+      else provUrl = 'https://world.openfoodfacts.org/';
+    } else if (source === 'ifixit') {
+      // iFixit: use raw.url if present; else try guide id; else site
+      provUrl =
+        raw?.url ??
+        (raw?.guideid ? `https://www.ifixit.com/Guide/${encodeURIComponent(raw.guideid)}` : 'https://www.ifixit.com/');
+    } else if (source === 'ebay') {
+      // eBay typical fields
+      provUrl =
+        raw?.viewItemURL ??
+        raw?.ViewItemURL ??
+        raw?.Item?.ViewItemURL ??
+        'https://www.ebay.co.uk/';
+    } else if (source === 'lot') {
+      // Library of Things (generic fallback)
+      provUrl = raw?.url ?? 'https://libraryofthings.co.uk/';
+    }
+
+    // Final fallback: valid URI placeholder
+    if (!provUrl) provUrl = `https://example.com/source/${encodeURIComponent(source)}`;
+
+    mapped.provenance = { url: provUrl };
   }
   // --- end: defaults ---
+
 
 
   const ajv = new Ajv({ strict: false, allErrors: true });
