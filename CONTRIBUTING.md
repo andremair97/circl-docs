@@ -11,3 +11,15 @@ Use GitHub's merge queue. Enable auto-merge after all required checks and review
 
 ## git worktree for parallel branches
 Use `git worktree add ../<dir> <branch>` to work on multiple branches simultaneously without switching checkouts.
+
+## Local git setup
+Configure git to simplify conflict resolution and to activate repo hooks:
+
+```sh
+git config --global rerere.enabled true     # reuse recorded conflict resolutions
+git config --global pull.rebase true        # keep history linear
+git config --global merge.conflictStyle zdiff3  # show base during merges
+git config core.hooksPath .githooks         # enable pre-commit safeguards
+```
+
+The top-level `Makefile` is intentionally stable; edit files under `make/*.mk` instead.
