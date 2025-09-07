@@ -22,3 +22,6 @@ mkdocs serve
   then `mkdocs build`
 - Without token (forks/offline):
   `mkdocs build -f mkdocs.nocommitters.yml`
+
+### Changelog
+Do not edit `CHANGELOG.md` directly. Add a short fragment in `changelog.d/`. The release workflow compiles fragments into the main changelog.
