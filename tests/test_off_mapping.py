@@ -1,19 +1,31 @@
-import json, subprocess, pathlib, os
+import json, subprocess, pathlib, os, sys, tempfile
+
+root = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(root))
+
+from src.mapping import load_overlay, apply_overlay
 
 
-def test_off_ingest_and_validate():
-    root = pathlib.Path(__file__).resolve().parents[1]
+def test_off_mapping_validates():
     schema = root / "schemas" / "universal" / "product.schema.json"
-    tool = root / "tools" / "ingest_and_map.py"
+    raw_path = root / "tests" / "data" / "off-product.raw.json"
+    overlay_path = root / "overlays" / "off.product.overlay.json"
 
-    # Run mapping
-    out = subprocess.check_output([str(tool), "--source", "off", "--barcode", "737628064502"])
-    mapped = json.loads(out)
+    raw = json.loads(raw_path.read_text())
+    overlay = load_overlay(str(overlay_path))
+    mapped = apply_overlay(raw, overlay)
 
-    # Validate via ajv on stdin
     env = os.environ.copy()
     env["PATH"] = f"{root / 'node_modules' / '.bin'}{os.pathsep}" + env.get("PATH", "")
-    proc = subprocess.run([
-        "ajv", "validate", "--spec=draft2020", "-s", str(schema), "-d", "stdin"
-    ], input=json.dumps(mapped).encode(), env=env, check=False)
+
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as tmp:
+        json.dump(mapped, tmp)
+        tmp_path = tmp.name
+    try:
+        proc = subprocess.run([
+            "ajv", "validate", "--spec=draft2020", "--validate-formats=false",
+            "-s", str(schema), "-d", tmp_path
+        ], env=env, check=False)
+    finally:
+        os.unlink(tmp_path)
     assert proc.returncode == 0

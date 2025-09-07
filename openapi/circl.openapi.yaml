@@ -2,13 +2,23 @@ openapi: 3.1.0
 info:
   title: Circl Public API
   version: 0.1.0
+  description: Circl product and search API.
+  contact:
+    email: support@circl.dev
 servers:
   - url: https://api.circl.dev
+
+tags:
+  - name: search
+  - name: products
 
 paths:
   /search:
     get:
       summary: Search for products and places
+      description: Full-text and geo search for products and nearby places.
+      operationId: search
+      tags: [search]
       parameters:
         - in: query
           name: q
@@ -30,6 +40,8 @@ paths:
     get:
       summary: Get a product by id
       description: Returns a universal product resource for the given ID (e.g., barcode).
+      operationId: getProduct
+      tags: [products]
       parameters:
         - in: path
           name: id
@@ -43,7 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/universal/product.json
+                $ref: ../schemas/universal/product.schema.json
         '404':
           description: Product not found
           content:

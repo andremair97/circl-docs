@@ -4,78 +4,21 @@
   "title": "Universal Product",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "title", "brand", "identifiers", "classification", "packaging", "provenance"],
+  "required": [
+    "title",
+    "brand",
+    "barcode"
+  ],
   "properties": {
-    "id": {
-      "type": "string",
-      "description": "Primary product identifier (e.g., barcode or internal ID)"
-    },
-    "title": {
-      "type": "string",
-      "minLength": 1
-    },
-    "brand": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["name"],
-      "properties": {
-        "name": { "type": "string", "minLength": 1 }
-      }
-    },
-    "identifiers": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "barcode": {
-          "type": "string",
-          "description": "EAN/UPC/GTIN; keep as string to preserve leading zeros"
-        }
-      }
-    },
-    "classification": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "categories": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
-      }
-    },
-    "packaging": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "net_quantity": { "type": "string", "description": "Human-readable, e.g., '400 g'" },
-        "materials": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
-      }
-    },
-    "scores": {
-      "type": "object",
-      "additionalProperties": true,
-      "properties": {
-        "ecoscore": {
-          "type": "object",
-          "additionalProperties": true,
-          "properties": {
-            "grade": { "type": "string", "enum": ["a", "b", "c", "d", "e"] }
-          }
-        }
-      }
-    },
-    "provenance": {
-      "type": "object",
-      "additionalProperties": true,
-      "required": ["source", "fetched_at", "record_id"],
-      "properties": {
-        "source": { "type": "string" },
-        "fetched_at": { "type": "string", "format": "date-time" },
-        "record_id": { "type": "string" }
-      }
-    }
+    "title": { "type": "string" },
+    "brand": { "type": "string" },
+    "barcode": { "type": "string" },
+    "quantity": { "type": "string" },
+    "categories": { "type": "string" },
+    "image_url": { "type": "string", "format": "uri" },
+    "ingredients_text": { "type": "string" },
+    "nutriscore_grade": { "type": "string" },
+    "ecoscore_grade": { "type": "string" },
+    "provenance_source": { "type": "string", "format": "uri" }
   }
 }
-
