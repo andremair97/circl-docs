@@ -12,7 +12,7 @@ export interface Suggestion {
   type: 'product' | 'company';
 }
 
-export interface SuggestProvider {
+export interface SuggestionProvider {
   /**
    * Returns suggestions for the given query. Implementations may use network
    * calls so an optional AbortSignal allows the caller to cancel stale

@@ -4,8 +4,8 @@ import EmptyState from './EmptyState';
 import ErrorState from './ErrorState';
 import Skeleton from './Skeleton';
 import useSuggestions from '../hooks/useSuggestions';
-import type { SuggestProvider, Suggestion } from '../suggest/Provider';
-import { LocalSeedProvider } from '../suggest/LocalSeedProvider';
+import type { SuggestionProvider, Suggestion } from '../suggest/Provider';
+import LocalSeedProvider from '../suggest/LocalSeedProvider';
 
 // SearchBar provides a single input with typeahead suggestions using reusable states.
 const defaultProvider = new LocalSeedProvider();
@@ -13,7 +13,7 @@ const defaultProvider = new LocalSeedProvider();
 export default function SearchBar({
   provider = defaultProvider,
 }: {
-  provider?: SuggestProvider;
+  provider?: SuggestionProvider;
 }) {
   const [query, setQuery] = useState('');
   const { suggestions, loading, error } = useSuggestions(provider, query);
@@ -39,6 +39,9 @@ export default function SearchBar({
       const s = suggestions[active];
       setQuery(s.title);
       navigate(`/results?type=${s.type}&q=${encodeURIComponent(s.title)}`);
+    } else if (e.key === 'Escape') {
+      setActive(-1);
+      setQuery('');
     }
   };
 
@@ -52,6 +55,11 @@ export default function SearchBar({
           setActive(-1);
         }}
         onKeyDown={handleKeyDown}
+        aria-activedescendant={
+          active >= 0 ? `suggestion-${suggestions[active].id}` : undefined
+        }
+        aria-autocomplete="list"
+        aria-controls="suggestions-list"
         className="w-72 rounded border-2 border-primary px-2 py-1"
       />
       {query && (
@@ -62,9 +70,12 @@ export default function SearchBar({
             <EmptyState title="No suggestions" />
           )}
           {suggestions.length > 0 && (
-            <ul className="list-none p-0">
+            <ul id="suggestions-list" role="listbox" className="list-none p-0">
               {suggestions.map((s: Suggestion, idx) => (
                 <li
+                  id={`suggestion-${s.id}`}
+                  role="option"
+                  aria-selected={idx === active}
                   key={s.id}
                   className={`cursor-pointer px-1 py-0.5 ${
                     idx === active ? 'bg-bg' : ''

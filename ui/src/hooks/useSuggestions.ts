@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import type { SuggestProvider, Suggestion } from '../suggest/Provider';
+import type { SuggestionProvider, Suggestion } from '../suggest/Provider';
 
 // Generic hook that delegates suggestion fetching to a provider. It mirrors
 // the signature of the previous mock search hook but is source agnostic.
 export default function useSuggestions(
-  provider: SuggestProvider,
+  provider: SuggestionProvider,
   query: string
 ) {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
