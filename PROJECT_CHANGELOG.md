@@ -9,13 +9,16 @@
 - Start here for your current branch. On merge, move bullets under today’s
   date.
 
+- connectors: enforce schema-safe mapping defaults (string ids, minimal provenance); fix samples & tests; scripts/map.mjs, tests/**, examples/*; follow-up: expand connector coverage
+- docs: add connectors section to nav and bundle local mermaid assets; mkdocs.yml, docs/assets/mermaid.esm.min.mjs; follow-up: publish diagrams
+- ci: fix require-changelog workflow YAML; .github/workflows/require-changelog.yml; follow-up: none
+
 ## 2025-09-07
 
 - Seeded `PROJECT_OVERVIEW.md` and `PROJECT_CHANGELOG.md`. Added a plan for a
   CI guard that requires changelog updates on PRs.
 
 ### Changelog Entry Template
-
 ```text
 - area: short description of change; why it matters; primary files touched;
   follow-ups
@@ -28,3 +31,4 @@
 
 - docs: add PRD “Deliberate Friction”; add Borrow and Repair buckets to UI
   spec; follow-up: screenshots
+```
