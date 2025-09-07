@@ -4,16 +4,27 @@ import EmptyState from '../components/EmptyState';
 import ErrorState from '../components/ErrorState';
 import ResultCard from '../components/ResultCard';
 import Skeleton from '../components/Skeleton';
-import useMockSearch from '../hooks/useMockSearch';
+import { useQuery } from '../lib/query/useQuery';
+import { SearchItem } from '../types';
+
+interface SearchResponse {
+  items: SearchItem[];
+}
 
 // Results page reads query from URL and displays matching cards.
 export default function Results() {
   const [params] = useSearchParams();
   const q = params.get('q') || '';
-  const { results, loading, error } = useMockSearch(q);
+  const { data, error, isLoading, refetch } = useQuery<SearchResponse>(
+    '/mocks/search.sample.json'
+  );
 
-  if (loading) return <Skeleton variant="cards" count={3} />;
-  if (error) return <ErrorState onRetry={() => location.reload()} />;
+  if (isLoading) return <Skeleton variant="cards" count={3} />;
+  if (error) return <ErrorState onRetry={refetch} />;
+
+  const results = (data?.items || []).filter((i) =>
+    i.title.toLowerCase().includes(q.toLowerCase())
+  );
   if (results.length === 0)
     return (
       <EmptyState

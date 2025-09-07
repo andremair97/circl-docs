@@ -1,20 +1,68 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmptyState from './EmptyState';
 import ErrorState from './ErrorState';
 import Skeleton from './Skeleton';
-import useMockSearch from '../hooks/useMockSearch';
+import type { Provider, Suggestion } from '../suggest/Provider';
 
-// SearchBar provides a single input with typeahead suggestions using reusable states.
-export default function SearchBar() {
+interface SearchBarProps {
+  provider: Provider;
+}
+
+// SearchBar provides a single input with pluggable typeahead suggestions.
+export default function SearchBar({ provider }: SearchBarProps) {
   const [query, setQuery] = useState('');
-  const { results: suggestions, loading, error } = useMockSearch(query);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [active, setActive] = useState(-1);
   const navigate = useNavigate();
+  const abortRef = useRef<AbortController | null>(null);
+  const timer = useRef<number>();
+
+  useEffect(() => {
+    window.clearTimeout(timer.current);
+    if (!query) {
+      abortRef.current?.abort();
+      setSuggestions([]);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    timer.current = window.setTimeout(async () => {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      setLoading(true);
+      try {
+        const res = await provider.suggest(query, controller.signal);
+        setSuggestions(res);
+        setActive(-1);
+        setError(null);
+      } catch (err: any) {
+        if (err.name !== 'AbortError') setError(err);
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }, 200);
+  }, [query, provider]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!query) return;
-    navigate(`/results?q=${encodeURIComponent(query)}`);
+    const chosen = suggestions[active]?.title || query;
+    if (!chosen) return;
+    navigate(`/results?q=${encodeURIComponent(chosen)}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown' && suggestions.length > 0) {
+      e.preventDefault();
+      setActive((i) => (i + 1) % suggestions.length);
+    } else if (e.key === 'ArrowUp' && suggestions.length > 0) {
+      e.preventDefault();
+      setActive((i) => (i - 1 + suggestions.length) % suggestions.length);
+    }
   };
 
   return (
@@ -23,6 +71,7 @@ export default function SearchBar() {
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="w-72 rounded border-2 border-primary px-2 py-1"
       />
       {query && (
@@ -34,8 +83,13 @@ export default function SearchBar() {
           )}
           {suggestions.length > 0 && (
             <ul className="list-none p-0">
-              {suggestions.map((s) => (
-                <li key={s.id} className="px-1 py-0.5 hover:bg-bg">
+              {suggestions.map((s, idx) => (
+                <li
+                  key={s.id}
+                  className={`px-1 py-0.5 ${
+                    idx === active ? 'bg-bg' : 'hover:bg-bg'
+                  }`}
+                >
                   {s.title}
                 </li>
               ))}

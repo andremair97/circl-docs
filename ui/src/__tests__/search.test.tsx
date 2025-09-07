@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
+import { clear as clearCache } from '../lib/query/cache';
 
 const mockData = {
   items: [
@@ -21,15 +22,15 @@ const mockData = {
 
 describe('mock search flow', () => {
   afterEach(() => {
-    vi.unstubAllEnvs();
     vi.unstubAllGlobals();
+    clearCache();
   });
 
   it('suggests results while typing and shows cards on submit', async () => {
-    vi.stubEnv('VITE_ENABLE_MOCK_SEARCH', 'true');
-    vi.stubGlobal('fetch', vi.fn(() =>
-      Promise.resolve({ json: () => Promise.resolve(mockData) }) as any
-    ));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(mockData) }))
+    );
     const App = (await import('../App')).default;
     render(
       <MemoryRouter initialEntries={['/']}>
@@ -46,7 +47,6 @@ describe('mock search flow', () => {
   });
 
   it('renders error state when fetch fails', async () => {
-    vi.stubEnv('VITE_ENABLE_MOCK_SEARCH', 'true');
     vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('fail'))));
     const App = (await import('../App')).default;
     render(

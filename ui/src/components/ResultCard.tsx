@@ -1,4 +1,4 @@
-import { SearchItem } from '../hooks/useMockSearch';
+import { SearchItem } from '../types';
 
 // ResultCard renders a single search result with its data source.
 export default function ResultCard({ item }: { item: SearchItem }) {
