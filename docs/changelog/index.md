@@ -1,5 +1,5 @@
 # Changelog
 
-> Generated from Conventional Commits via Commitizen.
+> Generated from changelog fragments. Do not edit directly.
 
---8<-- "CHANGELOG.md"
+--8<-- "PROJECT_CHANGELOG.md"

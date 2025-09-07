@@ -123,7 +123,7 @@ See `README.md` for quickstart. MkDocs build options are documented in-repo.
 
 - **MkDocs** for docs; build with or without committers token.
 - **Actions:** build, lint, and test; workflows under `.github/workflows/`.
-- **Guardrails:** PRs should update `PROJECT_CHANGELOG.md`. Scope changes may
+- **Guardrails:** PRs should include a changelog fragment. Scope changes may
   also update this overview.
 
 ## 10) Roadmap (Rolling)
@@ -151,7 +151,7 @@ See `README.md` for quickstart. MkDocs build options are documented in-repo.
 
 - Open a branch and make changes.
 
-- Update `PROJECT_CHANGELOG.md` (what changed, why, where).
+- Add `changelog/<PR>-<slug>.md` (what changed, why, where).
 
 - If scope or vision shifts, refresh this file.
 
