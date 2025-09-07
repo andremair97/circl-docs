@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useId, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmptyState from './EmptyState';
 import ErrorState from './ErrorState';
@@ -19,6 +19,7 @@ export default function SearchBar({ provider }: SearchBarProps) {
   const navigate = useNavigate();
   const abortRef = useRef<AbortController | null>(null);
   const timer = useRef<number>();
+  const listId = useId();
 
   useEffect(() => {
     window.clearTimeout(timer.current);
@@ -73,6 +74,12 @@ export default function SearchBar({ provider }: SearchBarProps) {
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         className="w-72 rounded border-2 border-primary px-2 py-1"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-controls={listId}
+        aria-activedescendant={
+          active >= 0 ? `${listId}-item-${active}` : undefined
+        }
       />
       {query && (
         <div className="absolute left-0 right-0 top-full z-10 mt-1 rounded border border-soft-border bg-surface p-2 shadow">
@@ -82,9 +89,12 @@ export default function SearchBar({ provider }: SearchBarProps) {
             <EmptyState title="No suggestions" />
           )}
           {suggestions.length > 0 && (
-            <ul className="list-none p-0">
+            <ul id={listId} role="listbox" className="list-none p-0">
               {suggestions.map((s, idx) => (
                 <li
+                  id={`${listId}-item-${idx}`}
+                  role="option"
+                  aria-selected={idx === active}
                   key={s.id}
                   className={`px-1 py-0.5 ${
                     idx === active ? 'bg-bg' : 'hover:bg-bg'

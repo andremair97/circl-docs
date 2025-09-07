@@ -27,8 +27,11 @@ describe('SearchBar', () => {
     );
     const input = screen.getByPlaceholderText(/search/i);
     await user.type(input, 'a');
-    await screen.findByText('Alpha');
-    await user.type(input, '{arrowdown}{enter}');
+    const first = await screen.findByText('Alpha');
+    await user.type(input, '{arrowdown}');
+    expect(first).toHaveAttribute('aria-selected', 'true');
+    expect(input).toHaveAttribute('aria-activedescendant', first.id);
+    await user.type(input, '{enter}');
     expect(navigate).toHaveBeenCalledWith('/results?q=Alpha');
   });
 });
