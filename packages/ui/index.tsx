@@ -1,11 +1,13 @@
-// React namespace import keeps typings compatible with both web and native builds
 import * as React from 'react';
-import { TamaguiProvider as Provider, Button, View, Text } from 'tamagui';
-import { config } from './tamagui.config';
+import { View as RNView, Text as RNText, Pressable } from 'react-native';
 
-// Provider exporting shared Tamagui components.
-export const TamaguiProvider = ({ children }: { children: React.ReactNode }) => (
-  <Provider config={config}>{children}</Provider>
+// Cross-platform UI primitives backed by react-native.
+// For web builds, react-native-web supplies compatible implementations via alias.
+export const View = RNView;
+export const Text = RNText;
+export const Button = ({ children, ...props }: React.ComponentProps<typeof Pressable>) => (
+  <Pressable {...props}>{typeof children === 'string' ? <RNText>{children}</RNText> : children}</Pressable>
 );
 
-export { Button, View, Text };
+// No-op provider placeholder until theming is introduced.
+export const TamaguiProvider = ({ children }: { children: React.ReactNode }) => <>{children}</>;

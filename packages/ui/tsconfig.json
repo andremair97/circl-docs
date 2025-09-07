@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    // Tamagui pulls in React Native types that conflict with DOM; skip to keep build green
     "skipLibCheck": true
   },
-  "include": ["index.tsx", "tamagui.config.ts"]
+  "include": ["index.tsx"]
 }
