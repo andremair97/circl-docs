@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "id": "p1",
+      "title": "Refurbished Laptop",
+      "source": "MockSource",
+      "description": "A reused laptop in good condition."
+    },
+    {
+      "id": "p2",
+      "title": "Local Repair Shop",
+      "source": "MockSource",
+      "description": "Nearby repair service."
+    }
+  ]
+}
