@@ -1,11 +1,66 @@
 #!/usr/bin/env node
 import 'dotenv/config';
-import fs from 'node:fs/promises';
+import { promises as fs, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { adapters } from '../src/adapters/index.mjs';
+
+// --- begin compatibility shim (no new imports) ---
+const __argv = process.argv.slice(2);
+const __get = (keys, def) => {
+  for (let i = 0; i < __argv.length; i++) {
+    const a = __argv[i];
+    const n = __argv[i + 1];
+    if (keys.includes(a) && n && !n.startsWith('-')) return n;
+    const [k, v] = a.split('=');
+    if (keys.includes(k) && v) return v;
+  }
+  return def;
+};
+const __has = (keys) => __argv.some(a => keys.includes(a));
+
+// Old tests call:  node scripts/map.mjs --source <name> --in <fixture>
+// New CLI may use: --input/--overlay/--schema
+// If old style is detected, derive overlay+schema automatically.
+const __maybeSource = __get(['--source'], null);
+const __maybeInput  = __get(['--input', '--in'], null);
+const __maybeOverlay = __get(['--overlay', '--map'], null);
+const __maybeSchema  = __get(['--schema'], null);
+
+// If old style provided but overlay/schema missing, synthesize them.
+if (__maybeSource && __maybeInput) {
+  if (!__maybeOverlay) {
+    // e.g., overlays/off.product.overlay.json for --source off
+    const guessedOverlay = `overlays/${__maybeSource}.product.overlay.json`;
+    __argv.push('--overlay', guessedOverlay);
+  }
+  if (!__maybeSchema) {
+    // Prefer new filename if present; fallback to older tests filename.
+    const preferred = 'schemas/universal/product.json';
+    const fallback  = 'schemas/universal/product.schema.json';
+    try {
+      if (existsSync(preferred)) {
+        __argv.push('--schema', preferred);
+      } else if (existsSync(fallback)) {
+        __argv.push('--schema', fallback);
+      }
+    } catch (_) {
+      // If fs check fails for any reason, still try preferred first:
+      __argv.push('--schema', preferred);
+    }
+  }
+  // Normalize to new flag name expected by script:
+  if (!__argv.includes('--input') && __maybeInput) {
+    __argv.push('--input', __maybeInput);
+  }
+}
+// Reassign process.argv so the rest of the script sees normalized flags.
+process.argv = [process.argv[0], process.argv[1], ...__argv];
+// --- end compatibility shim ---
+
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -94,10 +149,10 @@ async function main() {
     quiet
   } = args;
 
-  if (!source || (!barcode && !id && !query && !inFile) || !out) {
-    console.error('usage: --source <src> [--barcode|--id|--query|--in <file>] --out <file>');
+if (!source || (!barcode && !id && !query && !inFile)) {
+    console.error('usage: --source <src> [--barcode|--id|--query|--in <file>] [--out <file>]');
     process.exit(2);
-  }
+}
 
   const schemaPath = schema || path.join(ROOT, 'schemas', 'universal', 'product.json');
   const overlayPath = overlay || path.join(ROOT, 'schemas', 'overlays', source, 'product.overlay.json');
@@ -157,12 +212,17 @@ async function main() {
   const validate = ajv.compile(schemaJson);
   const valid = validate(mapped);
 
-  try {
-    await fs.writeFile(out, JSON.stringify(mapped, null, 2));
-  } catch (e) {
-    console.error(`failed to write ${out}: ${e.message}`);
+  const outputJson = JSON.stringify(mapped, null, 2);
+  if (out) {
+    try {
+      await fs.writeFile(out, outputJson);
+    } catch (e) {
+      console.error(`failed to write ${out}: ${e.message}`);
+    }
+  } else {
+    // default for tests: print to stdout
+    console.log(outputJson);
   }
-
   if (!quiet && !valid) {
     console.error('Validation errors:');
     for (const err of validate.errors) {
