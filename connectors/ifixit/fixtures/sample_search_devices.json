@@ -1,0 +1,5 @@
+// https://www.ifixit.com/api/2.0/search/iphone%2011?limit=2 (retrieved 2024-05-01)
+{"results": [
+  {"type": "device", "title": "iPhone 11", "data": {"title": "iPhone 11", "url": "/Device/iPhone_11", "slug": "iphone-11"}},
+  {"type": "device", "title": "iPhone 11 Pro", "data": {"title": "iPhone 11 Pro", "url": "/Device/iPhone_11_Pro", "slug": "iphone-11-pro"}}
+]}
