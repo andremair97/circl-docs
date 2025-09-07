@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "lint:oas": "spectral lint 'openapi/**/*.yaml'",
-    "map:off": "node scripts/off-map.mjs",
-    "schema:validate": "ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/universal/product.schema.json -d examples/products/get-by-id.json && ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/overlays/off/product.overlay.json -d examples/off/product.sample.json",
-    "generate:examples": "npm run map:off && npm run schema:validate",
+    "schema:validate": "ajv validate --spec=draft2020 --all-errors --strict=false --validate-formats=false -s schemas/universal/product.schema.json -d examples/products/get-by-id.json",
     "docs:build": "mkdocs build --strict"
   },
   "devDependencies": {

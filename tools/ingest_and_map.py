@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import argparse, json, sys
-from pathlib import Path
+import argparse, json, sys, pathlib
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+# Ensure project root on sys.path
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
+
 from src.adapters.off import fetch_off_product
 from src.mapping import load_overlay, apply_overlay
 

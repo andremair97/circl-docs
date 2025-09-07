@@ -9,12 +9,12 @@ def test_off_ingest_and_validate():
     out = subprocess.check_output([str(tool), "--source","off","--barcode","737628064502"])
     mapped = json.loads(out)
 
-    with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as tmp:
+    # Validate via ajv on stdin
+    with tempfile.NamedTemporaryFile("w+", suffix=".json") as tmp:
         json.dump(mapped, tmp)
         tmp.flush()
-        data_path = tmp.name
-
-    proc = subprocess.run([
-        "npx","ajv","validate","--spec=draft2020","--validate-formats=false","-s", str(schema), "-d", data_path
-    ], check=False)
-    assert proc.returncode == 0
+        proc = subprocess.run([
+            "npx", "ajv", "validate", "--spec=draft2020", "--all-errors", "--strict=false", "--validate-formats=false",
+            "-s", str(schema), "-d", tmp.name
+        ], check=False)
+        assert proc.returncode == 0

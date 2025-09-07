@@ -5,9 +5,9 @@
   "identifiers.barcode": "code",
   "classification.categories": "categories",
   "packaging.net_quantity": "quantity",
-  "packaging.materials": "packaging",
+  "scores.nutriscore.grade": "nutriscore_grade",
   "scores.ecoscore.grade": "ecoscore_grade",
-  "provenance.source": "url",
-  "provenance.record_id": "code",
-  "provenance.fetched_at": "last_modified_t"
+  "provenance.source": "_provenance.source",
+  "provenance.fetched_at": "_provenance.fetched_at",
+  "provenance.record_id": "_provenance.record_id"
 }

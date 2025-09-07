@@ -32,14 +32,6 @@ paths:
           required: true
           schema: { type: string, minLength: 1 }
           description: Search query string
-        - in: query
-          name: lat
-          schema: { type: number }
-          description: Latitude coordinate
-        - in: query
-          name: lng
-          schema: { type: number }
-          description: Longitude coordinate
       responses:
         '200':
           description: Search results
@@ -84,4 +76,3 @@ components:
     Product:
       # External file reference — note the path is relative to THIS file's location (openapi/)
       $ref: ../schemas/universal/product.schema.json
-
