@@ -1,7 +1,3 @@
-
-# .github/workflows/require-changelog.yml (add this file)
-
-```yaml
 name: Require CHANGELOG update
 
 on:
@@ -26,8 +22,3 @@ jobs:
             echo "ERROR: PROJECT_CHANGELOG.md must be updated in this PR." >&2
             exit 1
           fi
-```
-
-> Tip: if you prefer a softer approach, change `exit 1` to a warning and gate merges via branch protection.
-
----
