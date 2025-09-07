@@ -15,6 +15,18 @@ source .venv/bin/activate
 mkdocs serve
 ```
 
+### Developer commands
+
+Common tasks are wrapped as make targets:
+
+```bash
+make ui-install   # install UI dependencies
+make ui-build     # build the UI
+make docs-serve   # serve docs locally
+make docs-build   # build docs in strict mode
+make help         # list all targets
+```
+
 ### Docs build with/without committers
 
 - With token (recommended):
