@@ -5,9 +5,10 @@ Mock-driven search interface used for prototyping.
 ## Development
 
 Search suggestions and product results use in-repo seed data so no extra
-configuration is required. Run the dev server or tests directly:
+configuration is required. Install dependencies and run the dev server or tests:
 
 ```bash
+pnpm -C ui install
 pnpm -C ui dev
 pnpm -C ui test
 ```
