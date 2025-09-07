@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders icon, text, and action 1`] = `
+<div>
+  <div
+    class="py-8 text-center"
+    data-testid="empty-state"
+  >
+    <div
+      class="mx-auto mb-4 h-8 w-8 text-primary"
+    >
+      <svg
+        class="lucide lucide-search "
+        data-testid="icon"
+        fill="none"
+        height="24"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+        <path
+          d="m21 21-4.3-4.3"
+        />
+      </svg>
+    </div>
+    <h2
+      class="text-lg font-semibold"
+    >
+      No items
+    </h2>
+    <p
+      class="mt-2 text-sm text-gray-600"
+    >
+      nothing to see
+    </p>
+    <div
+      class="mt-4"
+    >
+      <button>
+        act
+      </button>
+    </div>
+  </div>
+</div>
+`;

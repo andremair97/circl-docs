@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`invokes retry handler when provided 1`] = `
+<div>
+  <div
+    class="py-8 text-center"
+    data-testid="error-state"
+  >
+    <h2
+      class="text-lg font-semibold text-bad"
+    >
+      oops
+    </h2>
+    <p
+      class="mt-2 text-sm text-gray-600"
+    >
+      fail
+    </p>
+    <button
+      class="mt-4 rounded border border-soft-border px-4 py-2 text-primary hover:bg-soft-border"
+      type="button"
+    >
+      Retry
+    </button>
+  </div>
+</div>
+`;

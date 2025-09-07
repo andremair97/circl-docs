@@ -1,11 +1,14 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EmptyState from './EmptyState';
+import ErrorState from './ErrorState';
+import Skeleton from './Skeleton';
 import useMockSearch from '../hooks/useMockSearch';
 
-// SearchBar provides a single input with basic typeahead suggestions.
+// SearchBar provides a single input with typeahead suggestions using reusable states.
 export default function SearchBar() {
   const [query, setQuery] = useState('');
-  const { results: suggestions } = useMockSearch(query);
+  const { results: suggestions, loading, error } = useMockSearch(query);
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
@@ -15,36 +18,30 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ position: 'relative' }}>
+    <form onSubmit={handleSubmit} className="relative">
       <input
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          border: '2px solid #2e7d32',
-          borderRadius: '4px',
-          width: '300px',
-        }}
+        className="w-72 rounded border-2 border-primary px-2 py-1"
       />
-      {suggestions.length > 0 && (
-        <ul
-          style={{
-            position: 'absolute',
-            top: '2.5rem',
-            left: 0,
-            right: 0,
-            background: '#fff',
-            listStyle: 'none',
-            margin: 0,
-            padding: '0.5rem',
-            border: '1px solid #ccc',
-          }}
-        >
-          {suggestions.map((s) => (
-            <li key={s.id}>{s.title}</li>
-          ))}
-        </ul>
+      {query && (
+        <div className="absolute left-0 right-0 top-full z-10 mt-1 rounded border border-soft-border bg-surface p-2 shadow">
+          {loading && <Skeleton count={3} />}
+          {error && <ErrorState title="Error loading" description={error.message} />}
+          {!loading && !error && suggestions.length === 0 && (
+            <EmptyState title="No suggestions" />
+          )}
+          {suggestions.length > 0 && (
+            <ul className="list-none p-0">
+              {suggestions.map((s) => (
+                <li key={s.id} className="px-1 py-0.5 hover:bg-bg">
+                  {s.title}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
     </form>
   );
