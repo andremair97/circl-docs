@@ -1,0 +1,14 @@
+ui:
+  - ui/**
+connectors:
+  - examples/**
+  - src/connectors/**
+  - tests/connectors/**
+schemas:
+  - schemas/**
+  - openapi/**
+ci:
+  - .github/workflows/**
+docs:
+  - docs/**
+  - mkdocs.yml
