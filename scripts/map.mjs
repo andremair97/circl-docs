@@ -133,6 +133,7 @@ async function main() {
     id,
     query,
     in: inFile,
+    input,
     schema,
     overlay,
     out,
@@ -141,8 +142,10 @@ async function main() {
     quiet
   } = args;
 
-  if (!source || (!barcode && !id && !query && !inFile)) {
-    console.error('usage: --source <src> [--barcode|--id|--query|--in <file>] [--out <file>]');
+  const inPath = inFile || input;
+
+  if (!source || (!barcode && !id && !query && !inPath)) {
+    console.error('usage: --source <src> [--barcode|--id|--query|--input <file>] [--out <file>]');
     process.exit(2);
   }
 
@@ -150,9 +153,9 @@ async function main() {
   const overlayPath = overlay || path.join(ROOT, 'schemas', 'overlays', source, 'product.overlay.json');
 
   let raw;
-  if (inFile) {
+  if (inPath) {
     try {
-      raw = JSON.parse(await fs.readFile(inFile, 'utf8'));
+      raw = JSON.parse(await fs.readFile(inPath, 'utf8'));
     } catch (e) {
       console.error(`cannot read input file: ${e.message}`);
       process.exit(2);
@@ -200,7 +203,7 @@ async function main() {
   }
 
   // --- begin: minimal defaults for required fields if overlay omitted them ---
-  if (!mapped.id) {
+  if (mapped.id == null) {
     mapped.id =
       ctx.id ??
       ctx.code ??
@@ -216,7 +219,7 @@ if (mapped.id !== undefined && mapped.id !== null) {
   mapped.id = String(mapped.id);
 }
 
-  if (!mapped.title) {
+  if (mapped.title == null) {
     const titleCandidates = [
       mapped.name,
       raw?.title,
@@ -231,8 +234,6 @@ if (mapped.id !== undefined && mapped.id !== null) {
   }
 
   // provenance must be exactly { url, source, fetched_at }
-  const PROV_KEYS = new Set(['url', 'source', 'fetched_at']);
-
   function deriveProvenanceUrl(source, raw, ctx) {
     if (source === 'off') {
       return ctx.code

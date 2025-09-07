@@ -36,12 +36,19 @@ markdown_extensions:
 
 plugins:
   - search
-  - mermaid2
+  - mermaid2:
+      javascript: assets/mermaid.esm.min.mjs
   - git-revision-date-localized:
       fallback_to_build_date: true
 
 nav:
   - Home: index.md
+  - Connectors:
+      - Overview: connectors/index.md
+      - Open Food Facts: connectors/off.md
+      - iFixit: connectors/ifixit.md
+      - eBay: connectors/ebay.md
+      - Library of Things: connectors/lot.md
   - Guides:
       - Overview:
           - vision/010-product-vision.md
@@ -71,6 +78,7 @@ nav:
       - Ops:
           - ops/CONTEXT-PACK.md
           - ops/AGENT-BRIEF.md
+          - ops/AGENT.md
           - ops/PROMPT-LIBRARY.md
           - ops/500-ingestion-playbooks.md
           - ops/510-data-quality.md
@@ -84,8 +92,13 @@ nav:
           - process/605-ai-collaboration.md
           - process/610-contributing.md
           - process/620-versioning-release.md
+          - ADR Process:
+              - process/600-adrs/index.md
+              - process/600-adrs/0001-use-adrs.md
   - Changelog: changelog/index.md
   - Architecture:
-      - ADRs: adr/index.md
+      - ADRs:
+          - adr/index.md
+          - adr/0000-template.md
   - Releases: releases.md
 
