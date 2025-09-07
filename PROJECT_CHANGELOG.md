@@ -13,7 +13,6 @@
 - ui: rename Tamagui provider entry to .tsx so TypeScript compiles JSX; files: packages/ui/index.tsx, packages/ui/package.json, packages/ui/tsconfig.json; follow-up: add component tests
 - web: alias react-native to react-native-web and simplify shared UI to React Native primitives; files: apps/web/next.config.mjs, apps/web/tsconfig.json, packages/ui/\*; follow-up: audit Next ESLint plugin
 - ci: ignore pnpm lockfile and fix require-changelog workflow so YAML lint passes; files: .yamllint.yaml, .github/workflows/require-changelog.yml; follow-up: monitor YAML lint
-- ci: path-scoped jobs, caches, codeowners
 
 ## 2025-09-07
 
