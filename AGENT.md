@@ -2,4 +2,8 @@
 
 - [Agent Brief](docs/ops/AGENT-BRIEF.md)
 - [Context Pack](docs/ops/CONTEXT-PACK.md)
-- Do not edit `CHANGELOG.md` directly. Add a fragment in `changelog.d/` instead; the release workflow compiles them.
+- **NEVER** modify `CHANGELOG.md` directly.
+  - For every PR add `/changelog.d/<short-title>.md` describing the change in one or two lines.
+  - Example filenames: `123-add-repair-connector.md`, `fix-typo.md`.
+  - Fragment style: `feat: add repair connector (#123)`.
+  - If no entry is needed, apply the `no-changelog` label.

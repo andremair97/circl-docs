@@ -15,3 +15,5 @@ Conventions:
 
 - Code in TypeScript/Node/Next.js, JSON Schema 2020-12, OpenAPI 3.1
 - Always update docs + ADRs when changing behavior or decisions
+- Never edit `CHANGELOG.md` directly; add `/changelog.d/<short-title>.md` and let CI compile.
+  CI guards reject direct edits without a fragment or `no-changelog` label.
