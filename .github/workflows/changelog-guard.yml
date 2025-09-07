@@ -1,0 +1,27 @@
+name: changelog guard
+
+on:
+  pull_request:
+
+jobs:
+  changelog:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-changelog') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure CHANGELOG.md not modified
+        run: |
+          set -euo pipefail
+          if git diff --name-only origin/${{ github.base_ref }}... | grep '^CHANGELOG.md$'; then
+            echo 'CHANGELOG.md must not be edited directly.' >&2
+            exit 1
+          fi
+      - name: Check for changelog fragment
+        run: |
+          set -euo pipefail
+          if ! git diff --name-only origin/${{ github.base_ref }}... | grep '^changelog.d/.*\.md$'; then
+            echo 'Missing changelog fragment in changelog.d/ or label the PR with no-changelog.' >&2
+            exit 1
+          fi

@@ -88,4 +88,6 @@ nav:
   - Architecture:
       - ADRs: adr/index.md
   - Releases: releases.md
+  - Contributing:
+      - Changelog fragments: contributing/changelog.md
 
