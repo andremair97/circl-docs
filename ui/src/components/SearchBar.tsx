@@ -3,18 +3,43 @@ import { useNavigate } from 'react-router-dom';
 import EmptyState from './EmptyState';
 import ErrorState from './ErrorState';
 import Skeleton from './Skeleton';
-import useMockSearch from '../hooks/useMockSearch';
+import useSuggestions from '../hooks/useSuggestions';
+import type { SuggestProvider, Suggestion } from '../suggest/Provider';
+import { LocalSeedProvider } from '../suggest/LocalSeedProvider';
 
 // SearchBar provides a single input with typeahead suggestions using reusable states.
-export default function SearchBar() {
+const defaultProvider = new LocalSeedProvider();
+
+export default function SearchBar({
+  provider = defaultProvider,
+}: {
+  provider?: SuggestProvider;
+}) {
   const [query, setQuery] = useState('');
-  const { results: suggestions, loading, error } = useMockSearch(query);
+  const { suggestions, loading, error } = useSuggestions(provider, query);
   const navigate = useNavigate();
+  const [active, setActive] = useState(-1);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!query) return;
-    navigate(`/results?q=${encodeURIComponent(query)}`);
+    navigate(`/results?type=product&q=${encodeURIComponent(query)}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (suggestions.length === 0) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive((a) => (a + 1) % suggestions.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive((a) => (a - 1 + suggestions.length) % suggestions.length);
+    } else if (e.key === 'Enter' && active >= 0) {
+      e.preventDefault();
+      const s = suggestions[active];
+      setQuery(s.title);
+      navigate(`/results?type=${s.type}&q=${encodeURIComponent(s.title)}`);
+    }
   };
 
   return (
@@ -22,7 +47,11 @@ export default function SearchBar() {
       <input
         placeholder="Search"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setActive(-1);
+        }}
+        onKeyDown={handleKeyDown}
         className="w-72 rounded border-2 border-primary px-2 py-1"
       />
       {query && (
@@ -34,8 +63,20 @@ export default function SearchBar() {
           )}
           {suggestions.length > 0 && (
             <ul className="list-none p-0">
-              {suggestions.map((s) => (
-                <li key={s.id} className="px-1 py-0.5 hover:bg-bg">
+              {suggestions.map((s: Suggestion, idx) => (
+                <li
+                  key={s.id}
+                  className={`cursor-pointer px-1 py-0.5 ${
+                    idx === active ? 'bg-bg' : ''
+                  }`}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    setQuery(s.title);
+                    navigate(
+                      `/results?type=${s.type}&q=${encodeURIComponent(s.title)}`
+                    );
+                  }}
+                >
                   {s.title}
                 </li>
               ))}

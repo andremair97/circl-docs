@@ -1,0 +1,11 @@
+[
+  { "id": "fairphone-5", "title": "Fairphone 5", "type": "product" },
+  { "id": "refurb-laptop", "title": "Refurbished Laptop", "type": "product" },
+  { "id": "patagonia", "title": "Patagonia", "type": "company" },
+  { "id": "ikea", "title": "IKEA", "type": "company" },
+  { "id": "bamboo-toothbrush", "title": "Bamboo Toothbrush", "type": "product" },
+  { "id": "organic-coffee", "title": "Organic Coffee Beans", "type": "product" },
+  { "id": "repair-cafe", "title": "Repair Café", "type": "company" },
+  { "id": "compostable-bags", "title": "Compostable Trash Bags", "type": "product" }
+]
+

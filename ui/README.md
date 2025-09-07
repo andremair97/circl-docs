@@ -2,16 +2,15 @@
 
 Mock-driven search interface used for prototyping.
 
-## Mock search feature flag
+## Development
 
-The mock search is disabled by default. Enable it by setting the environment variable before running development or tests:
+Search suggestions and product results use in-repo seed data so no extra
+configuration is required. Run the dev server or tests directly:
 
 ```bash
-VITE_ENABLE_MOCK_SEARCH=true pnpm -C ui dev
-VITE_ENABLE_MOCK_SEARCH=true pnpm -C ui test
+pnpm -C ui dev
+pnpm -C ui test
 ```
-
-Mock results are served from `public/mocks/search.sample.json`.
 
 ## Theme and reusable states
 
