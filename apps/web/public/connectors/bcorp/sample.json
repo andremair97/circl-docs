@@ -1,0 +1,46 @@
+{
+  "companies": [
+    {
+      "id": "patagonia-inc",
+      "name": "Patagonia, Inc.",
+      "status": "Certified",
+      "bImpactScore": 151.0,
+      "industries": ["Apparel", "Outdoors"],
+      "country": "United States",
+      "city": "Ventura",
+      "employeesRange": "1000+",
+      "certificationDate": "2012-12-01",
+      "website": "https://www.patagonia.com",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Patagonia_%28clothing%29_logo.svg/320px-Patagonia_%28clothing%29_logo.svg.png",
+      "description": "Outdoor apparel company known for environmental activism."
+    },
+    {
+      "id": "innocent-drinks-uk",
+      "name": "innocent drinks",
+      "status": "Certified",
+      "bImpactScore": 110.4,
+      "industries": ["Food & Beverage"],
+      "country": "United Kingdom",
+      "city": "London",
+      "employeesRange": "500-999",
+      "certificationDate": "2018-05-15",
+      "website": "https://www.innocentdrinks.co.uk",
+      "logo": "",
+      "description": "Fruit drinks and smoothies."
+    },
+    {
+      "id": "allbirds",
+      "name": "Allbirds",
+      "status": "Certified",
+      "bImpactScore": 89.0,
+      "industries": ["Footwear", "Retail"],
+      "country": "United States",
+      "city": "San Francisco",
+      "employeesRange": "250-499",
+      "certificationDate": "2016-09-01",
+      "website": "https://www.allbirds.com",
+      "logo": "",
+      "description": "Footwear brand focused on natural materials."
+    }
+  ]
+}
