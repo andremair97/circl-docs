@@ -1,0 +1,31 @@
+{
+  "_source_url": "fixture://myturn_search",
+  "results": [
+    {
+      "id": "mt1",
+      "name": "Hammer Drill",
+      "category": "Tools",
+      "photo": "https://example.org/hammerdrill.jpg",
+      "itemUrl": "https://edinburgh.myturn.com/library/viewitem.html?item_id=mt1",
+      "dailyCharge": 7.5,
+      "deposit": 30.0,
+      "status": "available",
+      "nextAvailable": "2023-09-10",
+      "branch": "Central Library",
+      "postcode": "EH1 1AA"
+    },
+    {
+      "id": "mt2",
+      "name": "Sander",
+      "category": "Tools",
+      "photo": "https://example.org/sander.jpg",
+      "itemUrl": "https://edinburgh.myturn.com/library/viewitem.html?item_id=mt2",
+      "dailyCharge": 5.0,
+      "deposit": 15.0,
+      "status": "unavailable",
+      "nextAvailable": "2023-09-15",
+      "branch": "West Branch",
+      "postcode": "EH2 2BB"
+    }
+  ]
+}
