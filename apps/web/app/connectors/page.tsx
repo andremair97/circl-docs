@@ -1,25 +1,27 @@
-import SearchAndFilter from "./components/SearchAndFilter";
-import { CONNECTORS, type ConnectorMeta } from "./_data/connectors";
+import Link from 'next/link'
+import { CONNECTORS } from '@/lib/connectorCatalog'
 
-export const metadata = {
-  title: "Connectors",
-  description: "Explore sustainability data sources integrated into Circl."
-};
-export const revalidate = 3600;
+// Hub page listing available connectors.
+// Why: gives users a single entry point to explore data sources.
+export const metadata = { title: 'Connectors' }
 
-// Server component renders connector hub; client filter keeps UX responsive.
-export default async function ConnectorsHub() {
-  const items: ConnectorMeta[] = CONNECTORS;
+export default function ConnectorsPage() {
   return (
-    <main className="container mx-auto max-w-6xl p-4 space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-2xl font-semibold">Connectors</h1>
-        <p className="text-sm text-gray-600">
-          Browse all data sources. Click a connector to open its page. Expand “How to use” for tips and sample queries.
-        </p>
-      </header>
-
-      <SearchAndFilter items={items} />
+    <main className="mx-auto max-w-5xl p-6">
+      <h1 className="text-2xl font-semibold mb-6">Connectors</h1>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {CONNECTORS.map(c => (
+          <Link
+            key={c.slug}
+            href={`/connectors/${c.slug}`}
+            className="rounded-xl border p-4 hover:shadow"
+          >
+            <div className="font-medium">{c.title}</div>
+            {c.description && <p className="text-sm text-gray-600 mt-1">{c.description}</p>}
+            <p className="text-xs text-gray-500 mt-2">/connectors/{c.slug}</p>
+          </Link>
+        ))}
+      </div>
     </main>
-  );
+  )
 }
