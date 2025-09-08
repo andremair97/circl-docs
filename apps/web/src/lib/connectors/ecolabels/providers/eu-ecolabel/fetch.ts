@@ -18,10 +18,13 @@ export async function searchEuEcolabel(params: SearchParamsInput): Promise<Certi
       if (params.page) url.searchParams.set("page", String(params.page));
       if (params.pageSize) url.searchParams.set("pageSize", String(params.pageSize));
 
-      const res = await fetch(url.toString(), {
-        headers: { "Accept": "application/json", "User-Agent": "circl-docs-ui" },
-        next: { revalidate: 3600 },
-      });
+      const res = await fetch(
+        url.toString(),
+        {
+          headers: { "Accept": "application/json", "User-Agent": "circl-docs-ui" },
+          next: { revalidate: 3600 },
+        } as RequestInit & { next: { revalidate: number } }
+      );
       if (!res.ok) throw new Error(`EU_ECOLABEL API ${res.status}`);
       const data = await res.json();
       const items = transformEuJson(data);
@@ -39,10 +42,13 @@ export async function searchEuEcolabel(params: SearchParamsInput): Promise<Certi
   // 2) CSV path
   if (csvUrl) {
     try {
-      const res = await fetch(csvUrl, {
-        headers: { "Accept": "text/csv", "User-Agent": "circl-docs-ui" },
-        next: { revalidate: 3600 },
-      });
+      const res = await fetch(
+        csvUrl,
+        {
+          headers: { "Accept": "text/csv", "User-Agent": "circl-docs-ui" },
+          next: { revalidate: 3600 },
+        } as RequestInit & { next: { revalidate: number } }
+      );
       if (!res.ok) throw new Error(`EU_ECOLABEL CSV ${res.status}`);
       const text = await res.text();
       const rows = parseCsv(text);          // implement simple CSV parser in this file

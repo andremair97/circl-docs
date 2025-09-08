@@ -41,27 +41,44 @@ export function transformEuRow(row: string[]): CertifiedProduct | null {
   };
 }
 
-export function transformEuJson(data: any): CertifiedProduct[] {
-  const items = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
-  return items.map((p: any) => ({
-    id: String(p.licenceId ?? p.id ?? p.registrationNumber ?? p.name ?? Math.random()),
-    provider: "EU_ECOLABEL",
-    name: first(p, FIELD_MAP.name) ?? "",
-    brand: first(p, FIELD_MAP.brand),
-    company: first(p, FIELD_MAP.company),
-    category: first(p, FIELD_MAP.category),
-    country: first(p, FIELD_MAP.country),
-    licenceId: first(p, FIELD_MAP.licenceId),
-    validFrom: first(p, FIELD_MAP.validFrom),
-    validTo: first(p, FIELD_MAP.validTo),
-    url: first(p, FIELD_MAP.url),
-    standardCode: first(p, FIELD_MAP.standardCode),
-  })).filter((x: CertifiedProduct) => x.name || x.company);
+export function transformEuJson(data: unknown): CertifiedProduct[] {
+  // Allow any shape but normalise to an array of records
+  const maybe = data as { items?: unknown };
+  const items: Record<string, unknown>[] = Array.isArray(maybe.items)
+    ? (maybe.items as Record<string, unknown>[])
+    : Array.isArray(data)
+    ? (data as Record<string, unknown>[])
+    : [];
+
+  return items
+    .map(
+      (p): CertifiedProduct => ({
+        id: String(
+          p["licenceId"] ?? p["id"] ?? p["registrationNumber"] ?? p["name"] ?? Math.random()
+        ),
+        provider: "EU_ECOLABEL",
+        name: first(p, FIELD_MAP.name) ?? "",
+        brand: first(p, FIELD_MAP.brand),
+        company: first(p, FIELD_MAP.company),
+        category: first(p, FIELD_MAP.category),
+        country: first(p, FIELD_MAP.country),
+        licenceId: first(p, FIELD_MAP.licenceId),
+        validFrom: first(p, FIELD_MAP.validFrom),
+        validTo: first(p, FIELD_MAP.validTo),
+        url: first(p, FIELD_MAP.url),
+        standardCode: first(p, FIELD_MAP.standardCode),
+      })
+    )
+    .filter((x) => x.name || x.company);
 }
 
-function first(obj: any, keys: string[]) {
+function first(obj: Record<string, unknown>, keys: readonly string[]): string | undefined {
   for (const k of keys) {
-    if (obj?.[k] != null && String(obj[k]).trim() !== "") return String(obj[k]);
+    const val = obj[k];
+    if (val != null) {
+      const str = String(val).trim();
+      if (str !== "") return str;
+    }
   }
   return undefined;
 }

@@ -18,10 +18,13 @@ export async function searchGreenSeal(params: SearchParamsInput): Promise<Certif
       if (params.pageSize) url.searchParams.set("pageSize", String(params.pageSize));
       url.searchParams.set("apikey", key);
 
-      const res = await fetch(url.toString(), {
-        headers: { "Accept": "application/json", "User-Agent": "circl-docs-ui" },
-        next: { revalidate: 3600 },
-      });
+      const res = await fetch(
+        url.toString(),
+        {
+          headers: { "Accept": "application/json", "User-Agent": "circl-docs-ui" },
+          next: { revalidate: 3600 },
+        } as RequestInit & { next: { revalidate: number } }
+      );
       if (!res.ok) throw new Error(`GREEN_SEAL ${res.status}`);
       const data = await res.json();
       const items = transformGsJson(data);
