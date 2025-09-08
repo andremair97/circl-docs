@@ -1,0 +1,16 @@
+// Data from GET /buy/browse/v1/item/{item_id} (2024-05-01)
+{
+  "itemId": "v1|1234567890|0",
+  "title": "Dell Inspiron 14 Laptop",
+  "price": {"value": "299.99", "currency": "GBP"},
+  "condition": "Used",
+  "image": {"imageUrl": "https://i.ebayimg.com/images/g/dell/s-l1600.jpg"},
+  "itemWebUrl": "https://www.ebay.com/itm/1234567890",
+  "seller": {"username": "techseller", "feedbackScore": 1000, "feedbackPercentage": "99.5"},
+  "itemLocation": {"city": "London", "country": "GB"},
+  "categories": [{"id": "175672", "name": "Laptops"}],
+  "buyingOptions": ["FIXED_PRICE"],
+  "shippingOptions": [
+    {"type": "FlatRate", "shippingCost": {"value": "10.0", "currency": "GBP"}, "shipToLocation": "GB", "estimatedDelivery": "2024-05-25T00:00:00.000Z"}
+  ]
+}

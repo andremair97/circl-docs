@@ -1,0 +1,32 @@
+// Data from GET /buy/browse/v1/item_summary/search?q=laptop (2024-05-01)
+{
+  "itemSummaries": [
+    {
+      "itemId": "v1|1234567890|0",
+      "title": "Dell Inspiron 14 Laptop",
+      "price": {"value": "299.99", "currency": "GBP"},
+      "condition": "Used",
+      "image": {"imageUrl": "https://i.ebayimg.com/images/g/dell/s-l1600.jpg"},
+      "thumbnailImages": [{"imageUrl": "https://i.ebayimg.com/images/g/dell/s-l64.jpg"}],
+      "itemWebUrl": "https://www.ebay.com/itm/1234567890",
+      "seller": {"username": "techseller", "feedbackScore": 1000, "feedbackPercentage": "99.5"},
+      "itemLocation": {"city": "London", "country": "GB"},
+      "categories": [{"id": "175672", "name": "Laptops"}],
+      "buyingOptions": ["FIXED_PRICE"],
+      "shippingOptions": [{"type": "FlatRate", "shippingCost": {"value": "10.0", "currency": "GBP"}, "shipToLocation": "GB"}]
+    },
+    {
+      "itemId": "v1|9876543210|0",
+      "title": "HP Pavilion Gaming Laptop",
+      "price": {"value": "450.00", "currency": "GBP"},
+      "condition": "Seller refurbished",
+      "image": {"imageUrl": "https://i.ebayimg.com/images/g/hp/s-l1600.jpg"},
+      "itemWebUrl": "https://www.ebay.com/itm/9876543210",
+      "seller": {"username": "hpstore", "feedbackScore": 500, "feedbackPercentage": "98.7"},
+      "itemLocation": {"city": "Manchester", "country": "GB"},
+      "categories": [{"id": "175672", "name": "Laptops"}],
+      "buyingOptions": ["FIXED_PRICE"],
+      "shippingOptions": [{"type": "FlatRate", "shippingCost": {"value": "0.0", "currency": "GBP"}, "shipToLocation": "GB"}]
+    }
+  ]
+}
