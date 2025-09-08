@@ -2,6 +2,10 @@
 
 ## 2025-09-08
 
+feat: diagnostics MVP – connector self-test API, UI dashboard, and CI runner
+- run `pnpm -C apps/web test:connectors` or visit `/debug/connectors` (requires NEXT_PUBLIC_SHOW_DEBUG=1)
+- CI publishes JUnit report artifact `selftests-report`
+
 refactor: move connector pages to app directory and update imports (#000)
 
 example: sample fragment to illustrate format
