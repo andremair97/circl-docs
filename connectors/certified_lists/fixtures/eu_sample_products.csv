@@ -1,0 +1,3 @@
+certificate_id,product_name,brand,model,gtin,categories,company,country,issued,expires,detail_url
+FR/012/001,Eco Laundry Detergent,EcoBrand,,1234567890123,Detergents,Eco Corp,FR,2021-01-01,2025-01-01,https://eu.ecolabel.eu/detail/FR-012-001
+DE/045/002,Green Soap,GreenBrand,,,Soaps,Green GmbH,DE,2020-06-15,2024-06-15,https://eu.ecolabel.eu/detail/DE-045-002
