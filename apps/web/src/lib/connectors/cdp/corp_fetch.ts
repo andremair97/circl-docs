@@ -3,6 +3,9 @@ import { transformCorpRows } from "./corp_transform";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+// Extend RequestInit to include Next.js' optional `next` cache config.
+type NextInit = RequestInit & { next?: { revalidate?: number } };
+
 export async function getCorpScores(params: { company?: string; year?: number; theme?: string; limit?: number; }): Promise<CorpScore[]> {
   const base = process.env.CDP_CORP_BASE;
   const key = process.env.CDP_CORP_API_KEY;
@@ -15,10 +18,13 @@ export async function getCorpScores(params: { company?: string; year?: number; t
     if (params.limit) url.searchParams.set("limit", String(params.limit));
 
     try {
-      const res = await fetch(url.toString(), {
-        headers: { "Authorization": `Bearer ${key}`, "Accept": "application/json" },
-        next: { revalidate: 3600 }
-      });
+      const res = await fetch(
+        url.toString(),
+        {
+          headers: { Authorization: `Bearer ${key}`, Accept: "application/json" },
+          next: { revalidate: 3600 }
+        } as NextInit // allow Next.js-specific `next` cache option without `any`
+      );
       if (res.ok) {
         const data = await res.json();
         const items = transformCorpRows(data);

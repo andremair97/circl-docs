@@ -3,6 +3,9 @@ import { transformSocrataRowsToCityEmissions } from "./cities_transform";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+// Extend `RequestInit` with Next.js' optional `next` caching config.
+type NextInit = RequestInit & { next?: { revalidate?: number } };
+
 const DEFAULT_HOST = "https://data.cdp.net";
 
 async function discoverEmissionsDataset(host: string): Promise<string | null> {
@@ -16,7 +19,12 @@ async function discoverEmissionsDataset(host: string): Promise<string | null> {
   discoveryUrl.searchParams.set("q", "emissions inventory");
   discoveryUrl.searchParams.set("limit", "5");
 
-  const res = await fetch(discoveryUrl.toString(), { next: { revalidate: 86400 } });
+  // Cast to `NextInit` because the `next` option is Next.js-specific and not
+  // part of the standard `RequestInit` type.
+  const res = await fetch(
+    discoveryUrl.toString(),
+    { next: { revalidate: 86400 } } as NextInit
+  );
   if (!res.ok) return null;
   const data = await res.json();
   // Heuristic: pick the first dataset whose columns include a likely total emissions field.
@@ -50,7 +58,11 @@ export async function findCityEmissions(params: { city?: string; country?: strin
     if (appToken) headers["X-App-Token"] = appToken;
 
     try {
-      const res = await fetch(soda.toString(), { headers, next: { revalidate: 3600 } });
+      // Same `NextInit` cast as above to allow Next.js cache hints via `next`.
+      const res = await fetch(
+        soda.toString(),
+        { headers, next: { revalidate: 3600 } } as NextInit
+      );
       if (res.ok) {
         const rows = await res.json();
         const items = transformSocrataRowsToCityEmissions(rows, dataset);
