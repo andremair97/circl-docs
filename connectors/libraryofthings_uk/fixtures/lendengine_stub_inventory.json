@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": "le1",
+      "title": "Cordless Drill",
+      "category": "Tools",
+      "image": "https://example.org/le-drill.jpg",
+      "url": "https://lend-engine.com/items/le1",
+      "price": 4.0,
+      "deposit": 20.0,
+      "status": "available",
+      "nextAvailable": "2023-08-15",
+      "location": "Leith",
+      "postcode": "EH6 6QQ"
+    },
+    {
+      "id": "le2",
+      "title": "Jigsaw",
+      "category": "Tools",
+      "image": "https://example.org/le-jigsaw.jpg",
+      "url": "https://lend-engine.com/items/le2",
+      "price": 5.0,
+      "deposit": 25.0,
+      "status": "available",
+      "nextAvailable": "2023-08-18",
+      "location": "New Town",
+      "postcode": "EH2 3JD"
+    },
+    {
+      "id": "le3",
+      "title": "Angle Grinder",
+      "category": "Tools",
+      "image": "https://example.org/le-grinder.jpg",
+      "url": "https://lend-engine.com/items/le3",
+      "price": 6.0,
+      "deposit": 30.0,
+      "status": "unavailable",
+      "nextAvailable": "2023-08-30",
+      "location": "Gorgie",
+      "postcode": "EH11 2QT"
+    }
+  ]
+}

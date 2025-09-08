@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": "lot1",
+      "title": "Sewing Machine",
+      "category": "Craft",
+      "image": "https://example.org/sewing.jpg",
+      "url": "https://libraryofthings.co.uk/items/lot1",
+      "price": 8.0,
+      "deposit": 40.0,
+      "status": "available",
+      "nextAvailable": "2023-08-20",
+      "location": "Camden",
+      "postcode": "NW1 0NE"
+    },
+    {
+      "id": "lot2",
+      "title": "Pressure Washer",
+      "category": "Garden",
+      "image": "https://example.org/washer.jpg",
+      "url": "https://libraryofthings.co.uk/items/lot2",
+      "price": 12.0,
+      "deposit": 50.0,
+      "status": "available",
+      "nextAvailable": "2023-08-25",
+      "location": "Brixton",
+      "postcode": "SW9 8HB"
+    },
+    {
+      "id": "lot3",
+      "title": "Dehumidifier",
+      "category": "Home",
+      "image": "https://example.org/dehumidifier.jpg",
+      "url": "https://libraryofthings.co.uk/items/lot3",
+      "price": 10.0,
+      "deposit": 45.0,
+      "status": "unavailable",
+      "nextAvailable": "2023-09-05",
+      "location": "Walthamstow",
+      "postcode": "E17 7LP"
+    }
+  ]
+}

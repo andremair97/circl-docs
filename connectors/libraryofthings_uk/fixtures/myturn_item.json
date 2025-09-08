@@ -1,0 +1,14 @@
+{
+  "_source_url": "fixture://myturn_item",
+  "id": "mt1",
+  "name": "Hammer Drill",
+  "category": "Tools",
+  "photo": "https://example.org/hammerdrill.jpg",
+  "itemUrl": "https://edinburgh.myturn.com/library/viewitem.html?item_id=mt1",
+  "dailyCharge": 7.5,
+  "deposit": 30.0,
+  "status": "available",
+  "nextAvailable": "2023-09-10",
+  "branch": "Central Library",
+  "postcode": "EH1 1AA"
+}
