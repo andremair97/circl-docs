@@ -1,0 +1,27 @@
+{
+  "itemSummaries": [
+    {
+      "itemId": "v1|1234567890|0",
+      "title": "Dell Latitude 7420 – Refurbished",
+      "image": { "imageUrl": "https://i.ebayimg.com/images/g/abc/s-l1600.jpg" },
+      "price": { "value": "279.99", "currency": "GBP" },
+      "condition": "CERTIFIED_REFURBISHED",
+      "buyingOptions": ["FIXED_PRICE"],
+      "itemWebUrl": "https://www.ebay.co.uk/itm/1234567890",
+      "itemLocation": { "city": "Leeds", "country": "GB" },
+      "shippingOptions": [{ "localPickup": true }],
+      "returnTerms": { "returnsAccepted": true, "returnWithin": "30_DAYS" },
+      "seller": { "username": "TopTechRefurbs", "feedbackPercentage": "99.6", "feedbackScore": 12543, "topRatedSeller": true }
+    },
+    {
+      "itemId": "v1|2345678901|0",
+      "title": "Apple iPhone 12 128GB – Used",
+      "price": { "value": "239.00", "currency": "GBP" },
+      "condition": "USED",
+      "buyingOptions": ["AUCTION","BUY_IT_NOW"],
+      "itemWebUrl": "https://www.ebay.co.uk/itm/2345678901",
+      "itemLocation": { "city": "Glasgow", "country": "GB" },
+      "shippingOptions": [{ "localPickup": false }]
+    }
+  ]
+}
