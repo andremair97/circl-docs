@@ -1,0 +1,47 @@
+[
+  {
+    "id": "UK-FT-0001",
+    "name": "Fairtrade Ground Coffee",
+    "brand": "Cafe Example",
+    "category": "coffee",
+    "gtins": ["5012345678900"],
+    "country_markets": ["UK"],
+    "images": ["https://example.com/coffee.jpg"],
+    "url": "https://www.fairtrade.org.uk/directory/coffee-1",
+    "licensee": "Cafe Example Ltd",
+    "floid": "UK123",
+    "valid_from": "2023-01-01",
+    "valid_to": "2024-12-31",
+    "status": "valid"
+  },
+  {
+    "id": "UK-FT-0002",
+    "name": "Organic Green Tea",
+    "brand": "Clipper",
+    "category": "tea",
+    "gtins": ["5021991001234"],
+    "country_markets": ["UK"],
+    "images": ["https://example.com/green-tea.jpg"],
+    "url": "https://www.fairtrade.org.uk/directory/tea-1",
+    "licensee": "Tea Makers Co",
+    "floid": "UK124",
+    "valid_from": "2022-06-01",
+    "valid_to": "2024-06-01",
+    "status": "valid"
+  },
+  {
+    "id": "UK-FT-0003",
+    "name": "Dark Chocolate Bar",
+    "brand": "Choco Bliss",
+    "category": "chocolate",
+    "gtins": ["5033333000000"],
+    "country_markets": ["UK"],
+    "images": ["https://example.com/chocolate.jpg"],
+    "url": "https://www.fairtrade.org.uk/directory/chocolate-1",
+    "licensee": "Choco Bliss Ltd",
+    "floid": "UK125",
+    "valid_from": "2023-02-01",
+    "valid_to": "2025-02-01",
+    "status": "valid"
+  }
+]

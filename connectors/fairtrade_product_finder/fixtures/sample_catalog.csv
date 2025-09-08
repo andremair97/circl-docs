@@ -1,0 +1,4 @@
+name,brand,category,gtin,country,image_url,page_url,licensee,floid,validity_from,validity_to,status
+Fairtrade Instant Coffee,Cafe Example,coffee,5012345678900,UK,https://example.com/coffee.jpg,https://example.com/coffee,Cafe Example Ltd,UK123,2023-01-01,2024-12-31,valid
+Organic Black Tea,Clipper,tea,5021991001234,UK,https://example.com/tea.jpg,https://example.com/tea,Tea Makers Co,UK124,2022-06-01,2024-06-01,valid
+Dark Chocolate Bar,Choco Bliss,chocolate,5033333000000,UK,https://example.com/choc.jpg,https://example.com/choc,Choco Bliss Ltd,UK125,2023-02-01,2025-02-01,valid
