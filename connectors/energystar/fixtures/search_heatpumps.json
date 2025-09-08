@@ -1,0 +1,22 @@
+[
+  {
+    ":id": "1",
+    "esuid": "HP123",
+    "brand_name": "HeatBrand",
+    "model_number": "HP5000",
+    "hspf2": "10",
+    "seer2": "20",
+    "cooling_capacity_btu_hr": "24000",
+    "product_url": "https://example.com/hp1"
+  },
+  {
+    ":id": "2",
+    "esuid": "HP456",
+    "brand_name": "HeatBrand",
+    "model_number": "HP6000",
+    "hspf2": "11",
+    "seer2": "21",
+    "cooling_capacity_btu_hr": "36000",
+    "product_url": "https://example.com/hp2"
+  }
+]

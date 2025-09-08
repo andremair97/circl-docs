@@ -1,0 +1,10 @@
+{
+  ":id": "1",
+  "esuid": "HP123",
+  "brand_name": "HeatBrand",
+  "model_number": "HP5000",
+  "hspf2": "10",
+  "seer2": "20",
+  "cooling_capacity_btu_hr": "24000",
+  "product_url": "https://example.com/hp1"
+}

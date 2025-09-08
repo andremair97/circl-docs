@@ -1,0 +1,22 @@
+[
+  {
+    ":id": "1",
+    "esuid": "D123",
+    "brand_name": "DryBrand",
+    "model_number": "DH100",
+    "capacity_pints_per_day": "30",
+    "energy_factor_l_kwh": "1.5",
+    "annual_energy_use_kwh": "200",
+    "product_url": "https://example.com/dh1"
+  },
+  {
+    ":id": "2",
+    "esuid": "D456",
+    "brand_name": "DryBrand",
+    "model_number": "DH200",
+    "capacity_pints_per_day": "40",
+    "energy_factor_l_kwh": "1.8",
+    "annual_energy_use_kwh": "220",
+    "product_url": "https://example.com/dh2"
+  }
+]
