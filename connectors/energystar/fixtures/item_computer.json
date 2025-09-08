@@ -1,0 +1,9 @@
+{
+  ":id": "1",
+  "esuid": "C123",
+  "brand_name": "CompBrand",
+  "model_number": "Model1",
+  "computer_type": "Laptop",
+  "annual_energy_use_kwh": "50",
+  "product_url": "https://example.com/comp1"
+}

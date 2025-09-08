@@ -1,0 +1,10 @@
+{
+  ":id": "1",
+  "esuid": "TV123",
+  "brand_name": "BrandA",
+  "model_number": "A1",
+  "size_class": "55",
+  "annual_energy_use_kwh": "100",
+  "most_efficient": "Most Efficient 2024",
+  "product_url": "https://example.com/tv1"
+}

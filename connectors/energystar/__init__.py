@@ -1,0 +1,1 @@
+"""ENERGY STAR connector package."""
