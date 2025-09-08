@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "floid": "12345",
+      "organisation": "Andean Coffee Co.",
+      "country": "Peru",
+      "type": "Producer",
+      "products": ["Coffee", "Green Coffee Beans"],
+      "website": "https://example.org",
+      "status": "certified"
+    },
+    {
+      "licence": "UK-LIC-6789",
+      "company": "Cocoa Collective Ltd",
+      "country": "United Kingdom",
+      "role": "Licensee",
+      "product_groups": ["Chocolate", "Cocoa Powder"],
+      "url": "https://example.co.uk",
+      "status": "certified",
+      "licensee": "Cocoa Collective Ltd"
+    },
+    {
+      "id": "T-001",
+      "name": "Global Traders BV",
+      "countryName": "Netherlands",
+      "entityType": "Trader",
+      "categories": ["Tea", "Herbal Infusions"],
+      "status": "suspended"
+    }
+  ]
+}
