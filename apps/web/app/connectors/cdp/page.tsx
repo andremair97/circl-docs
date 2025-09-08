@@ -3,8 +3,8 @@ import CitySearchForm from "./components/CitySearchForm";
 import CityCard from "./components/CityCard";
 import CityTable from "./components/CityTable";
 import CorpCard from "./components/CorpCard";
-import { findCityEmissions } from "@/app/../src/lib/connectors/cdp/cities_fetch";
-import { getCorpScores } from "@/app/../src/lib/connectors/cdp/corp_fetch";
+import { findCityEmissions } from "@/src/lib/connectors/cdp/cities_fetch"; // switch to workspace alias for stability
+import { getCorpScores } from "@/src/lib/connectors/cdp/corp_fetch"; // workspace alias avoids fragile relative paths
 
 export const revalidate = 3600;
 

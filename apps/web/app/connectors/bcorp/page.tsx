@@ -1,5 +1,5 @@
 import SearchBar from "./components/SearchBar";
-import { searchBcorp } from "@/app/../src/lib/connectors/bcorp/fetch";
+import { searchBcorp } from "@/src/lib/connectors/bcorp/fetch"; // use workspace alias for clearer resolution
 import { ResultCard } from "./components/ResultCard";
 import { ResultTable } from "./components/ResultTable";
 

@@ -1,4 +1,4 @@
-import { BcorpCompany } from "@/app/../src/lib/connectors/bcorp/types";
+import { BcorpCompany } from "@/src/lib/connectors/bcorp/types"; // use alias to avoid brittle relative paths
 
 // Tabular view complements cards for users who prefer dense data layouts.
 export function ResultTable({ items }: { items: BcorpCompany[] }) {

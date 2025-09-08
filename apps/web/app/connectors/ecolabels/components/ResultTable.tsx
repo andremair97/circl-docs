@@ -1,4 +1,4 @@
-import { CertifiedProduct } from "@/app/../src/lib/connectors/ecolabels/types";
+import { CertifiedProduct } from "@/src/lib/connectors/ecolabels/types"; // resolve shared types via alias
 
 export default function ResultTable({ items }: { items: CertifiedProduct[] }) {
   return (

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { transformFairtrade } from '../../../lib/connectors/fairtrade/transform';
+import { transformFairtrade } from '../../../src/lib/connectors/fairtrade/transform'; // update path post-move
 
 describe('transformFairtrade', () => {
   it('maps differing field names', () => {

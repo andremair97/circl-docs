@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { transformGsJson } from "../../../../../lib/connectors/ecolabels/providers/green-seal/transform";
+import { transformGsJson } from "../../../../../src/lib/connectors/ecolabels/providers/green-seal/transform"; // update path to src
 
 describe("transformGsJson", () => {
   it("maps json item to CertifiedProduct", () => {
