@@ -7,11 +7,15 @@ const headers = {
   Accept: 'application/json',
 };
 
+// Extend RequestInit so we can use Next.js' revalidate option without type errors.
+type NextFetchOptions = RequestInit & { next?: { revalidate?: number } };
+
 // Queries iFixit for guides and devices. Falls back to bundled samples on error.
 export async function searchIfixit(q: string): Promise<IfixitSearch> {
   const url = `${BASE}/suggest/${encodeURIComponent(q)}?doctypes=guide,device`;
   try {
-    const res = await fetch(url, { headers, next: { revalidate: 3600 } });
+    // Cast to NextFetchOptions to include `next.revalidate` for ISR caching.
+    const res = await fetch(url, { headers, next: { revalidate: 3600 } } as NextFetchOptions);
     if (!res.ok) throw new Error(`status ${res.status}`);
     const json = await res.json();
     return transformSuggest(json);
@@ -26,7 +30,8 @@ export async function searchIfixit(q: string): Promise<IfixitSearch> {
 export async function getGuideDetail(id: number): Promise<IfixitGuideDetail | null> {
   const url = `${BASE}/guides/${id}`;
   try {
-    const res = await fetch(url, { headers, next: { revalidate: 3600 } });
+    // Cast ensures Next.js revalidation option is recognised by TypeScript.
+    const res = await fetch(url, { headers, next: { revalidate: 3600 } } as NextFetchOptions);
     if (!res.ok) throw new Error(`status ${res.status}`);
     const json = await res.json();
     return transformGuideDetail(json);
