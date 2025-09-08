@@ -7,7 +7,6 @@ export default function ConnectorCard({ c }: { c: ConnectorMeta }) {
   return (
     <article className="rounded-2xl border p-4 flex gap-4">
       {c.icon ? (
-        // eslint-disable-next-line @next/next/no-img-element
         <img src={c.icon} alt="" className="w-10 h-10 mt-1 opacity-80" />
       ) : <div className="w-10 h-10" />}
       <div className="flex-1 space-y-2">

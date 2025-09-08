@@ -1,4 +1,3 @@
-import ConnectorCard from "./components/ConnectorCard";
 import SearchAndFilter from "./components/SearchAndFilter";
 import { CONNECTORS, type ConnectorMeta } from "./_data/connectors";
 
@@ -20,15 +19,7 @@ export default async function ConnectorsHub() {
         </p>
       </header>
 
-      <SearchAndFilter
-        items={items}
-        onFiltered={() => { /* client handles filtering */ }}
-      />
-
-      {/* Initial list rendered for non-JS / SEO; SearchAndFilter will adjust client-side */}
-      <section className="grid gap-4 md:grid-cols-2">
-        {items.map(c => <ConnectorCard key={c.slug} c={c} />)}
-      </section>
+      <SearchAndFilter items={items} />
     </main>
   );
 }
