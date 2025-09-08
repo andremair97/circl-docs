@@ -1,0 +1,47 @@
+[
+  {
+    "certificate_number": "DE125060063",
+    "brand": "Dell",
+    "model": "Latitude 7440",
+    "category": "Notebooks",
+    "generation": "g10",
+    "valid_from": "2024-01-01",
+    "valid_to": "2027-12-31",
+    "status": "valid",
+    "gtins": ["0884112345678", "0884112345685"],
+    "product_finder": "https://tcocertified.com/product/dell-latitude-7440",
+    "certificate_pdf": "https://tcocertified.com/certificates/DE125060063.pdf",
+    "product_page": "https://dell.com/latitude7440",
+    "attributes": {"recycled_content_pct": 40}
+  },
+  {
+    "certificate_number": "HP99887766",
+    "brand": "HP",
+    "model": "Z24n G3",
+    "category": "Displays",
+    "generation": "g10",
+    "valid_from": "2024-05-01",
+    "valid_to": "2026-04-30",
+    "status": "valid",
+    "gtins": ["0190012345678"],
+    "product_finder": "https://tcocertified.com/product/hp-z24n-g3",
+    "certificate_pdf": "https://tcocertified.com/certificates/HP99887766.pdf",
+    "product_page": "https://hp.com/z24n-g3",
+    "attributes": {"recycled_content_pct": 30}
+  },
+  {
+    "certificate_number": "LN12345678",
+    "brand": "Lenovo",
+    "model": "ThinkCentre Neo 50s",
+    "category": "Desktops",
+    "generation": "g10",
+    "valid_from": "2024-02-15",
+    "valid_to": "2027-02-14",
+    "status": "valid",
+    "gtins": ["0196112345678"],
+    "product_finder": "https://tcocertified.com/product/lenovo-neo50s",
+    "certificate_pdf": "https://tcocertified.com/certificates/LN12345678.pdf",
+    "product_page": "https://lenovo.com/neo50s",
+    "attributes": {"recycled_content_pct": 25}
+  }
+]
