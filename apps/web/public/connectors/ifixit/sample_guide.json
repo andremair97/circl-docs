@@ -1,0 +1,12 @@
+{
+  "guideid": 12345,
+  "title": "iPhone Battery Replacement",
+  "url": "https://www.ifixit.com/Guide/Example/12345",
+  "category": "iPhone 8",
+  "type": "replacement",
+  "difficulty": "moderate",
+  "time_required": "30 minutes",
+  "steps": [{ "title": "Step 1" }, { "title": "Step 2" }],
+  "parts": [{ "name": "Battery" }],
+  "tools": [{ "name": "Pentalobe Screwdriver" }]
+}
