@@ -1,0 +1,18 @@
+{
+  "query": "iphone battery",
+  "results": [
+    {
+      "dataType": "guide",
+      "guideid": 12345,
+      "title": "iPhone Battery Replacement",
+      "category": "iPhone 8",
+      "url": "https://www.ifixit.com/Guide/Example/12345"
+    },
+    {
+      "dataType": "wiki",
+      "title": "iPhone 8",
+      "display_title": "iPhone 8 Repair",
+      "url": "https://www.ifixit.com/Device/iPhone_8"
+    }
+  ]
+}
