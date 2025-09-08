@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest";
 import { transformOffProduct } from "../../../lib/connectors/off/transform";
+import { OffRawProduct } from "../../../lib/connectors/off/types";
 
 // Ensure transformer extracts core fields and tolerates missing data.
 describe("transformOffProduct", () => {
   it("maps basic fields and handles null", () => {
-    const raw = {
+    const raw: OffRawProduct = {
       code: "1",
       product_name: "Item",
       brands: "Brand1, Brand2",
@@ -20,6 +21,6 @@ describe("transformOffProduct", () => {
     expect(p.categories).toEqual(["cat"]);
     expect(p.novaGroup).toBe(2);
 
-    expect(transformOffProduct(null as any)).toBeNull();
+    expect(transformOffProduct(null as unknown)).toBeNull();
   });
 });

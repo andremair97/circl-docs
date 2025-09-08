@@ -1,15 +1,17 @@
-import { OffProduct } from "./types";
+import { OffProduct, OffRawProduct } from "./types";
 
 // Normalize raw OFF product into our OffProduct shape. Returns null if input lacks minimal identifiers.
-export function transformOffProduct(p: any): OffProduct | null {
+export function transformOffProduct(p: OffRawProduct | null | undefined): OffProduct | null {
   if (!p) return null;
-  const id = String(p.code || p._id || p.id || "");
-  const name = p.product_name?.trim() || "";
+  const id = String(p.code ?? p._id ?? p.id ?? "");
+  const name = p.product_name?.trim() ?? "";
   if (!id && !name) return null;
 
-  const brands = Array.isArray(p.brands_tags) ? p.brands_tags
-    : typeof p.brands === "string" ? p.brands.split(",").map((s: string) => s.trim()).filter(Boolean)
-    : [];
+  const brands = Array.isArray(p.brands_tags)
+    ? p.brands_tags
+    : typeof p.brands === "string"
+      ? p.brands.split(",").map((s: string) => s.trim()).filter(Boolean)
+      : [];
 
   const labels = Array.isArray(p.labels_tags) ? p.labels_tags : [];
   const categories = Array.isArray(p.categories_tags_en) ? p.categories_tags_en : [];
