@@ -24,10 +24,12 @@ export async function searchOffProducts(q: string): Promise<OffProduct[]> {
   if (q?.trim()) url.searchParams.set("search_terms", q.trim());
 
   try {
-    const res = await fetch(url.toString(), {
+    // `next` is a Next.js-specific init option for caching; extend RequestInit to satisfy TS.
+    const init: RequestInit & { next: { revalidate: number } } = {
       headers: { Accept: "application/json", "User-Agent": "circl-docs-ui" },
       next: { revalidate: 3600 },
-    });
+    };
+    const res = await fetch(url.toString(), init);
     if (!res.ok) throw new Error(`OFF ${res.status}`);
     const data = (await res.json()) as OffSearchResponse;
     const items = (data?.products || [])

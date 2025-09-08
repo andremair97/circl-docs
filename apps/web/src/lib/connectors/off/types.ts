@@ -15,5 +15,26 @@ export type OffProduct = {
   quantity?: string;
 };
 
+// Minimal raw product shape returned by the OFF API that we transform.
+// Optional fields reflect inconsistent data coming from the service.
+export type OffRawProduct = {
+  code?: string | number;
+  _id?: string | number;
+  id?: string | number;
+  product_name?: string;
+  brands_tags?: string[];
+  brands?: string;
+  nutriscore_grade?: string;
+  nutrition_grades?: string;
+  ecoscore_grade?: string;
+  nova_group?: number;
+  labels_tags?: string[];
+  packaging?: string;
+  allergens?: string;
+  image_front_url?: string;
+  categories_tags_en?: string[];
+  quantity?: string;
+};
+
 // Minimal response shape we care about from OFF search endpoint.
-export type OffSearchResponse = { products: any[] };
+export type OffSearchResponse = { products: OffRawProduct[] };

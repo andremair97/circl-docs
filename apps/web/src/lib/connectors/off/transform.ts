@@ -1,7 +1,8 @@
-import { OffProduct } from "./types";
+import { OffProduct, OffRawProduct } from "./types";
 
 // Convert raw OFF product to our narrow OffProduct, discarding unusable items.
-export function transformOffProduct(p: any): OffProduct | null {
+// Accepts a loosely-typed raw product, enabling resilience against API changes.
+export function transformOffProduct(p: OffRawProduct | null | undefined): OffProduct | null {
   if (!p) return null;
   const id = String(p.code || p._id || p.id || "").trim();
   const name = (p.product_name ?? "").trim();
