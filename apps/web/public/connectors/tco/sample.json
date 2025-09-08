@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "id": "D1025050157",
+      "productType": "Display",
+      "brand": "AOC",
+      "model": "27E4U",
+      "generation": "Gen 10",
+      "certificateNumber": "D1025050157",
+      "certifiedSince": "2025-05-19",
+      "validUntil": "2027-05-19",
+      "gtin": "6921732799999",
+      "detailUrl": "https://tcocertified.com/product-finder/",
+      "certificateUrl": "https://aoc.com/api/download/22551"
+    },
+    {
+      "id": "Q27P4U",
+      "productType": "Display",
+      "brand": "AOC",
+      "model": "Q27P4U",
+      "generation": "Gen 10",
+      "certificateNumber": "D1025070175",
+      "certifiedSince": "2025-07-10",
+      "validUntil": "2027-07-10",
+      "gtin": "6921732700000",
+      "detailUrl": "https://tcocertified.com/product-finder/",
+      "certificateUrl": "https://aoc.com/api/download/23216"
+    },
+    {
+      "id": "GTIN-735007XXXXXX",
+      "productType": "Notebook",
+      "brand": "ExampleBrand",
+      "model": "NB-14 ECO",
+      "generation": "Gen 10",
+      "certifiedSince": "2024-12-12",
+      "validUntil": "2026-12-12",
+      "gtin": "7350071234567",
+      "detailUrl": "https://tcocertified.com/product-finder/"
+    }
+  ]
+}
