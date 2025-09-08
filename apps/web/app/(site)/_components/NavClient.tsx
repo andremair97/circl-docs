@@ -52,14 +52,13 @@ export default function NavClient({ connectors }: Props) {
             })}
           </ul>
         </details>
-        {process.env.NEXT_PUBLIC_SHOW_DEBUG === '1' && (
-          <Link
-            href="/debug/connectors"
-            className={isActive('/debug/connectors') ? 'font-semibold' : ''}
-          >
-            Diagnostics
-          </Link>
-        )}
+        {/* Always expose diagnostics to simplify debugging across environments. */}
+        <Link
+          href="/debug/connectors"
+          className={isActive('/debug/connectors') ? 'font-semibold' : ''}
+        >
+          Diagnostics
+        </Link>
       </div>
     </nav>
   );
