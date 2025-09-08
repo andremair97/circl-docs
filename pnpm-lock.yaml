@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      jose:
+        specifier: ^6.1.0
+        version: 6.1.0
     devDependencies:
       '@stoplight/spectral-cli':
         specifier: ^6.15.0
@@ -7496,6 +7500,10 @@ packages:
 
   /join-component@1.1.0:
     resolution: {integrity: sha512-bF7vcQxbODoGK1imE2P9GS9aw4zD0Sd+Hni68IMZLj7zRnquH7dXUmMw9hDI5S/Jzt7q+IyTXN0rSg2GI0IKhQ==}
+    dev: false
+
+  /jose@6.1.0:
+    resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
     dev: false
 
   /js-tokens@4.0.0:

@@ -22,17 +22,20 @@
   },
   "devDependencies": {
     "@stoplight/spectral-cli": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "ajv": "^8.17.1",
     "ajv-cli": "^5.0.0",
     "ajv-formats": "^3.0.1",
     "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
     "glob": "^11.0.0",
     "markdownlint-cli": "^0.41.0",
+    "prettier": "^3.2.5",
     "turbo": "^1.13.0",
-    "typescript": "^5.4.0",
-    "eslint": "^8.57.0",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "prettier": "^3.2.5"
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "jose": "^6.1.0"
   }
 }
