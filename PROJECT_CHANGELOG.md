@@ -56,6 +56,9 @@ feat: add EU Ecolabel and Green Seal connector UI (#000)
 feat: polish theme and add reusable UI states (UI-07)
 
 ci: add pre-commit hook and merge queue docs
+UI: routes audit + nav exposure
+- `pnpm routes` lists discovered pages
+- enable diagnostics link with `NEXT_PUBLIC_SHOW_DEBUG=1`
 
 feat: add preview-only auth middleware for web app
 
