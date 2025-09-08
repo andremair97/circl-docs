@@ -17,4 +17,6 @@ export type LotQuery = {
   location?: string;
 };
 
-export type LotResponse = { items: any[] };
+// Raw response shape from Library of Things providers.
+// Uses `unknown` for items to avoid assuming structure prior to transform.
+export type LotResponse = { items: unknown[] };

@@ -1,6 +1,11 @@
 import { LotItem, LotQuery, LotResponse } from '../types';
 import { transformLotItem } from '../transform';
 
+// Custom fetch init that allows Next.js-specific `next.revalidate` while keeping type safety.
+interface NextRequestInit extends RequestInit {
+  next?: { revalidate?: number };
+}
+
 const REVALIDATE = 3600;
 
 // Attempts to fetch from an external JSON feed; returns null on error/empty.
@@ -17,7 +22,7 @@ export async function fetchJsonFeed(q: LotQuery): Promise<LotItem[] | null> {
       'User-Agent': 'circl-docs-ui',
     },
     next: { revalidate: REVALIDATE },
-  }).catch(() => null);
+  } as NextRequestInit).catch(() => null);
   if (!res || !res.ok) return null;
   const data = (await res.json()) as LotResponse;
   const items = (data.items ?? [])

@@ -10,29 +10,30 @@ const CO2E_BY_CATEGORY: Record<string, number> = {
 
 // Normalises a raw Library of Things item into our internal shape.
 // Tolerates missing data and infers a rough CO2e saved estimate.
-export function transformLotItem(x: any): LotItem | null {
-  if (!x) return null;
-  const id = String(x.id ?? x.slug ?? x.code ?? '');
-  const name = (x.name ?? x.title ?? '').trim();
+export function transformLotItem(x: unknown): LotItem | null {
+  if (!x || typeof x !== 'object') return null;
+  const obj = x as Record<string, unknown>;
+  const id = String(obj.id ?? obj.slug ?? obj.code ?? '');
+  const name = (obj.name ?? obj.title ?? '').toString().trim();
   if (!id && !name) return null;
 
-  const category = x.category ?? x.group ?? undefined;
+  const category = (obj.category ?? obj.group ?? undefined) as string | undefined;
   const co2e =
-    typeof x.co2eSavedKg === 'number'
-      ? x.co2eSavedKg
+    typeof obj.co2eSavedKg === 'number'
+      ? obj.co2eSavedKg
       : (category && CO2E_BY_CATEGORY[category]) || undefined;
 
   return {
     id: id || name,
     name,
     category,
-    dailyPrice: typeof x.dailyPrice === 'number' ? x.dailyPrice : undefined,
-    deposit: typeof x.deposit === 'number' ? x.deposit : undefined,
-    locationCode: String(x.locationCode ?? x.location ?? 'XX'),
-    locationName: x.locationName ?? undefined,
-    image: x.image ?? x.imageUrl ?? undefined,
-    nextAvailable: x.nextAvailable ?? undefined,
-    link: x.link ?? x.url ?? undefined,
+    dailyPrice: typeof obj.dailyPrice === 'number' ? obj.dailyPrice : undefined,
+    deposit: typeof obj.deposit === 'number' ? obj.deposit : undefined,
+    locationCode: String(obj.locationCode ?? obj.location ?? 'XX'),
+    locationName: obj.locationName as string | undefined,
+    image: (obj.image ?? obj.imageUrl ?? undefined) as string | undefined,
+    nextAvailable: obj.nextAvailable as string | undefined,
+    link: (obj.link ?? obj.url ?? undefined) as string | undefined,
     co2eSavedKg: co2e,
   };
 }
