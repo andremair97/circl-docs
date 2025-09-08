@@ -1,0 +1,27 @@
+{
+  "page": 1,
+  "page_size": 2,
+  "products": [
+    {
+      "code": "1234567890123",
+      "product_name": "Sample Product",
+      "brands": "BrandA",
+      "categories_tags": ["en:breakfast-cereals"],
+      "labels_tags": ["en:organic"],
+      "ecoscore_grade": "a",
+      "nutriscore_grade": "b",
+      "image_url": "https://example.com/img.jpg",
+      "url": "https://world.openfoodfacts.org/product/1234567890123/sample-product"
+    },
+    {
+      "code": "9876543210987",
+      "product_name": "Another Product",
+      "brands": "BrandB",
+      "categories_tags": ["en:snacks"],
+      "labels_tags": [],
+      "ecoscore_grade": "c",
+      "nutriscore_grade": "d",
+      "image_url": "https://example.com/img2.jpg"
+    }
+  ]
+}
