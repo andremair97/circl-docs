@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "lot-cp-pressure-washer",
+      "name": "Heavy Duty Pressure Washer",
+      "category": "Cleaning",
+      "dailyPrice": 20,
+      "deposit": 30,
+      "locationCode": "CP",
+      "locationName": "Crystal Palace",
+      "image": "",
+      "nextAvailable": "2025-09-14",
+      "link": "https://example.org/pressure-washer",
+      "co2eSavedKg": 48
+    },
+    {
+      "id": "lot-mo-sewing-machine",
+      "name": "Sewing Machine",
+      "category": "DIY",
+      "dailyPrice": 5,
+      "deposit": 10,
+      "locationCode": "MO",
+      "locationName": "Morden",
+      "image": "",
+      "nextAvailable": "2025-09-10",
+      "link": "https://example.org/sewing-machine"
+    },
+    {
+      "id": "lot-dl-impact-drill",
+      "name": "Impact Drill",
+      "category": "DIY",
+      "dailyPrice": 7,
+      "deposit": 15,
+      "locationCode": "DL",
+      "locationName": "Dalston",
+      "image": "",
+      "nextAvailable": "2025-09-12",
+      "link": "https://example.org/impact-drill"
+    },
+    {
+      "id": "lot-dw-projector",
+      "name": "Home Projector",
+      "category": "Events",
+      "dailyPrice": 12,
+      "deposit": 20,
+      "locationCode": "DW",
+      "locationName": "Dulwich",
+      "image": "",
+      "nextAvailable": "2025-09-18",
+      "link": "https://example.org/projector"
+    }
+  ]
+}
