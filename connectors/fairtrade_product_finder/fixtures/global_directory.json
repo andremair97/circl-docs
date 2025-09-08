@@ -1,0 +1,50 @@
+[
+  {
+    "id": "GLOBAL-001",
+    "name": "Global Coffee Blend",
+    "brand": "Global Brew",
+    "manufacturer": "Global Brew AG",
+    "category": "coffee",
+    "gtins": ["4012345678901"],
+    "country_markets": ["DE", "AT"],
+    "image": "https://example.org/global-coffee.jpg",
+    "url": "https://example.org/global-coffee",
+    "licensee": "Global Brew AG",
+    "floid": "FLO123456",
+    "valid_from": "2023-01-15",
+    "valid_to": "2024-01-15",
+    "status": "valid"
+  },
+  {
+    "id": "GLOBAL-002",
+    "name": "World Tea Selection",
+    "brand": "World Tea",
+    "manufacturer": "World Tea GmbH",
+    "category": "tea",
+    "gtins": ["4098765432105"],
+    "country_markets": ["DE", "NL", "FR"],
+    "image": "https://example.org/world-tea.jpg",
+    "url": "https://example.org/world-tea",
+    "licensee": "World Tea GmbH",
+    "floid": "FLO654321",
+    "valid_from": "2022-05-01",
+    "valid_to": "2025-05-01",
+    "status": "valid"
+  },
+  {
+    "id": "GLOBAL-003",
+    "name": "International Cocoa Powder",
+    "brand": "Cocoa World",
+    "manufacturer": "Cocoa World BV",
+    "category": "chocolate",
+    "gtins": ["4001234567002"],
+    "country_markets": ["FR", "BE"],
+    "image": "https://example.org/cocoa.jpg",
+    "url": "https://example.org/cocoa",
+    "licensee": "Cocoa World BV",
+    "floid": "FLO777888",
+    "valid_from": "2023-02-01",
+    "valid_to": "2024-02-01",
+    "status": "valid"
+  }
+]

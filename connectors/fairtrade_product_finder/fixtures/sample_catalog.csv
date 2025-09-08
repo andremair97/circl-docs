@@ -1,0 +1,3 @@
+name,brand,category,gtin,country,image_url,page_url,licensee,floid,validity_from,validity_to,status
+Sample Coffee,Sample Brand,coffee,5098765432100,UK,https://example.org/sample-coffee.jpg,https://example.org/sample-coffee,Sample Co,FLO999999,2023-01-01,2024-01-01,valid
+Sample Tea,Another Brand,tea,5000000000002,DE;AT,https://example.org/sample-tea.jpg,https://example.org/sample-tea,Tea Co,FLO888888,2022-05-05,2023-05-05,expired
