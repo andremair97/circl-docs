@@ -1,0 +1,28 @@
+[
+  {
+    "org_name": "Alphabet Inc",
+    "year": 2024,
+    "country": "United States",
+    "sector": "Technology & Communications",
+    "score_climate": "A",
+    "score_water": "B",
+    "score_forests": "",
+    "disclosure_status": "Disclosed",
+    "org_id": "ALPH-2024",
+    "cdp_profile": "https://www.cdp.net/en/companies/70850",
+    "company_url": "https://abc.xyz"
+  },
+  {
+    "org_name": "Nestlé S.A.",
+    "year": 2024,
+    "country": "Switzerland",
+    "sector": "Food & Beverage",
+    "score_climate": "A-",
+    "score_water": "A",
+    "score_forests": "B",
+    "disclosure_status": "Disclosed",
+    "org_id": "NEST-2024",
+    "cdp_profile": "https://www.cdp.net/en/companies/12345",
+    "company_url": "https://www.nestle.com"
+  }
+]

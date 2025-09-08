@@ -1,0 +1,4 @@
+org_name,year,country,sector,score_climate,score_water,score_forests,disclosure_status,org_id,cdp_profile,company_url
+Alphabet Inc,2024,United States,Technology & Communications,A,B,,Disclosed,ALPH-2024,https://www.cdp.net/en/companies/70850,https://abc.xyz
+Nestlé S.A.,2024,Switzerland,Food & Beverage,A-,A,B,Disclosed,NEST-2024,https://www.cdp.net/en/companies/12345,https://www.nestle.com
+Local Widgets LLC,2024,Germany,Manufacturing,C,,D,Did Not Disclose,LOCAL-1,,https://localwidgets.example.com
