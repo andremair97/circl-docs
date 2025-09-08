@@ -1,0 +1,48 @@
+{
+  "products": [
+    {
+      "code": "12345",
+      "product_name": "Organic Oat Milk",
+      "brands": "BrandOne",
+      "brands_tags": ["brandone"],
+      "nutriscore_grade": "a",
+      "ecoscore_grade": "b",
+      "nova_group": 2,
+      "labels_tags": ["organic", "eu-organic"],
+      "packaging": "Carton",
+      "allergens": "",
+      "image_front_url": "https://static.openfoodfacts.org/images/products/12345/front_en.400.jpg",
+      "categories_tags_en": ["plant-based-drinks", "oat-milks"],
+      "quantity": "1L"
+    },
+    {
+      "code": "23456",
+      "product_name": "Almond Drink Unsweetened",
+      "brands_tags": ["brandtwo"],
+      "nutrition_grades": "b",
+      "ecoscore_grade": "c",
+      "nova_group": 3,
+      "labels_tags": [],
+      "packaging": "Carton",
+      "allergens": "nuts",
+      "image_front_url": "",
+      "categories_tags_en": ["plant-based-drinks", "almond-drinks"],
+      "quantity": "1L"
+    },
+    {
+      "code": "34567",
+      "product_name": "Chocolate Bar",
+      "brands": "BrandThree",
+      "brands_tags": ["brandthree"],
+      "nutriscore_grade": "d",
+      "ecoscore_grade": "d",
+      "nova_group": 4,
+      "labels_tags": ["fair-trade"],
+      "packaging": "Wrapper",
+      "allergens": "milk",
+      "image_front_url": "https://static.openfoodfacts.org/images/products/34567/front_en.400.jpg",
+      "categories_tags_en": ["chocolate", "snacks"],
+      "quantity": "100g"
+    }
+  ]
+}
