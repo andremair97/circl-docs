@@ -1,0 +1,47 @@
+[
+  {
+    "id": "GL-FT-1001",
+    "name": "Global Coffee Beans",
+    "brand": "World Cafe",
+    "category": "coffee",
+    "gtins": ["4023456789012"],
+    "country_markets": ["DE", "AT"],
+    "images": ["https://example.com/global-coffee.jpg"],
+    "url": "https://directory.fairtrade.net/product/coffee-1",
+    "licensee": "World Cafe GmbH",
+    "floid": "987654",
+    "valid_from": "2023-01-01",
+    "valid_to": "2024-12-31",
+    "status": "valid"
+  },
+  {
+    "id": "GL-FT-1002",
+    "name": "Fairtrade Sugar",
+    "brand": "Sweet Co",
+    "category": "sugar",
+    "gtins": ["4001111000002"],
+    "country_markets": ["US", "CA"],
+    "images": ["https://example.com/sugar.jpg"],
+    "url": "https://directory.fairtrade.net/product/sugar-1",
+    "licensee": "Sweet Co Inc",
+    "floid": "987655",
+    "valid_from": "2022-01-01",
+    "valid_to": "2023-12-31",
+    "status": "expired"
+  },
+  {
+    "id": "GL-FT-1003",
+    "name": "Banana Chips",
+    "brand": "Tropicana",
+    "category": "snacks",
+    "gtins": ["4012345678901"],
+    "country_markets": ["FR", "BE", "NL"],
+    "images": ["https://example.com/banana-chips.jpg"],
+    "url": "https://directory.fairtrade.net/product/banana-1",
+    "licensee": "Tropicana Foods",
+    "floid": "987656",
+    "valid_from": "2021-05-01",
+    "valid_to": "2024-05-01",
+    "status": "valid"
+  }
+]
