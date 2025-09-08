@@ -1,4 +1,4 @@
-import { CorpScore } from "@/app/../src/lib/connectors/cdp/types";
+import { CorpScore } from "@/src/lib/connectors/cdp/types"; // workspace alias clarifies source location
 
 export default function CorpCard({ s }: { s: CorpScore }) {
   return (

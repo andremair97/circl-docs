@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { transformOffProduct } from "../../../lib/connectors/off/transform";
-import { OffRawProduct } from "../../../lib/connectors/off/types";
+import { transformOffProduct } from "../../../src/lib/connectors/off/transform"; // adjust relative path after move
+import { OffRawProduct } from "../../../src/lib/connectors/off/types"; // align with workspace structure
 
 // Ensure transformer extracts core fields and tolerates missing data.
 describe("transformOffProduct", () => {

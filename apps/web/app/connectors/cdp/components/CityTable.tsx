@@ -1,4 +1,4 @@
-import { CityEmission } from "@/app/../src/lib/connectors/cdp/types";
+import { CityEmission } from "@/src/lib/connectors/cdp/types"; // rely on alias for maintainability
 
 export default function CityTable({ rows }: { rows: CityEmission[] }) {
   return (

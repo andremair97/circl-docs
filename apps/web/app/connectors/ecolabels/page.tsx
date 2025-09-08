@@ -2,8 +2,8 @@ import ProviderTabs from "./components/ProviderTabs";
 import SearchBar from "./components/SearchBar";
 import ResultCard from "./components/ResultCard";
 import ResultTable from "./components/ResultTable";
-import { providers } from "@/app/../src/lib/connectors/ecolabels";
-import { CertifiedProduct } from "@/app/../src/lib/connectors/ecolabels/types";
+import { providers } from "@/src/lib/connectors/ecolabels"; // workspace alias keeps paths concise
+import { CertifiedProduct } from "@/src/lib/connectors/ecolabels/types"; // alias ensures consistent resolution
 
 export const revalidate = 3600;
 

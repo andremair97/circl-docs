@@ -1,4 +1,4 @@
-import { BcorpCompany } from "@/app/../src/lib/connectors/bcorp/types";
+import { BcorpCompany } from "@/src/lib/connectors/bcorp/types"; // alias keeps tests and builds consistent
 
 // Small badge helper for repeated metadata chips.
 function Badge({ children }: { children: React.ReactNode }) {

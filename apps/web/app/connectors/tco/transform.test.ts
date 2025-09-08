@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { transformTcoRecord } from '../../../lib/connectors/tco/transform';
+import { transformTcoRecord } from '../../../src/lib/connectors/tco/transform'; // path updated after connector move
 
 describe('transformTcoRecord', () => {
   it('maps json-ld styled record', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { transformEuRow } from "../../../../../lib/connectors/ecolabels/providers/eu-ecolabel/transform";
+import { transformEuRow } from "../../../../../src/lib/connectors/ecolabels/providers/eu-ecolabel/transform"; // reflect src/ location
 
 describe("transformEuRow", () => {
   it("maps csv row to CertifiedProduct", () => {

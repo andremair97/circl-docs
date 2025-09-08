@@ -1,4 +1,4 @@
-import { CityEmission } from "@/app/../src/lib/connectors/cdp/types";
+import { CityEmission } from "@/src/lib/connectors/cdp/types"; // use alias to simplify module path
 
 function Badge({ children }: { children: React.ReactNode }) {
   return <span className="inline-block text-xs px-2 py-1 rounded bg-gray-100 border">{children}</span>;
