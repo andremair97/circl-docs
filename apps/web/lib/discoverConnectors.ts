@@ -9,13 +9,20 @@ export type DiscoveredConnector = { slug: string; title: string; description?: s
 /**
  * Discover connector routes by scanning the app directory on the server.
  * Node runtime only. Returns [] if not found or on error.
+ *
+ * @param cwd Base directory to resolve from. Defaults to `process.cwd()`.
  */
-export async function discoverConnectors(): Promise<DiscoveredConnector[]> {
+export async function discoverConnectors(cwd: string = process.cwd()): Promise<DiscoveredConnector[]> {
   try {
-    // Resolve the path to the Next.js app/connectors directory within this package
-    // Assumes this file lives under apps/web/lib/**
-    const appDir = path.resolve(process.cwd(), 'apps/web/app/connectors')
-    if (!fs.existsSync(appDir)) return []
+    // Resolve the path to the Next.js app/connectors directory.
+    // Support running from either the repo root or the apps/web package by
+    // checking both "app/connectors" and "apps/web/app/connectors".
+    const candidates = [
+      path.resolve(cwd, 'app/connectors'),
+      path.resolve(cwd, 'apps/web/app/connectors'),
+    ]
+    const appDir = candidates.find((dir) => fs.existsSync(dir))
+    if (!appDir) return []
 
     const entries = fs.readdirSync(appDir, { withFileTypes: true })
     const slugs = entries
