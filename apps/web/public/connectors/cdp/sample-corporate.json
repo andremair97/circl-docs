@@ -1,0 +1,4 @@
+[
+  { "company": "Example PLC", "year": 2024, "theme": "climate", "score": "A-", "country": "United Kingdom", "isin": "GB00EXAMPL01", "ticker": "EXM" },
+  { "company": "Widgets SA", "year": 2024, "theme": "water", "score": "B", "country": "France", "isin": "FR00WIDGET01", "ticker": "WID" }
+]
