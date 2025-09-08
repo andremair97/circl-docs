@@ -26,15 +26,20 @@ export async function searchEbay(q: string): Promise<EbayItem[]> {
 
   try {
     if (!token) throw new Error("Missing EBAY_OAUTH_TOKEN");
-    const res = await fetch(url.toString(), {
-      headers: {
-        "Accept": "application/json",
-        "User-Agent": "circl-docs-ui",
-        "Authorization": `Bearer ${token}`,
-        "X-EBAY-C-MARKETPLACE-ID": market,
-      },
-      next: { revalidate: 1800 },
-    });
+    const res = await fetch(
+      url.toString(),
+      {
+        headers: {
+          "Accept": "application/json",
+          "User-Agent": "circl-docs-ui",
+          "Authorization": `Bearer ${token}`,
+          "X-EBAY-C-MARKETPLACE-ID": market,
+        },
+        // Tell Next.js to revalidate server-side results every 30 minutes.
+        // The cast preserves the `next` option while keeping strict TS happy.
+        next: { revalidate: 1800 },
+      } as RequestInit & { next: { revalidate: number } },
+    );
     if (!res.ok) throw new Error(`eBay ${res.status}`);
     const data = (await res.json()) as EbaySearchResponse;
     const items = (data.itemSummaries || []).map(transformEbayItem).filter(Boolean) as EbayItem[];
