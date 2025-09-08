@@ -7,7 +7,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run --exclude tests/e2e/**",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "cf:build": "npx @cloudflare/next-on-pages",
+    "cf:preview": "wrangler pages dev ./.vercel/output/static --port=8788 || true"
   },
   "dependencies": {
     "next": "^14.2.3",
@@ -28,6 +30,8 @@
     "@playwright/test": "^1.44.0",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "@cloudflare/next-on-pages": "latest",
+    "wrangler": "latest"
   }
 }

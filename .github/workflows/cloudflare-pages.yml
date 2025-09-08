@@ -1,0 +1,31 @@
+name: cloudflare-pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["apps/web/**"]
+  pull_request:
+    paths: ["apps/web/**"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Install deps
+        run: pnpm -w install
+      - name: Build web app
+        working-directory: apps/web
+        run: pnpm build
+      - name: Cloudflare adapter build
+        working-directory: apps/web
+        run: pnpm cf:build
