@@ -1,0 +1,20 @@
+[
+  {
+    "city": "London",
+    "country": "United Kingdom",
+    "year": 2021,
+    "total_emissions_tco2e": 31200000,
+    "per_capita_emissions": 3.5,
+    "scope": "City-wide",
+    "inventory_method": "GPC Basic"
+  },
+  {
+    "city": "Manchester",
+    "country": "United Kingdom",
+    "year": 2020,
+    "total_emissions_tco2e": 7100000,
+    "per_capita_emissions": 4.1,
+    "scope": "City-wide",
+    "inventory_method": "GPC Basic"
+  }
+]
