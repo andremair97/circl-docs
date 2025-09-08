@@ -1,17 +1,18 @@
 export type ConnectorMeta = { title: string; description?: string }
 
+// Keys mirror directory names under `apps/web/app/connectors` so that
+// filesystem discovery can link to these pages without additional mapping.
 export const CONNECTOR_CATALOG: Record<string, ConnectorMeta> = {
-  'ebay': { title: 'eBay' },
-  'ifixit': { title: 'iFixit' },
-  'off': { title: 'Open Food Facts' },
-  'eu-ecolabel': { title: 'EU Ecolabel' },
-  'green-seal': { title: 'Green Seal' },
-  'cdp': { title: 'CDP (Carbon Disclosure Project)' },
-  'tco-certified': { title: 'TCO Certified' },
+  bcorp: { title: 'B Corp Directory' },
+  cdp: { title: 'CDP (Carbon Disclosure Project)' },
+  ecolabels: { title: 'Eco-labels (EU Ecolabel & Green Seal)' },
   'energy-star': { title: 'ENERGY STAR' },
-  'fairtrade': { title: 'Fairtrade Product Finder' },
-  'library-of-things': { title: 'Library of Things (UK)' },
-  'bcorp': { title: 'B Corp Directory' },
+  fairtrade: { title: 'Fairtrade Product Finder' },
+  ifixit: { title: 'iFixit' },
+  lot: { title: 'Library of Things (UK)' },
+  off: { title: 'Open Food Facts' },
+  tco: { title: 'TCO Certified' },
+  ebay: { title: 'eBay' },
 }
 
 export function prettifySlug(slug: string): string {
