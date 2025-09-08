@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "certificateNumber": "GS37-2024-00123",
+      "productName": "General Purpose Cleaner – Citrus",
+      "brand": "CleanCo",
+      "companyName": "CleanCo USA Inc.",
+      "category": "Cleaning Products",
+      "country": "US",
+      "standardCode": "GS-37",
+      "issueDate": "2024-05-01",
+      "expirationDate": "2027-05-01",
+      "url": "https://certified.greenseal.org/"
+    },
+    {
+      "certificateNumber": "GS41-2023-00456",
+      "productName": "Hand Soap Fragrance Free",
+      "brand": "PureHands",
+      "companyName": "PureHands LLC",
+      "category": "Hand Care",
+      "country": "US",
+      "standardCode": "GS-41",
+      "issueDate": "2023-11-10",
+      "expirationDate": "2026-11-10",
+      "url": "https://certified.greenseal.org/"
+    }
+  ]
+}
