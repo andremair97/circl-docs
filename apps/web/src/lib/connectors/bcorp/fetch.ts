@@ -15,7 +15,7 @@ export async function searchBcorp(q: string): Promise<BcorpCompany[]> {
   if (appId && apiKey && index) {
     try {
       const url = `https://${appId}-dsn.algolia.net/1/indexes/${encodeURIComponent(index)}/query`;
-      const res = await fetch(url, {
+      const init: RequestInit & { next: { revalidate: number } } = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +26,8 @@ export async function searchBcorp(q: string): Promise<BcorpCompany[]> {
         },
         body: JSON.stringify({ query: (q || "").toString(), hitsPerPage: 20, page: 0 }),
         next: { revalidate: 86400 }, // Cache to keep requests modest.
-      });
+      };
+      const res = await fetch(url, init);
       if (!res.ok) throw new Error(`Algolia ${res.status}`);
       const data = (await res.json()) as BcorpSearchResponse;
       const items = (data?.hits || []).map(transformBcorpRecord).filter(Boolean) as BcorpCompany[];

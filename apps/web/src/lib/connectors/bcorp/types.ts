@@ -16,7 +16,7 @@ export type BcorpCompany = {
 };
 
 // Response shape from Algolia search endpoint.
-export type BcorpSearchResponse = { hits?: any[] };
+export type BcorpSearchResponse = { hits?: Record<string, unknown>[] };
 
 // Local fallback sample bundled with the app for offline rendering.
-export type BcorpLocalSample = { companies: any[] };
+export type BcorpLocalSample = { companies: Record<string, unknown>[] };
