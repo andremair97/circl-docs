@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": "ref-001",
+      "category": "Refrigerators",
+      "brand": "CoolCo",
+      "model": "CCRF-25A",
+      "capacity": "25 cu ft",
+      "annualKwh": 410,
+      "mostEfficient": true,
+      "productUrl": "https://example.com/coolco-ccrf-25a",
+      "certifiedDate": "2024-11-15"
+    },
+    {
+      "id": "dw-010",
+      "category": "Dishwashers",
+      "brand": "Sparkle",
+      "model": "SP-DW600",
+      "capacity": "15 place settings",
+      "annualKwh": 220,
+      "mostEfficient": false,
+      "productUrl": "https://example.com/sparkle-sp-dw600",
+      "certifiedDate": "2025-02-02"
+    },
+    {
+      "id": "mon-777",
+      "category": "Monitors",
+      "brand": "ViewMax",
+      "model": "VX27Q",
+      "capacity": "27-inch",
+      "annualKwh": 28,
+      "mostEfficient": true,
+      "productUrl": "https://example.com/viewmax-vx27q",
+      "certifiedDate": "2025-03-10"
+    }
+  ]
+}
