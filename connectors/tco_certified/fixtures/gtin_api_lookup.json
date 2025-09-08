@@ -1,0 +1,19 @@
+{
+  "gtin": "0887276789012",
+  "certificate_number": "TC0X12345",
+  "brand": "ExampleBrand",
+  "model": "EcoDisplay 27",
+  "category": "Displays",
+  "generation": "g10",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31",
+  "status": "valid",
+  "links": {
+    "product_finder": "https://tcocertified.com/product/123",
+    "certificate_pdf": "https://tcocertified.com/certificates/TC0X12345.pdf",
+    "product_page": "https://example.com/eco-display-27"
+  },
+  "attributes": {
+    "recycled_content_pct": 35
+  }
+}

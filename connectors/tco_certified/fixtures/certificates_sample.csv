@@ -1,0 +1,5 @@
+certificate_number,brand,model,category,generation,valid_from,valid_to,status,gtins,product_finder,certificate_pdf,product_page,recycled_content_pct
+DE125060063,Dell,Latitude 7440,Notebooks,g10,2024-01-01,2027-12-31,valid,0884112345678|0884112345685,https://tcocertified.com/product/dell-latitude-7440,https://tcocertified.com/certificates/DE125060063.pdf,https://dell.com/latitude7440,40
+HP99887766,HP,Z24n G3,Displays,g10,2024-05-01,2026-04-30,valid,0190012345678,https://tcocertified.com/product/hp-z24n-g3,https://tcocertified.com/certificates/HP99887766.pdf,https://hp.com/z24n-g3,30
+LN12345678,Lenovo,ThinkCentre Neo 50s,Desktops,g10,2024-02-15,2027-02-14,valid,0196112345678,https://tcocertified.com/product/lenovo-neo50s,https://tcocertified.com/certificates/LN12345678.pdf,https://lenovo.com/neo50s,25
+SM55544433,Samsung,Galaxy Book3,Notebooks,g10,2024-03-01,2026-02-28,valid,0887276789012,https://tcocertified.com/product/samsung-galaxy-book3,https://tcocertified.com/certificates/SM55544433.pdf,https://samsung.com/galaxy-book3,20
