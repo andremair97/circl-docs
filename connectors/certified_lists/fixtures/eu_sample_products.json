@@ -1,0 +1,26 @@
+[
+  {
+    "certificate_id": "IT/099/003",
+    "product_name": "Eco Dishwasher",
+    "brand": "CleanCo",
+    "model": "DW-100",
+    "gtin": "9876543210987",
+    "categories": ["Dishwashers"],
+    "company": "CleanCo SRL",
+    "country": "IT",
+    "issued": "2022-03-10",
+    "expires": "2026-03-10",
+    "detail_url": "https://eu.ecolabel.eu/detail/IT-099-003"
+  },
+  {
+    "certificate_id": "ES/011/004",
+    "product_name": "Green Paint",
+    "brand": "ColorVida",
+    "categories": ["Paints"],
+    "company": "ColorVida SA",
+    "country": "ES",
+    "issued": "2019-09-01",
+    "expires": "2023-09-01",
+    "detail_url": "https://eu.ecolabel.eu/detail/ES-011-004"
+  }
+]
