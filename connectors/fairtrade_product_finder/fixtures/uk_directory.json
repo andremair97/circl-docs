@@ -1,0 +1,50 @@
+[
+  {
+    "id": "UK-FT-0001",
+    "name": "Fair Brew Coffee Beans",
+    "brand": "Fair Brew",
+    "manufacturer": "Fair Brew Ltd",
+    "category": "coffee",
+    "gtins": ["5012345678900"],
+    "country_markets": ["UK"],
+    "image": "https://example.org/coffee.jpg",
+    "url": "https://example.org/coffee",
+    "licensee": "Fair Brew Ltd",
+    "floid": "UK123",
+    "valid_from": "2023-01-01",
+    "valid_to": "2024-12-31",
+    "status": "valid"
+  },
+  {
+    "id": "UK-FT-0002",
+    "name": "Clipper Green Tea",
+    "brand": "Clipper",
+    "manufacturer": "Clipper Teas",
+    "category": "tea",
+    "gtins": ["5021991936450"],
+    "country_markets": ["UK"],
+    "image": "https://example.org/tea.jpg",
+    "url": "https://example.org/tea",
+    "licensee": "Clipper Teas",
+    "floid": "UK124",
+    "valid_from": "2022-06-01",
+    "valid_to": "2025-06-01",
+    "status": "valid"
+  },
+  {
+    "id": "UK-FT-0003",
+    "name": "Divine Chocolate Bar",
+    "brand": "Divine",
+    "manufacturer": "Divine Chocolate Ltd",
+    "category": "chocolate",
+    "gtins": ["5071234567890"],
+    "country_markets": ["UK"],
+    "image": "https://example.org/chocolate.jpg",
+    "url": "https://example.org/chocolate",
+    "licensee": "Divine Chocolate Ltd",
+    "floid": "UK125",
+    "valid_from": "2023-03-01",
+    "valid_to": "2024-03-01",
+    "status": "valid"
+  }
+]
