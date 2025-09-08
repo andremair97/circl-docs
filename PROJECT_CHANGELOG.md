@@ -59,6 +59,77 @@ feat: add EU Ecolabel and Green Seal connector UI (#000)
 
 - fix: install pnpm in CI workflow
 
+fix: handle connectors path fallback in Nav (#PR)
+
+feat: polish theme and add reusable UI states (UI-07)
+
+ci: add pre-commit hook and merge queue docs
+
+feat: add preview-only auth middleware for web app
+
+chore(ui): add routes audit script and expose connector pages in nav
+
+chore: align connector catalog keys with folder names
+
+## 2025-09-08
+
+refactor: move connector pages to app directory and update imports (#000)
+
+example: sample fragment to illustrate format
+
+CI: Robust PR gate for changelog fragments; supports skip-label.
+
+CI: Safe compiler; preserves history; no loop.
+
+feat: make SearchBar suggestions pluggable with local seed provider (#UI-08)
+
+feat: add OFF mock product results grid
+
+# Changelog fragments
+
+Add a short Markdown file for each pull request using the pattern `<PR>-<slug>.md`.
+
+- Bullets only; keep each entry concise.
+- Example: `123-fix-typo.md`
+
+Fragments are compiled into `PROJECT_CHANGELOG.md` on merge.
+
+feat: add CDP connector UI
+
+feat: add navigation link to connectors hub
+
+feat: add debug connectors status page
+
+feat: add eBay connector UI page
+
+feat: add Library of Things connector UI
+
+feat: add Open Food Facts connector page for UI
+
+feat: always show diagnostics link in navbar
+
+feat: auto-discover connector routes for /connectors page
+
+feat: add B Corp directory connector UI
+
+feat: add connectors hub page with search and tips
+
+fix: ensure connector discovery works from repo root or apps/web
+
+feat: add ENERGY STAR connector UI
+
+feat(connectors): add isolated ENERGY STAR connector (Socrata provider + CLI, offline tests & docs); no UI wiring
+
+feat(connectors): add isolated Fairtrade Product Finder connector (UK/global fixtures + opt-in CSV provider); includes CLI, tests, docs
+
+feat(tco): add TCO Certified connector UI page
+
+feat: add iFixit connector UI page
+
+feat: add EU Ecolabel and Green Seal connector UI (#000)
+
+- fix: install pnpm in CI workflow
+
 feat: polish theme and add reusable UI states (UI-07)
 
 ci: add pre-commit hook and merge queue docs
