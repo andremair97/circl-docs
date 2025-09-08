@@ -10,4 +10,5 @@ export type FairtradeEntity = {
 };
 
 // Collection wrapper used by external datasets.
-export type FairtradeCollection = { items: any[] };
+// Minimal wrapper shape for datasets that expose an items array.
+export type FairtradeCollection = { items: unknown[] };

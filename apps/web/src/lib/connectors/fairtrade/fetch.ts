@@ -23,13 +23,16 @@ export async function searchFairtrade(
 
   if (url) {
     try {
-      const res = await fetch(url, {
-        headers: {
-          Accept: 'application/json',
-          'User-Agent': 'circl-docs-ui',
-        },
-        next: { revalidate: 86400 },
-      });
+      const res = await fetch(
+        url,
+        {
+          headers: {
+            Accept: 'application/json',
+            'User-Agent': 'circl-docs-ui',
+          },
+          next: { revalidate: 86400 },
+        } as RequestInit & { next: { revalidate: number } }
+      );
       if (res.ok) {
         const data = (await res.json()) as FairtradeCollection;
         items = data.items

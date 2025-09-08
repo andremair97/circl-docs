@@ -2,6 +2,7 @@ import SearchBar from './components/SearchBar';
 import { searchFairtrade } from '@/src/lib/connectors/fairtrade/fetch';
 import { ResultCard } from './components/ResultCard';
 import { ResultTable } from './components/ResultTable';
+import type { FairtradeEntity } from '@/src/lib/connectors/fairtrade/types';
 
 export const revalidate = 86400;
 
@@ -12,7 +13,12 @@ export default async function FairtradePage({
 }) {
   const q = searchParams?.q ?? 'coffee';
   const country = searchParams?.country || undefined;
-  const type = (searchParams?.type as any) || undefined;
+  const allowedTypes: Exclude<FairtradeEntity['entityType'], 'Unknown' | undefined>[] = [
+    'Producer',
+    'Trader',
+    'Licensee',
+  ];
+  const type = allowedTypes.find((t) => t === searchParams?.type);
 
   const items = await searchFairtrade(q, { country, type });
 
